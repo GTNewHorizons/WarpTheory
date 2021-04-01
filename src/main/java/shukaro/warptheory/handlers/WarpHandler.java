@@ -315,6 +315,8 @@ public class WarpHandler
         if(ConfigHandler.disableRebound)
             return;
         UUID uuid = player.getUniqueID();
+        if(!Unavoidable.containsKey(uuid))
+            Unavoidable.put(uuid, 0);
         count = Math.max(0,count + Unavoidable.get(uuid));
         Unavoidable.put(uuid, count);
     }
