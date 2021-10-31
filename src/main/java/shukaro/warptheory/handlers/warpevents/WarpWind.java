@@ -1,64 +1,30 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import shukaro.warptheory.handlers.IWarpEvent;
+import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import shukaro.warptheory.net.PacketDispatcher;
-import shukaro.warptheory.util.ChatHelper;
-import shukaro.warptheory.util.FormatCodes;
-import shukaro.warptheory.util.MiscHelper;
 
-import java.util.ArrayList;
-
-public class WarpWind extends IWarpEvent
-{
-	private final int _mMinWarpLevel;
-    public WarpWind(int pMinWarpLevel)
-    {
-    	_mMinWarpLevel = pMinWarpLevel;
-    	FMLCommonHandler.instance().bus().register(this);
+public class WarpWind extends IWorldTickWarpEvent {
+    public WarpWind(int minWarp) {
+        super("wind", minWarp, world -> 5 + world.rand.nextInt(10));
     }
 
     @Override
-    public String getName()
-    {
-        return "wind";
+    public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
+        PacketDispatcher.sendWindEvent(player, world.rand.nextDouble() - world.rand.nextDouble(), world.rand.nextDouble(), world.rand.nextDouble() - world.rand.nextDouble());
+        return 1;
     }
 
     @Override
-    public int getSeverity()
-    {
-    	return _mMinWarpLevel;
-    }
-
-    @Override
-    public boolean doEvent(World world, EntityPlayer player)
-    {
-        ChatHelper.sendToPlayer(player, FormatCodes.Purple.code + FormatCodes.Italic.code + StatCollector.translateToLocal("chat.warptheory.wind"));
-        MiscHelper.modEventInt(player, "wind", 5 + world.rand.nextInt(10));
-        return true;
-    }
-
     @SubscribeEvent
-    public void onTick(TickEvent.WorldTickEvent e)
-    {
-        if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER)
+    public void onTick(TickEvent.WorldTickEvent e) {
+        if (e.world.getTotalWorldTime() % 20 != 0) {
             return;
-        for (EntityPlayer player : (ArrayList<EntityPlayer>)e.world.playerEntities)
-        {
-            if (MiscHelper.getWarpTag(player).hasKey("wind") && e.world.rand.nextBoolean() && e.world.getTotalWorldTime() % 20 == 0)
-            {
-                int wind = MiscHelper.getWarpTag(player).getInteger("wind");
-                PacketDispatcher.sendWindEvent(player, e.world.rand.nextDouble() - e.world.rand.nextDouble(), e.world.rand.nextDouble(), e.world.rand.nextDouble() - e.world.rand.nextDouble());
-                MiscHelper.getWarpTag(player).setInteger("wind", --wind);
-                if (wind <= 0)
-                    MiscHelper.getWarpTag(player).removeTag("wind");
-            }
         }
+
+        super.onTick(e);
     }
 }

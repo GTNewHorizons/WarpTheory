@@ -20,12 +20,10 @@ import shukaro.warptheory.util.FormatCodes;
 import java.util.List;
 import java.util.Locale;
 
-public class ItemPaper extends Item
-{
+public class ItemPaper extends Item {
     private IIcon icon;
 
-    public ItemPaper()
-    {
+    public ItemPaper() {
         super();
         this.setHasSubtypes(true);
         this.setMaxStackSize(64);
@@ -35,50 +33,42 @@ public class ItemPaper extends Item
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack)
-    {
+    public String getUnlocalizedName(ItemStack stack) {
         return this.getUnlocalizedName();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item id, CreativeTabs tab, List list)
-    {
+    public void getSubItems(Item id, CreativeTabs tab, List list) {
         list.add(new ItemStack(id, 1, 0));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg)
-    {
+    public void registerIcons(IIconRegister reg) {
         this.icon = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":" + "itemPaper");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack stack)
-    {
+    public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.uncommon;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int meta)
-    {
+    public IIcon getIconFromDamage(int meta) {
         return this.icon;
     }
 
     @Override
-    public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
-    {
+    public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
         return this.icon;
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
-    {
-        if (!world.isRemote)
-        {
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        if (!world.isRemote) {
             int totalWarp = WarpHandler.getTotalWarp(player);
             int[] individualWarps = WarpHandler.getIndividualWarps(player);
             String severity;
@@ -105,8 +95,7 @@ public class ItemPaper extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced)
-    {
+    public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced) {
         infoList.add(FormatCodes.DarkGrey.code + FormatCodes.Italic.code + StatCollector.translateToLocal("tooltip.warptheory.paper"));
     }
 }

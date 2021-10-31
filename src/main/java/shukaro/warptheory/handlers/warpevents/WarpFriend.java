@@ -1,83 +1,64 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.StatCollector;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import shukaro.warptheory.WarpTheory;
+import shukaro.warptheory.entity.EntityFakeCreeper;
 import shukaro.warptheory.entity.EntityPassiveCreeper;
-import shukaro.warptheory.handlers.IWarpEvent;
-import shukaro.warptheory.util.ChatHelper;
-import shukaro.warptheory.util.FormatCodes;
-import shukaro.warptheory.util.MiscHelper;
+import shukaro.warptheory.handlers.IMultiWarpEvent;
+import shukaro.warptheory.util.BlockCoord;
+import shukaro.warptheory.util.RandomBlockHelper;
 
-import java.util.ArrayList;
-
-public class WarpFriend extends IWarpEvent
-{
-	private final int _mMinWarpLevel;
-    public WarpFriend(int pMinWarpLevel)
-    {
-    	_mMinWarpLevel = pMinWarpLevel;
-        FMLCommonHandler.instance().bus().register(this);
+public class WarpFriend extends IMultiWarpEvent {
+    public WarpFriend(int minWarp) {
+        super("friend", minWarp, 3, world -> 1);
     }
 
     @Override
-    public String getName()
-    {
-        return "friend";
-    }
+    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player) {
+        int successful = 0;
 
-    @Override
-    public int getSeverity()
-    {
-    	return _mMinWarpLevel;
-    }
+        for (int i = 0; i < 6; i++) {
+            BlockCoord target = RandomBlockHelper.randomDoubleAirBlock(world, player, 4);
+            if (target == null) {
+                continue;
+            }
 
-    @Override
-    public boolean doEvent(World world, EntityPlayer player)
-    {
-        ChatHelper.sendToPlayer(player, FormatCodes.Purple.code + FormatCodes.Italic.code + StatCollector.translateToLocal("chat.warptheory.friend"));
-        MiscHelper.modEventInt(player, "friend", 1);
-        return true;
-    }
+            EntityCreeper creeper;
+            switch (eventLevel) {
+                case 2:
+                case 1:
+                    creeper = new EntityFakeCreeper(world);
+                    break;
 
-    @SubscribeEvent
-    public void onTick(TickEvent.WorldTickEvent e)
-    {
-        if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER)
-            return;
-        // Spawning friend
-        for (EntityPlayer player : (ArrayList<EntityPlayer>)e.world.playerEntities)
-        {
-            if (MiscHelper.getWarpTag(player).hasKey("friend"))
-            {
-                int friend = MiscHelper.getWarpTag(player).getInteger("friend");
-                for (int i = 0; i < 6; i++)
-                {
-                    int targetX = (int)player.posX + e.world.rand.nextInt(4) - e.world.rand.nextInt(4);
-                    int targetY = (int)player.posY + e.world.rand.nextInt(4) - e.world.rand.nextInt(4);
-                    int targetZ = (int)player.posZ + e.world.rand.nextInt(4) - e.world.rand.nextInt(4);
-                    if (e.world.isAirBlock(targetX, targetY, targetZ) && e.world.isAirBlock(targetX, targetY + 1, targetZ))
-                    {
-                        EntityPassiveCreeper creeper = new EntityPassiveCreeper(e.world);
-                        try { creeper.setCustomNameTag(WarpTheory.normalNames.compose(e.world.rand.nextInt(3) + 2)); }
-                        catch (Exception x) { x.printStackTrace(); }
-                        creeper.playLivingSound();
-                        creeper.setLocationAndAngles((double)targetX + e.world.rand.nextDouble(), (double)targetY + e.world.rand.nextDouble(), (double)targetZ + e.world.rand.nextDouble(), e.world.rand.nextFloat(), e.world.rand.nextFloat());
-                        if (e.world.spawnEntityInWorld(creeper))
-                        {
-                            MiscHelper.getWarpTag(player).setInteger("friend", --friend);
-                            if (friend <= 0)
-                                MiscHelper.getWarpTag(player).removeTag("friend");
-                            break;
-                        }
-                    }
+                case 0:
+                default:
+                    creeper = new EntityPassiveCreeper(world);
+                    break;
+            }
+            if (eventLevel == 2) {
+                creeper.addPotionEffect(new PotionEffect(Potion.invisibility.id, EntityFakeCreeper.ARMING_TIME));
+            }
+
+            try {
+                creeper.setCustomNameTag(WarpTheory.normalNames.compose(world.rand.nextInt(3) + 2));
+            } catch (Exception x) {
+                x.printStackTrace();
+            }
+
+            creeper.playLivingSound();
+            RandomBlockHelper.setLocation(world, creeper, target);
+            if (world.spawnEntityInWorld(creeper)) {
+                successful++;
+                if (successful >= eventAmount) {
+                    break;
                 }
             }
         }
+
+        return successful;
     }
 }

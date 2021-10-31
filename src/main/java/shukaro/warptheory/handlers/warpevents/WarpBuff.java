@@ -1,69 +1,48 @@
 package shukaro.warptheory.handlers.warpevents;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import shukaro.warptheory.handlers.IWarpEvent;
-import shukaro.warptheory.util.ChatHelper;
-import shukaro.warptheory.util.FormatCodes;
 
 import java.util.Collection;
 
-public class WarpBuff extends IWarpEvent
-{
-	private final int _mMinWarpLevel;
-    private String name;
-    private int id;
-    private int duration;
-    private int level;
+public class WarpBuff extends IWarpEvent {
+    private final ImmutableList<PotionEffect> potionEffects;
 
-    public WarpBuff(int pMinWarpLevel, String name, PotionEffect effect)
-    {
-    	_mMinWarpLevel = pMinWarpLevel;
-        this.name = name;
-        this.id = effect.getPotionID();
-        this.duration = effect.getDuration();
-        this.level = effect.getAmplifier();
+    public WarpBuff(String name, int minWarp, PotionEffect... effects) {
+        super(name, minWarp);
+        this.potionEffects = ImmutableList.copyOf(effects);
     }
 
     @Override
-    public String getName()
-    {
-        return name;
-    }
-
-    @Override
-    public int getSeverity()
-    {
-    	return _mMinWarpLevel;
-    }
-
-    @Override
-    public boolean doEvent(World world, EntityPlayer player)
-    {
+    @SuppressWarnings("unchecked")
+    public boolean doEvent(World world, EntityPlayer player) {
         if (world.isRemote)
             return true;
-        PotionEffect effect = null;
-        if (player.isPotionActive(id))
-        {
-            for (PotionEffect e : (Collection<PotionEffect>)player.getActivePotionEffects())
-            {
-                if (e.getPotionID() == id)
-                {
-                    effect = new PotionEffect(id, duration + e.getDuration(), level);
-                    break;
+
+        for (PotionEffect effect : potionEffects) {
+            int id = effect.getPotionID();
+            int duration = effect.getDuration();
+            int level = effect.getAmplifier();
+
+            if (player.isPotionActive(id)) {
+                for (PotionEffect e : (Collection<PotionEffect>) player.getActivePotionEffects()) {
+                    if (e.getPotionID() == id) {
+                        effect = new PotionEffect(id, duration + e.getDuration(), level);
+                        break;
+                    }
                 }
+            } else {
+                effect = new PotionEffect(id, duration, level);
             }
-        }
-        else
-            effect = new PotionEffect(id, duration, level);
-        if (effect != null)
-        {
+
             effect.getCurativeItems().clear();
             player.addPotionEffect(effect);
-            ChatHelper.sendToPlayer(player, FormatCodes.Purple.code + FormatCodes.Italic.code + StatCollector.translateToLocal("chat.warptheory." + getName()));
         }
+
+        sendChatMessage(player);
         return true;
     }
 }

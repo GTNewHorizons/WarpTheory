@@ -14,7 +14,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import shukaro.warptheory.WarpTheory;
-import shukaro.warptheory.handlers.WarpHandler;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.FormatCodes;
 import thaumcraft.api.ThaumcraftApiHelper;
@@ -22,12 +21,10 @@ import thaumcraft.api.ThaumcraftApiHelper;
 import java.util.List;
 import java.util.Locale;
 
-public class ItemSomething extends Item
-{
+public class ItemSomething extends Item {
     private IIcon icon;
 
-    public ItemSomething()
-    {
+    public ItemSomething() {
         super();
         this.setHasSubtypes(true);
         this.setMaxStackSize(64);
@@ -37,57 +34,48 @@ public class ItemSomething extends Item
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack)
-    {
+    public String getUnlocalizedName(ItemStack stack) {
         return this.getUnlocalizedName();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item id, CreativeTabs tab, List list)
-    {
+    public void getSubItems(Item id, CreativeTabs tab, List list) {
         list.add(new ItemStack(id, 1, 0));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg)
-    {
+    public void registerIcons(IIconRegister reg) {
         this.icon = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":" + "itemSomething");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack stack)
-    {
+    public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.uncommon;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int meta)
-    {
+    public IIcon getIconFromDamage(int meta) {
         return this.icon;
     }
 
     @Override
-    public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
-    {
+    public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
         return this.icon;
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
-    {
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
         return stack;
     }
 
     @Override
-    public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
-    {
-        if (!world.isRemote)
-        {
+    public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
+        if (!world.isRemote) {
             player.addChatMessage(new ChatComponentText(FormatCodes.Purple.code + FormatCodes.Italic.code + StatCollector.translateToLocal("chat.warptheory.addwarp")));
             ThaumcraftApiHelper.addWarpToPlayer(player, 4 + world.rand.nextInt(4), false);
             ThaumcraftApiHelper.addWarpToPlayer(player, 5 + world.rand.nextInt(5), true);
@@ -100,21 +88,18 @@ public class ItemSomething extends Item
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack)
-    {
+    public int getMaxItemUseDuration(ItemStack stack) {
         return 32;
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack stack)
-    {
+    public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.eat;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced)
-    {
+    public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced) {
         infoList.add(FormatCodes.DarkGrey.code + FormatCodes.Italic.code + StatCollector.translateToLocal("tooltip.warptheory.something"));
     }
 }
