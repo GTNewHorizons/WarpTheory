@@ -1,5 +1,6 @@
 package shukaro.warptheory.handlers;
 
+import cpw.mods.fml.common.Loader;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.config.Configuration;
@@ -24,7 +25,9 @@ import shukaro.warptheory.handlers.warpevents.WarpFakeSoundBehind;
 import shukaro.warptheory.handlers.warpevents.WarpFall;
 import shukaro.warptheory.handlers.warpevents.WarpFireBats;
 import shukaro.warptheory.handlers.warpevents.WarpFriend;
+import shukaro.warptheory.handlers.warpevents.WarpGregTechFakeSound;
 import shukaro.warptheory.handlers.warpevents.WarpInsomnia;
+import shukaro.warptheory.handlers.warpevents.WarpInventoryScramble;
 import shukaro.warptheory.handlers.warpevents.WarpInventorySwap;
 import shukaro.warptheory.handlers.warpevents.WarpJunk;
 import shukaro.warptheory.handlers.warpevents.WarpLayEggs;
@@ -84,40 +87,50 @@ public enum WarpEventRegistry {
             "FakeBoomer", "fake creeper", true, 10, false, false),
 
     // GTNH warp effects
-    BLAZE_FIREBALL(WarpBlazeFireball::new, "BlazeFireball", "blaze fireball", false, 100, false, false),
-    COIN(WarpCoin::new, "Coin", "coin", false, 100, false, false),
-    COUNTDOWN_BOMB(WarpCountdownBomb::new, "CountdownBomb", "countdown bomb", false, 100, true, false),
-    DOPPELGANGER(WarpDoppelganger::new, "Doppelganger", "doppelganger", false, 100, false, false),
-    ENDER_PEARL(WarpEnderPearl::new, "EnderPearl", "ender pearl", false, 100, false, false),
-    ENDERMEN(WarpEndermen::new, "Endermen", "endermen", false, 100, false, false),
-    EYE_BLINK(WarpEyeBlink::new, "EyeBlink", "eye blink", false, 100, false, false),
-    FAKE_RAIN(WarpFakeRain::new, "FakeRain", "fake rain", false, 100, false, false),
-    FIRE_BATS(WarpFireBats::new, "FireBats", "fire bats", false, 100, false, false),
-    INSOMNIA(WarpInsomnia::new, "Insomnia", "insomnia", false, 100, false, false),
-    INVENTORY_SWAP(WarpInventorySwap::new, "InventorySwap", "inventory swap", false, 100, false, false),
-    JUNK(WarpJunk::new, "Junk", "junk", false, 100, false, false),
-    LAY_EGGS(WarpLayEggs::new, "LayEggs", "lay eggs", false, 100, false, false),
-    LITMUS_PAPER(WarpLitmusPaper::new, "LitmusPaper", "litmus paper", false, 100, false, false),
-    MUSHROOMS(WarpMushrooms::new, "Mushrooms", "mushrooms", false, 100, true, false),
-    OBSIDIAN(WarpObsidian::new, "Obsidian", "obsidian", false, 100, true, false),
-    PHANTOMS(WarpPhantoms::new, "Phantoms", "phantoms", false, 100, false, false),
-    PUMPKIN(WarpPumpkin::new, "Pumpkin", "pumpkin", false, 100, false, false),
-    SNOW(WarpSnow::new, "Snow", "snow", false, 100, true, false),
-    WAND_DRAIN(WarpWandDrain::new, "WandDrain", "wand drain", false, 100, false, false),
+    BLAZE_FIREBALL(WarpBlazeFireball::new, "BlazeFireball", "blaze fireball", true, 100, false, false),
+    COIN(WarpCoin::new, "Coin", "coin", true, 100, false, false),
+    COUNTDOWN_BOMB(WarpCountdownBomb::new, "CountdownBomb", "countdown bomb", true, 100, true, false),
+    DOPPELGANGER(WarpDoppelganger::new, "Doppelganger", "doppelganger", true, 100, false, false),
+    ENDER_PEARL(WarpEnderPearl::new, "EnderPearl", "ender pearl", true, 100, false, false),
+    ENDERMEN(WarpEndermen::new, "Endermen", "endermen", true, 100, false, false),
+    EYE_BLINK(WarpEyeBlink::new, "EyeBlink", "eye blink", true, 100, false, false),
+    FAKE_RAIN(WarpFakeRain::new, "FakeRain", "fake rain", true, 100, false, false),
+    FIRE_BATS(WarpFireBats::new, "FireBats", "fire bats", true, 100, false, false),
+    INSOMNIA(WarpInsomnia::new, "Insomnia", "insomnia", true, 100, false, false),
+    INVENTORY_SWAP(WarpInventorySwap::new, "InventorySwap", "inventory swap", true, 100, false, false),
+    INVENTORY_SCRAMBLE(WarpInventoryScramble::new, "InventoryScramble", "inventory scramble", true, 100, false, false),
+    JUNK(WarpJunk::new, "Junk", "junk", true, 100, false, false),
+    LAY_EGGS(WarpLayEggs::new, "LayEggs", "lay eggs", true, 100, false, false),
+    LITMUS_PAPER(WarpLitmusPaper::new, "LitmusPaper", "litmus paper", true, 100, false, false),
+    MUSHROOMS(WarpMushrooms::new, "Mushrooms", "mushrooms", true, 100, true, false),
+    OBSIDIAN(WarpObsidian::new, "Obsidian", "obsidian", true, 100, true, false),
+    PHANTOMS(WarpPhantoms::new, "Phantoms", "phantoms", true, 100, false, false),
+    PUMPKIN(WarpPumpkin::new, "Pumpkin", "pumpkin", true, 100, false, false),
+    SNOW(WarpSnow::new, "Snow", "snow", true, 100, true, false),
+    WAND_DRAIN(WarpWandDrain::new, "WandDrain", "wand drain", true, 100, false, false),
     WITHER_POTION(
             warp -> new WarpBuff(
                     "witherpotion", warp,
                     new PotionEffect(Potion.wither.id, 30 * 20, 2),
                     new PotionEffect(Potion.hunger.id, 30 * 20, 2),
                     new PotionEffect(Potion.moveSlowdown.id, 30 * 20, 2)),
-            "WitherPotion", "wither potion", false, 100, false, false),
+            "WitherPotion", "wither potion", true, 100, false, false),
     FAKE_ENDERMAN(
             warp -> new WarpFakeSoundBehind("fakeenderman", warp, "mob.endermen.stare", 2, 1.5f, 0.1f),
-            "FakeEnderman", "fake enderman", false, 100, false, false),
+            "FakeEnderman", "fake enderman", true, 100, false, false),
     FAKE_WITHER(
             warp -> new WarpFakeSoundBehind("fakewither", warp, "mob.wither.spawn", 2),
-            "FakeWither", "fake wither", false, 100, false, false),
-    ;
+            "FakeWither", "fake wither", true, 100, false, false),
+
+    // Requires GregTech
+    GREGTECH_FAKE_SOUND(WarpGregTechFakeSound::new, "GregTechFakeSound", "GregTech fake sound", true, 100, false, false) {
+        @Override
+        public void createWarpEvent(Consumer<IWarpEvent> consumer) {
+            if (Loader.isModLoaded("gregtech") && Loader.isModLoaded("IC2NuclearControl")) {
+                super.createWarpEvent(consumer);
+            }
+        }
+    };
 
     private static final int MAX_WARP_FOR_EFFECTS = 200;
 

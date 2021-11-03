@@ -16,8 +16,10 @@ public class EntityPhantom extends EntityLiving implements IHurtable {
                     new ResourceLocation("warptheory", "textures/entities/phantom.png"),
                     new ResourceLocation("textures/entity/steve.png"));
 
-    private static final int SKIN_DATA_WATCHER_ID = 16;
-    private static final int LIFETIME_DATA_WATCHER_ID = 17;
+    protected static final int SKIN_DATA_WATCHER_ID = 16;
+    protected static final String SKIN_NBT_TAG = "skin";
+    protected static final int LIFETIME_DATA_WATCHER_ID = 17;
+    protected static final String LIFETIME_NBT_TAG = "lifetime";
 
     public EntityPhantom(World world) {
         super(world);
@@ -78,13 +80,13 @@ public class EntityPhantom extends EntityLiving implements IHurtable {
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
-        nbt.setByte("skin", dataWatcher.getWatchableObjectByte(SKIN_DATA_WATCHER_ID));
-        nbt.setShort("lifetime", dataWatcher.getWatchableObjectShort(LIFETIME_DATA_WATCHER_ID));
+        nbt.setByte(SKIN_NBT_TAG, dataWatcher.getWatchableObjectByte(SKIN_DATA_WATCHER_ID));
+        nbt.setShort(LIFETIME_NBT_TAG, dataWatcher.getWatchableObjectShort(LIFETIME_DATA_WATCHER_ID));
     }
 
     public void readEntityFromNBT(NBTTagCompound nbt) {
         super.readEntityFromNBT(nbt);
-        dataWatcher.updateObject(SKIN_DATA_WATCHER_ID, nbt.getByte("skin"));
-        dataWatcher.updateObject(LIFETIME_DATA_WATCHER_ID, nbt.getShort("lifetime"));
+        dataWatcher.updateObject(SKIN_DATA_WATCHER_ID, nbt.getByte(SKIN_NBT_TAG));
+        dataWatcher.updateObject(LIFETIME_DATA_WATCHER_ID, nbt.getShort(LIFETIME_NBT_TAG));
     }
 }
