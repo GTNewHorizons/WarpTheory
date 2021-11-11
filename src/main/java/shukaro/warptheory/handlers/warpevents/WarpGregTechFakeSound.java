@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import shukaro.warptheory.handlers.IMultiWarpEvent;
 
 public class WarpGregTechFakeSound extends IMultiWarpEvent {
-    // How many times to play the alarm sound.
+    /** How many times to play the alarm sound. */
     private static final int ALARM_PLAY_TIMES = 8;
     private static final ImmutableList<String> SOUNDS =
             ImmutableList.of(
