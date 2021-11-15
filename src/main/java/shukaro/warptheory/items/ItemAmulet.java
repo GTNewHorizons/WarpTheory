@@ -22,12 +22,10 @@ import shukaro.warptheory.util.FormatCodes;
 import java.util.List;
 import java.util.Locale;
 
-public class ItemAmulet extends Item implements IBauble
-{
+public class ItemAmulet extends Item implements IBauble {
     private IIcon icon;
 
-    public ItemAmulet()
-    {
+    public ItemAmulet() {
         super();
         this.setHasSubtypes(true);
         this.setMaxStackSize(1);
@@ -37,87 +35,73 @@ public class ItemAmulet extends Item implements IBauble
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack)
-    {
+    public String getUnlocalizedName(ItemStack stack) {
         return this.getUnlocalizedName();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item id, CreativeTabs tab, List list)
-    {
+    public void getSubItems(Item id, CreativeTabs tab, List list) {
         list.add(new ItemStack(id, 1, 0));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg)
-    {
+    public void registerIcons(IIconRegister reg) {
         this.icon = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":" + "itemAmulet");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack stack)
-    {
+    public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.uncommon;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int meta)
-    {
+    public IIcon getIconFromDamage(int meta) {
         return this.icon;
     }
 
     @Override
-    public BaubleType getBaubleType(ItemStack itemstack)
-    {
+    public BaubleType getBaubleType(ItemStack itemstack) {
         return BaubleType.AMULET;
     }
 
     @Override
-    public void onWornTick(ItemStack itemstack, EntityLivingBase entity)
-    {
-        if (entity instanceof EntityPlayer)
-        {
-            EntityPlayer player = (EntityPlayer)entity;
+    public void onWornTick(ItemStack itemstack, EntityLivingBase entity) {
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
             if (player.ticksExisted % 500 != 0 || WarpHandler.getTotalWarp(player) <= 0 || player.worldObj.isRemote)
                 return;
-            if (player.worldObj.rand.nextInt(100) <= Math.sqrt(WarpHandler.getTotalWarp(player)))
-            {
+            if (player.worldObj.rand.nextInt(100) <= Math.sqrt(WarpHandler.getTotalWarp(player))) {
                 IWarpEvent event = WarpHandler.queueOneEvent(player, WarpHandler.getTotalWarp(player));
-               	WarpHandler.removeWarp(player, (event != null) ? event.getCost() : 1);
+                WarpHandler.removeWarp(player, (event != null) ? event.getCost() : 1);
             }
         }
     }
 
     @Override
-    public void onEquipped(ItemStack itemstack, EntityLivingBase player)
-    {
+    public void onEquipped(ItemStack itemstack, EntityLivingBase player) {
     }
 
     @Override
-    public void onUnequipped(ItemStack itemstack, EntityLivingBase player)
-    {
+    public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {
     }
 
     @Override
-    public boolean canEquip(ItemStack itemstack, EntityLivingBase player)
-    {
+    public boolean canEquip(ItemStack itemstack, EntityLivingBase player) {
         return true;
     }
 
     @Override
-    public boolean canUnequip(ItemStack itemstack, EntityLivingBase player)
-    {
+    public boolean canUnequip(ItemStack itemstack, EntityLivingBase player) {
         return true;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced)
-    {
+    public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced) {
         infoList.add(FormatCodes.DarkGrey.code + FormatCodes.Italic.code + StatCollector.translateToLocal("tooltip.warptheory.amulet"));
     }
 }

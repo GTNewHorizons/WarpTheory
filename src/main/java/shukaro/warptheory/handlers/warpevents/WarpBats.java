@@ -1,80 +1,49 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.StatCollector;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import shukaro.warptheory.handlers.IWarpEvent;
-import shukaro.warptheory.util.ChatHelper;
-import shukaro.warptheory.util.FormatCodes;
-import shukaro.warptheory.util.MiscHelper;
+import shukaro.warptheory.handlers.IMultiWarpEvent;
+import shukaro.warptheory.util.BlockCoord;
+import shukaro.warptheory.util.RandomBlockHelper;
 
-import java.util.ArrayList;
-
-public class WarpBats extends IWarpEvent
-{
-	private final int _mMinWarpLevel;
-    public WarpBats(int pMinWarpLevel)
-    {
-    	_mMinWarpLevel = pMinWarpLevel;
-        FMLCommonHandler.instance().bus().register(this);
+public class WarpBats extends IMultiWarpEvent {
+    public WarpBats(int minWarp) {
+        super("bats", minWarp, 3, world -> 15 + world.rand.nextInt(30));
     }
 
     @Override
-    public String getName()
-    {
-        return "bats";
-    }
+    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player) {
+        int successful = 0;
+        for (int i = 0; i < 6; i++) {
+            BlockCoord target = RandomBlockHelper.randomAirBlock(world, player, 8);
+            if (target == null) {
+                continue;
+            }
 
-    @Override
-    public int getSeverity()
-    {
-    	return _mMinWarpLevel;
-    }
+            EntityBat bat = new EntityBat(world);
+            bat.playLivingSound();
+            RandomBlockHelper.setLocation(world, bat, target);
 
-    @Override
-    public boolean doEvent(World world, EntityPlayer player)
-    {
-        ChatHelper.sendToPlayer(player, FormatCodes.Purple.code + FormatCodes.Italic.code + StatCollector.translateToLocal("chat.warptheory.bats"));
-        MiscHelper.modEventInt(player, "bats", 15 + world.rand.nextInt(30));
-        return true;
-    }
+            switch (eventLevel) {
+                case 2:
+                    bat.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 3600 * 20));
+                    // Fall-through
+                case 1:
+                    bat.setFire(3600);
+                    break;
+            }
 
-    @SubscribeEvent
-    public void onTick(TickEvent.WorldTickEvent e)
-    {
-        if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER)
-            return;
-        // Spawning bats
-        for (EntityPlayer player : (ArrayList<EntityPlayer>)e.world.playerEntities)
-        {
-            if (MiscHelper.getWarpTag(player).hasKey("bats"))
-            {
-                int bats = MiscHelper.getWarpTag(player).getInteger("bats");
-                for (int i = 0; i < 6; i++)
-                {
-                    int targetX = (int)player.posX + e.world.rand.nextInt(8) - e.world.rand.nextInt(8);
-                    int targetY = (int)player.posY + e.world.rand.nextInt(8) - e.world.rand.nextInt(8);
-                    int targetZ = (int)player.posZ + e.world.rand.nextInt(8) - e.world.rand.nextInt(8);
-                    if (e.world.isAirBlock(targetX, targetY, targetZ))
-                    {
-                        EntityBat bat = new EntityBat(e.world);
-                        bat.playLivingSound();
-                        bat.setLocationAndAngles((double)targetX + e.world.rand.nextDouble(), (double)targetY + e.world.rand.nextDouble(), (double)targetZ + e.world.rand.nextDouble(), e.world.rand.nextFloat(), e.world.rand.nextFloat());
-                        if (e.world.spawnEntityInWorld(bat))
-                        {
-                            MiscHelper.getWarpTag(player).setInteger("bats", --bats);
-                            if (bats <= 0)
-                                MiscHelper.getWarpTag(player).removeTag("bats");
-                            break;
-                        }
-                    }
+            if (world.spawnEntityInWorld(bat)) {
+                successful++;
+                if (successful >= eventAmount) {
+                    break;
                 }
             }
         }
+
+        return successful;
     }
 }

@@ -21,13 +21,11 @@ import shukaro.warptheory.util.FormatCodes;
 import java.util.List;
 import java.util.Locale;
 
-public class ItemCleanser extends Item
-{   
+public class ItemCleanser extends Item {
     private IIcon icon1;
     private IIcon icon2;
 
-    public ItemCleanser()
-    {
+    public ItemCleanser() {
         super();
         this.setHasSubtypes(true);
         this.setMaxStackSize(16);
@@ -38,50 +36,45 @@ public class ItemCleanser extends Item
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack)
-    {
+    public String getUnlocalizedName(ItemStack stack) {
         return this.getUnlocalizedName();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item id, CreativeTabs tab, List list)
-    {
+    public void getSubItems(Item id, CreativeTabs tab, List list) {
         list.add(new ItemStack(id, 1, 0));
     }
 
     protected String getIcon() {
-        return  "itemCleanser";
+        return "itemCleanser";
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg)
-    {   
+    public void registerIcons(IIconRegister reg) {
         this.icon1 = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemCleanser"); //that's what renders inHand apparently
         this.icon2 = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemCleanserOpaque");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack stack)
-    {
+    public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.uncommon;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int meta)
-    {
+    public IIcon getIconFromDamage(int meta) {
         return this.icon1;
     }
 
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
-    {   
+    public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
         return icon2;
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean requiresMultipleRenderPasses() {
@@ -89,12 +82,11 @@ public class ItemCleanser extends Item
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
-    {
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
         return stack;
     }
-    
+
     protected void purgeWarp(EntityPlayer player) {
         if (WarpHandler.getTotalWarp(player) > 0)
             ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purge"));
@@ -103,12 +95,10 @@ public class ItemCleanser extends Item
 
         WarpHandler.purgeWarp(player);
     }
-    
+
     @Override
-    public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
-    {
-        if (!world.isRemote)
-        {
+    public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
+        if (!world.isRemote) {
             world.playSoundAtEntity(player, "game.potion.smash", 1.0f, 1.0f);
             purgeWarp(player);
         }
@@ -120,14 +110,12 @@ public class ItemCleanser extends Item
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack)
-    {
+    public int getMaxItemUseDuration(ItemStack stack) {
         return 24;
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack stack)
-    {
+    public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.eat;
     }
 
@@ -137,8 +125,7 @@ public class ItemCleanser extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced)
-    {
+    public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced) {
         infoList.add(FormatCodes.DarkGrey.code + FormatCodes.Italic.code + StatCollector.translateToLocal(getToolTip()));
     }
 }

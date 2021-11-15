@@ -19,12 +19,10 @@ import thaumcraft.api.research.ResearchPage;
 
 import java.util.HashMap;
 
-public class WarpResearch
-{
+public class WarpResearch {
     public static HashMap<String, Object> recipes = new HashMap();
 
-    public static void init()
-    {
+    public static void init() {
         ResearchCategories.registerCategory(Constants.CATEGORY_WARPTHEORY, new ResourceLocation("warptheory", "textures/items/r_itemCleanser.png"), new ResourceLocation("thaumcraft", "textures/gui/gui_researchbackeldritch.png"));
 
         //create pseudo research for Sanity Soap
@@ -36,23 +34,25 @@ public class WarpResearch
         new WTResearchItem(Constants.ITEM_WARPCLEANSERMINOR, new AspectList().add(Aspect.ELDRITCH, 3).add(Aspect.EXCHANGE, 1), -1, -2, 2, new ItemStack(WarpItems.itemCleanserMinor))
                 .setPages(new ResearchPage[]{new ResearchPage(StatCollector.translateToLocal("research.warptheory.warpcleanserminor")),
                         new ResearchPage((InfusionRecipe) recipes.get("PureTearMinor"))})
-                .setParents("ELDRITCHMAJOR", Constants.ITEM_LITMUS, "FAKEELDMAJOR").setHidden().setItemTriggers(ItemApi.getItem("itemSanitySoap",0)).registerResearchItem();		
+                .setParents("ELDRITCHMAJOR", Constants.ITEM_LITMUS, "FAKEELDMAJOR").setHidden().setItemTriggers(ItemApi.getItem("itemSanitySoap", 0)).registerResearchItem();
 
         new WTResearchItem(Constants.ITEM_WARPCLEANSER, new AspectList().add(Aspect.ELDRITCH, 6).add(Aspect.EXCHANGE, 3), -3, -2, 2, new ItemStack(WarpItems.itemCleanser))
                 .setPages(new ResearchPage[]{new ResearchPage(StatCollector.translateToLocal("research.warptheory.warpcleanser")),
                         new ResearchPage((InfusionRecipe) recipes.get("PureTear"))})
-                .setParents("ELDRITCHMAJOR", Constants.ITEM_LITMUS, "FAKEELDMAJOR").setHidden().setItemTriggers(ItemApi.getItem("itemSanitySoap",0)).registerResearchItem();
+                .setParents("ELDRITCHMAJOR", Constants.ITEM_LITMUS, "FAKEELDMAJOR").setHidden().setItemTriggers(ItemApi.getItem("itemSanitySoap", 0)).registerResearchItem();
 
         new WTResearchItem(Constants.ITEM_PURE_TALISMAN, new AspectList().add(Aspect.ELDRITCH, 6).add(Aspect.EXCHANGE, 3).add(Aspect.MAGIC, 3), -4, -3, 3, new ItemStack(WarpItems.itemAmulet))
                 .setPages(new ResearchPage[]{new ResearchPage(StatCollector.translateToLocal("research.warptheory.amulet")),
                         new ResearchPage((InfusionRecipe) recipes.get("PureAmulet"))})
                 .setParents(Constants.ITEM_WARPCLEANSER).setConcealed().registerResearchItem();
 
-		ResearchPage[] somethingPages = new ResearchPage[WarpRecipes.meats.size() + 1];
+        ResearchPage[] somethingPages = new ResearchPage[WarpRecipes.meats.size() + 1];
         somethingPages[0] = new ResearchPage(StatCollector.translateToLocal("research.warptheory.warpsomething"));
         int i = 1;
         for (ItemStack meat : WarpRecipes.meats) {
-            somethingPages[i] = (new ResearchPage((CrucibleRecipe) recipes.get("WarpChunk" + meat)));i++;}
+            somethingPages[i] = (new ResearchPage((CrucibleRecipe) recipes.get("WarpChunk" + meat)));
+            i++;
+        }
 
         new WTResearchItem(Constants.ITEM_SOMETHING, new AspectList().add(Aspect.ELDRITCH, 3), 2, 0, 1, new ItemStack(WarpItems.itemSomething))
                 .setPages(somethingPages).setParents("FAKESOAP").setSecondary().setAspectTriggers(Aspect.ELDRITCH, Aspect.FLESH, Aspect.EXCHANGE).registerResearchItem();

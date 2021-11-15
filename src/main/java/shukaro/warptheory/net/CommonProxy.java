@@ -8,17 +8,14 @@ import shukaro.warptheory.util.Constants;
 
 import java.util.EnumMap;
 
-public class CommonProxy
-{
+public class CommonProxy {
     public static EnumMap<Side, FMLEmbeddedChannel> warpChannel;
 
-    public void init()
-    {
+    public void init() {
         warpChannel = NetworkRegistry.INSTANCE.newChannel(Constants.modID, new WarpMessageToMessageCodec(), new PacketHandler());
     }
 
-    public EntityPlayer getPlayer()
-    {
+    public EntityPlayer getPlayer() {
         return null;
     }
 }

@@ -13,7 +13,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Logger;
 import shukaro.warptheory.block.WarpBlocks;
+import shukaro.warptheory.entity.EntityDoppelganger;
+import shukaro.warptheory.entity.EntityFakeCreeper;
 import shukaro.warptheory.entity.EntityPassiveCreeper;
+import shukaro.warptheory.entity.EntityPhantom;
 import shukaro.warptheory.gui.WarpTab;
 import shukaro.warptheory.handlers.ConfigHandler;
 import shukaro.warptheory.handlers.WarpCommand;
@@ -25,7 +28,6 @@ import shukaro.warptheory.recipe.WarpRecipes;
 import shukaro.warptheory.research.WarpResearch;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.NameGenerator;
-
 
 import java.io.File;
 import java.io.InputStream;
@@ -84,7 +86,12 @@ public class WarpTheory {
     public void init(FMLInitializationEvent evt) {
         WarpRecipes.init();
         WarpHandler.initEvents();
+
         EntityRegistry.registerModEntity(EntityPassiveCreeper.class, "creeperPassive", 0, this, 160, 4, true);
+        EntityRegistry.registerModEntity(EntityFakeCreeper.class, "creeperFake", 1, this, 160, 4, true);
+        EntityRegistry.registerModEntity(EntityDoppelganger.class, "doppelganger", 2, this, 160, 4, true);
+        EntityRegistry.registerModEntity(EntityPhantom.class, "phantom", 3, this, 160, 4, true);
+
         proxy.init();
     }
 

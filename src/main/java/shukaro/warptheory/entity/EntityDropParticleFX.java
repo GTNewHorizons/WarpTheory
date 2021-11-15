@@ -2,7 +2,6 @@ package shukaro.warptheory.entity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EntityFX;
@@ -66,25 +65,25 @@ public class EntityDropParticleFX extends EntityFX {
             this.motionZ *= 0.699999988079071D;
         }
         if (this.particleGravity > 0) {
-            Material material = this.worldObj.getBlock((int)Math.floor(this.posX), (int)Math.floor(this.posY), (int)Math.floor(this.posZ)).getMaterial();
+            Material material = this.worldObj.getBlock((int) Math.floor(this.posX), (int) Math.floor(this.posY), (int) Math.floor(this.posZ)).getMaterial();
 
             if (material.isLiquid() || material.isSolid()) {
                 double d0 = Math.floor(this.posY)
                         + 1
-                        - BlockLiquid.getLiquidHeightPercent(this.worldObj.getBlockMetadata((int)Math.floor(this.posX), (int)Math.floor(this.posY),
-                        (int)Math.floor(this.posZ)));
+                        - BlockLiquid.getLiquidHeightPercent(this.worldObj.getBlockMetadata((int) Math.floor(this.posX), (int) Math.floor(this.posY),
+                        (int) Math.floor(this.posZ)));
                 if (this.posY < d0) {
                     this.setDead();
                 }
             }
         } else {
-            Material material = this.worldObj.getBlock((int)Math.ceil(this.posX), (int)Math.ceil(this.posY), (int)Math.ceil(this.posZ)).getMaterial();
+            Material material = this.worldObj.getBlock((int) Math.ceil(this.posX), (int) Math.ceil(this.posY), (int) Math.ceil(this.posZ)).getMaterial();
 
             if (material.isLiquid() || material.isSolid()) {
-                double d0 = (int)Math.ceil(this.posY)
+                double d0 = (int) Math.ceil(this.posY)
                         + 1
-                        - BlockLiquid.getLiquidHeightPercent(this.worldObj.getBlockMetadata((int)Math.ceil(this.posX), (int)Math.ceil(this.posY),
-                        (int)Math.ceil(this.posZ)));
+                        - BlockLiquid.getLiquidHeightPercent(this.worldObj.getBlockMetadata((int) Math.ceil(this.posX), (int) Math.ceil(this.posY),
+                        (int) Math.ceil(this.posZ)));
                 if (this.posY > d0) {
                     this.setDead();
                 }
