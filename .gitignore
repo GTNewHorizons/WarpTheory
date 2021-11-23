@@ -1,23 +1,28 @@
-# Ignore Gradle cache files & directories
-bin/
-build/
-libs/
-eclipse/
-minecraft/
+.gradle
+.settings
+/.idea/
+/run/
+/build/
+/eclipse/
 .classpath
-.gradle/
 .project
-.settings/
-
-# Ignore OS cache files & directories
-*.DS_Store
-_MACOSX
-Thumbs.db
-
-# Ignore IntelliJ files
-out/
-*.ipr
+/bin/
+/config/
+/crash-reports/
+/logs/
+options.txt
+/saves/
+usernamecache.json
+banned-ips.json
+banned-players.json
+eula.txt
+ops.json
+server.properties
+servers.dat
+usercache.json
+whitelist.json
+/out/
 *.iml
+*.ipr
 *.iws
-.idea/
-*.bat
+src/main/resources/mixins.*.json

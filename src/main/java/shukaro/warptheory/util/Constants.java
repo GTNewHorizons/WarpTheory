@@ -8,7 +8,7 @@ public class Constants {
     //Mod Properties
     public static final String modID = "WarpTheory";
     public static final String modName = "WarpTheory";
-    public static final String modVersion = "1.7.10R1.0g.Custom";
+    public static final String modVersion = "GRADLETOKEN_VERSION";
 
     //Research Categories
     public static final String CATEGORY_WARPTHEORY = "WT_Category";

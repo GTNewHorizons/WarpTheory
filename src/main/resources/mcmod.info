@@ -1,10 +1,10 @@
 [
 {
-  "modid": "WarpTheory",
-  "name": "WarpTheory",
+  "modid": "${modId}",
+  "name": "${modName}",
   "description": "",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "",
   "updateUrl": "",
   "authors": [
