@@ -80,6 +80,7 @@ chat.warptheory.wither=You feel overwhelmed with dread...
 # << GTNH new warp effects >>
 chat.warptheory.blazefireball=You feel a searing pain in your throat
 chat.warptheory.coin=You spot something shiny at your feet!
+chat.warptheory.countdown.bomb=You're about to explode! Get somewhere cheap!
 chat.warptheory.doppelganger=You feel beside yourself...
 chat.warptheory.doppelganger.name=%s's Doppelgänger
 chat.warptheory.doppelganger.hurt=You feel your doppelgänger cry out
