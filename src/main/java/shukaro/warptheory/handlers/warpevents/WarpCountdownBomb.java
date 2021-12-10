@@ -17,6 +17,11 @@ public class WarpCountdownBomb extends ITimerWarpEvent {
     }
 
     @Override
+    public void sendChatMessage(EntityPlayer player) {
+        // No message for this one.
+    }
+
+    @Override
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
         setTimer(player, COUNTDOWN, 11);
         return 1;
