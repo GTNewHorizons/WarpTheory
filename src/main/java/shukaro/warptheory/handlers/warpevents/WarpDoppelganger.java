@@ -17,7 +17,7 @@ public class WarpDoppelganger extends IWorldTickWarpEvent {
         int successful = 0;
 
         for (int i = 0; i < 6; i++) {
-            BlockCoord target = RandomBlockHelper.randomDoubleAirBlock(world, player, 4);
+            BlockCoord target = RandomBlockHelper.randomBlock(world, player, 4, block -> isValid(world, block));
             if (target == null) {
                 continue;
             }
@@ -35,5 +35,12 @@ public class WarpDoppelganger extends IWorldTickWarpEvent {
         }
 
         return successful;
+    }
+
+    private static boolean isValid(World world, BlockCoord block) {
+        BlockCoord below = block.copy().offset(0);
+        BlockCoord above = block.copy().offset(1);
+
+        return below.isTopSolid(world) && block.isAir(world) && above.isAir(world);
     }
 }
