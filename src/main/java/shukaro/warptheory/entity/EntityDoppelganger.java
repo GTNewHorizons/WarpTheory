@@ -32,6 +32,7 @@ import shukaro.warptheory.util.FormatCodes;
 
 import javax.annotation.Nullable;
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -49,6 +50,9 @@ public class EntityDoppelganger extends EntityCreature implements IHurtable {
 
     protected static final int UUID_DATA_WATCHER_ID = 16;
     protected static final String UUID_NBT_TAG = "playerUuid";
+
+    // This will only be populated on the client.
+    protected static final Map<UUID, GameProfile> gameProfileCache = new HashMap<>();
 
     protected int findPlayerWait;
     protected int healWait;
@@ -88,23 +92,20 @@ public class EntityDoppelganger extends EntityCreature implements IHurtable {
     @Nullable
     @SuppressWarnings("unchecked")
     public ResourceLocation getPlayerSkin() {
-        String uuid = dataWatcher.getWatchableObjectString(UUID_DATA_WATCHER_ID);
-        if (uuid.isEmpty()) {
+        String uuidString = dataWatcher.getWatchableObjectString(UUID_DATA_WATCHER_ID);
+        if (uuidString.isEmpty()) {
             return null;
         }
+        UUID uuid = UUID.fromString(uuidString);
 
-        GameProfile profile = MinecraftServer.getServer().func_152358_ax().func_152652_a(UUID.fromString(uuid));
-        if (profile == null) {
-            return null;
-        }
-
-        // Fetch the textures from the server if necessary.
-        if (profile.getProperties().get("textures").isEmpty()) {
-            MinecraftServer.getServer().func_147130_as().fillProfileProperties(profile, true);
+        GameProfile gameProfile = gameProfileCache.get(uuid);
+        if (gameProfile == null) {
+            gameProfile = Minecraft.getMinecraft().func_152347_ac().fillProfileProperties(new GameProfile(uuid, null), true);
+            gameProfileCache.put(uuid, gameProfile);
         }
 
         SkinManager skinManager = Minecraft.getMinecraft().func_152342_ad();
-        Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> textureMap = skinManager.func_152788_a(profile);
+        Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> textureMap = skinManager.func_152788_a(gameProfile);
 
         if (textureMap.containsKey(MinecraftProfileTexture.Type.SKIN)) {
             return skinManager.func_152792_a(
