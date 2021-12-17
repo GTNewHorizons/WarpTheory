@@ -97,16 +97,10 @@ public class EntityDoppelganger extends EntityCreature implements IHurtable {
             return null;
         }
         UUID uuid = UUID.fromString(uuidString);
-        GameProfile gameProfile = gameProfileCache.computeIfAbsent(uuid, u -> new GameProfile(u, null));
 
-        // Fetch the textures from the server if necessary.
-        if (gameProfile.getProperties().get("textures").isEmpty()) {
-            MinecraftServer server = MinecraftServer.getServer();
-            if (server == null) {
-                return null;
-            }
-
-            gameProfile = server.func_147130_as().fillProfileProperties(gameProfile, true);
+        GameProfile gameProfile = gameProfileCache.get(uuid);
+        if (gameProfile == null) {
+            gameProfile = Minecraft.getMinecraft().func_152347_ac().fillProfileProperties(new GameProfile(uuid, null), true);
             gameProfileCache.put(uuid, gameProfile);
         }
 
