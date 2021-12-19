@@ -34,6 +34,7 @@ import shukaro.warptheory.handlers.warpevents.WarpLayEggs;
 import shukaro.warptheory.handlers.warpevents.WarpLightning;
 import shukaro.warptheory.handlers.warpevents.WarpLitmusPaper;
 import shukaro.warptheory.handlers.warpevents.WarpLivestockRain;
+import shukaro.warptheory.handlers.warpevents.WarpMessage;
 import shukaro.warptheory.handlers.warpevents.WarpMushrooms;
 import shukaro.warptheory.handlers.warpevents.WarpObsidian;
 import shukaro.warptheory.handlers.warpevents.WarpPhantoms;
@@ -93,7 +94,7 @@ public enum WarpEventRegistry {
     DOPPELGANGER(WarpDoppelganger::new, "Doppelganger", "doppelganger", true, 75, false, false),
     ENDER_PEARL(WarpEnderPearl::new, "EnderPearl", "ender pearl", true, 90, false, false),
     ENDERMEN(WarpEndermen::new, "Endermen", "endermen", true, 80, false, false),
-    EYE_BLINK(WarpEyeBlink::new, "EyeBlink", "eye blink", true, 5, false, false),
+    EYE_BLINK(WarpEyeBlink::new, "EyeBlink", "eye blink", false, 5, false, false),
     FAKE_RAIN(WarpFakeRain::new, "FakeRain", "fake rain", true, 25, false, false),
     FIRE_BATS(WarpFireBats::new, "FireBats", "fire bats", true, 60, false, false),
     INSOMNIA(WarpInsomnia::new, "Insomnia", "insomnia", true, 50, false, false),
@@ -102,6 +103,7 @@ public enum WarpEventRegistry {
     JUNK(WarpJunk::new, "Junk", "junk", true, 100, false, false),
     LAY_EGGS(WarpLayEggs::new, "LayEggs", "lay eggs", true, 20, false, false),
     LITMUS_PAPER(WarpLitmusPaper::new, "LitmusPaper", "litmus paper", true, 100, false, false),
+    MESSAGE(WarpMessage::new, "Message", "message", true, 5, false, false),
     MUSHROOMS(WarpMushrooms::new, "Mushrooms", "mushrooms", true, 170, true, false),
     OBSIDIAN(WarpObsidian::new, "Obsidian", "obsidian", true, 110, true, false),
     PHANTOMS(WarpPhantoms::new, "Phantoms", "phantoms", true, 20, false, false),
