@@ -39,13 +39,13 @@ public class EntitySafeTaintSheep extends EntityTaintSheep {
 
     @Override
     protected void updateAITasks() {
+        super.updateAITasks();
+        
         try {
             sheepTimerField.set(this, eatGrass.func_151499_f());
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-
-        super.updateAITasks();
     }
 
     @Override
