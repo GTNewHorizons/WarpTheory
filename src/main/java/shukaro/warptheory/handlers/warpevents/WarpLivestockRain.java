@@ -8,6 +8,7 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import shukaro.warptheory.entity.EntitySafeTaintSheep;
 import shukaro.warptheory.handlers.IMultiWarpEvent;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.RandomBlockHelper;
@@ -47,8 +48,10 @@ public class WarpLivestockRain extends IMultiWarpEvent {
                         case 2:
                             // There is a chance that some of these entities may survive, due to
                             // landing on an adjacent block.
-                            // Tainted sheep are capable of spreading taint, so be careful!
-                            victim = new EntityTaintSheep(world);
+                            //
+                            // Tainted sheep are capable of spreading taint, so instead, we use a
+                            // custom version of tainted sheep that cannot spread taint.
+                            victim = new EntitySafeTaintSheep(world);
                             break;
                         default:
                             victim = new EntityTaintChicken(world);

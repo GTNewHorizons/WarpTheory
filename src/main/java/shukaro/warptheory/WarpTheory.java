@@ -17,6 +17,7 @@ import shukaro.warptheory.entity.EntityDoppelganger;
 import shukaro.warptheory.entity.EntityFakeCreeper;
 import shukaro.warptheory.entity.EntityPassiveCreeper;
 import shukaro.warptheory.entity.EntityPhantom;
+import shukaro.warptheory.entity.EntitySafeTaintSheep;
 import shukaro.warptheory.gui.WarpTab;
 import shukaro.warptheory.handlers.ConfigHandler;
 import shukaro.warptheory.handlers.WarpCommand;
@@ -91,6 +92,7 @@ public class WarpTheory {
         EntityRegistry.registerModEntity(EntityFakeCreeper.class, "creeperFake", 1, this, 160, 4, true);
         EntityRegistry.registerModEntity(EntityDoppelganger.class, "doppelganger", 2, this, 160, 4, true);
         EntityRegistry.registerModEntity(EntityPhantom.class, "phantom", 3, this, 160, 4, true);
+        EntityRegistry.registerModEntity(EntitySafeTaintSheep.class, "taintSheepSafe", 4, this, 160, 4, true);
 
         proxy.init();
     }

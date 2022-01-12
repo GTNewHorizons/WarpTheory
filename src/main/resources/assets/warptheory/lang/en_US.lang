@@ -23,6 +23,9 @@ item.warptheory.amulet.name=Purification Talisman
 item.warptheory.something.name=Hunk of Something
 item.warptheory.paper.name=Arcane Litmus Paper
 
+# << entity names >>
+entity.WarpTheory.taintSheepSafe.name=Tainted Sheep
+
 # << tooltips >>
 tooltip.warptheory.cleanserminor=It's missing something...
 tooltip.warptheory.cleanser=Crunchy
