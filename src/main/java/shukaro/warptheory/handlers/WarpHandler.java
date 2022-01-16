@@ -133,6 +133,7 @@ public class WarpHandler {
     public static int getTotalWarp(EntityPlayer player) {
         String name = player.getDisplayName();
         int innerWarp = Knowledge.getWarpTotal(name);
+        if (innerWarp <= 0) return 0;
         int extraPerm = Knowledge.getWarpPerm(name) * (int) Math.max(0, ConfigHandler.permWarpMult - 1);
         int outerWarp = getWarpFromGear(player);
         return innerWarp + extraPerm + outerWarp;
