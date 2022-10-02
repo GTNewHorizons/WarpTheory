@@ -14,8 +14,8 @@ public class WarpEventHandler {
     public void livingUpdate(LivingEvent.LivingUpdateEvent e) {
         if (e.entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.entity;
-            boolean appliable = !player.isPotionActive(potionWarpWardID) || (WarpHandler.getUnavoidableCount(player) > 0) && !wuss && !player.capabilities.isCreativeMode;
-            boolean tickflag = !player.worldObj.isRemote && player.ticksExisted > 0 && player.ticksExisted % 2000 == 0;
+            boolean appliable = (!player.isPotionActive(potionWarpWardID) || WarpHandler.getUnavoidableCount(player) > 0) && !wuss && !player.capabilities.isCreativeMode;
+            boolean tickflag = ConfigHandler.allowWarpEffects && !player.worldObj.isRemote && player.ticksExisted > 0 && player.ticksExisted % 2000 == 0;
             if (tickflag && appliable && WarpHandler.getTotalWarp(player) > 0 && player.worldObj.rand.nextInt(100) <= Math.sqrt(WarpHandler.getTotalWarp(player))) {
                 IWarpEvent event = WarpHandler.queueOneEvent(player, WarpHandler.getTotalWarp(player));
                 if (event != null) {
