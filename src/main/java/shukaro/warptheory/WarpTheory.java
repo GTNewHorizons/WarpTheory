@@ -79,8 +79,7 @@ public class WarpTheory {
 
         WarpItems.initItems();
 
-        if (ConfigHandler.allowWarpEffects)
-            MinecraftForge.EVENT_BUS.register(new WarpEventHandler());
+        MinecraftForge.EVENT_BUS.register(new WarpEventHandler());
     }
 
     @Mod.EventHandler
