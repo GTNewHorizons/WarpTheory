@@ -1,6 +1,8 @@
 package shukaro.warptheory.handlers;
 
 import cpw.mods.fml.common.Loader;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.config.Configuration;
@@ -47,25 +49,42 @@ import shukaro.warptheory.handlers.warpevents.WarpWandDrain;
 import shukaro.warptheory.handlers.warpevents.WarpWind;
 import shukaro.warptheory.handlers.warpevents.WarpWither;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
-
 public enum WarpEventRegistry {
     // Default Warp Theory warp events
     BATS(WarpBats::new, "Bats", "spawn bats", true, 30, false, false),
     BLINK(WarpBlink::new, "Blink", "random teleport", true, 130, false, false),
     POISON(
             warp -> new WarpBuff("poison", warp, new PotionEffect(Potion.poison.id, 20 * 20)),
-            "Poison", "poison", true, 65, false, false),
+            "Poison",
+            "poison",
+            true,
+            65,
+            false,
+            false),
     NAUSEA(
             warp -> new WarpBuff("nausea", warp, new PotionEffect(Potion.confusion.id, 20 * 20)),
-            "Nausea", "nausea", true, 45, false, false),
+            "Nausea",
+            "nausea",
+            true,
+            45,
+            false,
+            false),
     JUMP(
             warp -> new WarpBuff("jump", warp, new PotionEffect(Potion.jump.id, 20 * 20, 20)),
-            "Jump", "jump boost", true, 45, false, false),
+            "Jump",
+            "jump boost",
+            true,
+            45,
+            false,
+            false),
     BLIND(
             warp -> new WarpBuff("blind", warp, new PotionEffect(Potion.blindness.id, 20 * 20)),
-            "Blind", "blindness", true, 65, false, false),
+            "Blind",
+            "blindness",
+            true,
+            65,
+            false,
+            false),
     DECAY(WarpDecay::new, "Decay", "decay", true, 180, true, false),
     EARS(WarpEars::new, "Deaf", "ears (unable to read messages)", false, 75, false, false),
     SWAMP(WarpSwamp::new, "Swamp", "swamp (random trees)", true, 190, true, false),
@@ -82,10 +101,20 @@ public enum WarpEventRegistry {
     WITHER(WarpWither::new, "WitherSpawn", "spawn wither", true, 200, true, false),
     FAKE_EXPLOSION(
             warp -> new WarpFakeSound("fakeexplosion", warp, "random.explode", 8),
-            "FakeBoom", "fake explosion", true, 10, false, false),
+            "FakeBoom",
+            "fake explosion",
+            true,
+            10,
+            false,
+            false),
     FAKE_CREEPER(
             warp -> new WarpFakeSoundBehind("fakecreeper", warp, "creeper.primed", 2),
-            "FakeBoomer", "fake creeper", true, 25, false, false),
+            "FakeBoomer",
+            "fake creeper",
+            true,
+            25,
+            false,
+            false),
 
     // GTNH warp effects
     BLAZE_FIREBALL(WarpBlazeFireball::new, "BlazeFireball", "blaze fireball", true, 95, false, false),
@@ -112,20 +141,37 @@ public enum WarpEventRegistry {
     WAND_DRAIN(WarpWandDrain::new, "WandDrain", "wand drain", true, 50, false, false),
     WITHER_POTION(
             warp -> new WarpBuff(
-                    "witherpotion", warp,
+                    "witherpotion",
+                    warp,
                     new PotionEffect(Potion.wither.id, 30 * 20, 2),
                     new PotionEffect(Potion.hunger.id, 30 * 20, 2),
                     new PotionEffect(Potion.moveSlowdown.id, 30 * 20, 2)),
-            "WitherPotion", "wither potion", true, 80, false, false),
+            "WitherPotion",
+            "wither potion",
+            true,
+            80,
+            false,
+            false),
     FAKE_ENDERMAN(
             warp -> new WarpFakeSoundBehind("fakeenderman", warp, "mob.endermen.stare", 2, 1.5f, 0.1f),
-            "FakeEnderman", "fake enderman", true, 35, false, false),
+            "FakeEnderman",
+            "fake enderman",
+            true,
+            35,
+            false,
+            false),
     FAKE_WITHER(
             warp -> new WarpFakeSoundBehind("fakewither", warp, "mob.wither.spawn", 2),
-            "FakeWither", "fake wither", true, 150, false, false),
+            "FakeWither",
+            "fake wither",
+            true,
+            150,
+            false,
+            false),
 
     // Requires GregTech
-    GREGTECH_FAKE_SOUND(WarpGregTechFakeSound::new, "GregTechFakeSound", "GregTech fake sound", true, 30, false, false) {
+    GREGTECH_FAKE_SOUND(
+            WarpGregTechFakeSound::new, "GregTechFakeSound", "GregTech fake sound", true, 30, false, false) {
         @Override
         public void createWarpEvent(Consumer<IWarpEvent> consumer) {
             if (Loader.isModLoaded("gregtech") && Loader.isModLoaded("IC2NuclearControl")) {
@@ -137,14 +183,10 @@ public enum WarpEventRegistry {
     private static final int MAX_WARP_FOR_EFFECTS = 200;
 
     private static final String CONFIG_ENABLED_NAME_FORMAT_STRING = "allow%sEffect";
-    private static final String CONFIG_ENABLED_DESCRIPTION_FORMAT_STRING =
-            "Whether to allow %s warp effect.";
-    private static final String CONFIG_ENABLED_DESCRIPTION_SERVER_KICK =
-            " May cause server errors.";
+    private static final String CONFIG_ENABLED_DESCRIPTION_FORMAT_STRING = "Whether to allow %s warp effect.";
+    private static final String CONFIG_ENABLED_DESCRIPTION_SERVER_KICK = " May cause server errors.";
     private static final String CONFIG_MIN_WARP_NAME_FORMAT_STRING = "minWarp%sEffect";
-    private static final String CONFIG_MIN_WARP_DESCRIPTION_FORMAT_STRING =
-            "Min warp required until %s can happen.";
-
+    private static final String CONFIG_MIN_WARP_DESCRIPTION_FORMAT_STRING = "Min warp required until %s can happen.";
 
     private final Function<Integer, IWarpEvent> constructor;
     private final String name;
@@ -159,9 +201,12 @@ public enum WarpEventRegistry {
 
     WarpEventRegistry(
             Function<Integer, IWarpEvent> constructor,
-            String name, String description,
-            boolean defaultEnabled, int defaultMinWarp,
-            boolean isGlobal, boolean isServerKick) {
+            String name,
+            String description,
+            boolean defaultEnabled,
+            int defaultMinWarp,
+            boolean isGlobal,
+            boolean isServerKick) {
         this.constructor = constructor;
         this.name = name;
         this.description = description;
@@ -175,21 +220,23 @@ public enum WarpEventRegistry {
     }
 
     public void loadConfig(Configuration config) {
-        String enabledDescription =
-                String.format(CONFIG_ENABLED_DESCRIPTION_FORMAT_STRING, description);
+        String enabledDescription = String.format(CONFIG_ENABLED_DESCRIPTION_FORMAT_STRING, description);
         if (isServerKick) {
             enabledDescription += CONFIG_ENABLED_DESCRIPTION_SERVER_KICK;
         }
-        isEnabled =
-                config.getBoolean(
-                        String.format(CONFIG_ENABLED_NAME_FORMAT_STRING, name),
-                        "warp_effects", defaultEnabled, enabledDescription);
+        isEnabled = config.getBoolean(
+                String.format(CONFIG_ENABLED_NAME_FORMAT_STRING, name),
+                "warp_effects",
+                defaultEnabled,
+                enabledDescription);
 
-        minWarp =
-                config.getInt(
-                        String.format(CONFIG_MIN_WARP_NAME_FORMAT_STRING, name),
-                        "warp_levels", defaultMinWarp, 1, MAX_WARP_FOR_EFFECTS,
-                        String.format(CONFIG_MIN_WARP_DESCRIPTION_FORMAT_STRING, description));
+        minWarp = config.getInt(
+                String.format(CONFIG_MIN_WARP_NAME_FORMAT_STRING, name),
+                "warp_levels",
+                defaultMinWarp,
+                1,
+                MAX_WARP_FOR_EFFECTS,
+                String.format(CONFIG_MIN_WARP_DESCRIPTION_FORMAT_STRING, description));
     }
 
     /**

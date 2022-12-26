@@ -4,6 +4,8 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+import java.util.Locale;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,9 +20,6 @@ import shukaro.warptheory.handlers.IWarpEvent;
 import shukaro.warptheory.handlers.WarpHandler;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.FormatCodes;
-
-import java.util.List;
-import java.util.Locale;
 
 public class ItemAmulet extends Item implements IBauble {
     private IIcon icon;
@@ -82,12 +81,10 @@ public class ItemAmulet extends Item implements IBauble {
     }
 
     @Override
-    public void onEquipped(ItemStack itemstack, EntityLivingBase player) {
-    }
+    public void onEquipped(ItemStack itemstack, EntityLivingBase player) {}
 
     @Override
-    public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {
-    }
+    public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {}
 
     @Override
     public boolean canEquip(ItemStack itemstack, EntityLivingBase player) {
@@ -102,6 +99,8 @@ public class ItemAmulet extends Item implements IBauble {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced) {
-        infoList.add(FormatCodes.DarkGrey.code + FormatCodes.Italic.code + StatCollector.translateToLocal("tooltip.warptheory.amulet"));
+        infoList.add(FormatCodes.DarkGrey.code
+                + FormatCodes.Italic.code
+                + StatCollector.translateToLocal("tooltip.warptheory.amulet"));
     }
 }

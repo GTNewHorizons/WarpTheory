@@ -27,7 +27,8 @@ public class WarpTongue extends IWarpEvent {
     public void onMessageReceived(ServerChatEvent e) {
         // Warp tongue
         if (MiscHelper.getWarpTag(e.player).hasKey(name)) {
-            e.component = new ChatComponentTranslation("<" + ChatHelper.getUsername(e.component) + "> " + ChatHelper.garbleMessage(e.component));
+            e.component = new ChatComponentTranslation(
+                    "<" + ChatHelper.getUsername(e.component) + "> " + ChatHelper.garbleMessage(e.component));
             decreaseTag(e.player, name, 1);
         }
     }

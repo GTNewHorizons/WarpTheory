@@ -41,7 +41,8 @@ public abstract class IWarpEvent {
     public void sendChatMessage(EntityPlayer player, String messageName) {
         ChatHelper.sendToPlayer(
                 player,
-                FormatCodes.Purple.code + FormatCodes.Italic.code
+                FormatCodes.Purple.code
+                        + FormatCodes.Italic.code
                         + StatCollector.translateToLocal("chat.warptheory." + messageName));
     }
 

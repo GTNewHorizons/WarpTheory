@@ -1,5 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
+import java.util.List;
+import java.util.Set;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityMooshroom;
@@ -13,9 +15,6 @@ import shukaro.warptheory.util.MiscHelper;
 import shukaro.warptheory.util.RandomBlockHelper;
 import thaumcraft.common.config.ConfigBlocks;
 
-import java.util.List;
-import java.util.Set;
-
 public class WarpMushrooms extends IWorldTickWarpEvent {
     public WarpMushrooms(int minWarp) {
         super("biomeMushrooms", minWarp, world -> 16 + world.rand.nextInt(16));
@@ -25,8 +24,7 @@ public class WarpMushrooms extends IWorldTickWarpEvent {
     @SuppressWarnings("unchecked")
     public boolean canDo(World world, EntityPlayer player) {
         for (String n : (Set<String>) MiscHelper.getWarpTag(player).func_150296_c()) {
-            if (n.startsWith("biome") && !n.equals(getName()))
-                return false;
+            if (n.startsWith("biome") && !n.equals(getName())) return false;
         }
         return true;
     }
@@ -35,8 +33,7 @@ public class WarpMushrooms extends IWorldTickWarpEvent {
     @SuppressWarnings("unchecked")
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
         BlockCoord target =
-                RandomBlockHelper.randomBlock(
-                        world, player, 16, block -> MiscHelper.hasNonSolidNeighbor(world, block));
+                RandomBlockHelper.randomBlock(world, player, 16, block -> MiscHelper.hasNonSolidNeighbor(world, block));
         if (target == null) {
             return 0;
         }
@@ -62,14 +59,13 @@ public class WarpMushrooms extends IWorldTickWarpEvent {
             return 1;
         }
 
-        AxisAlignedBB boundingBox =
-                AxisAlignedBB.getBoundingBox(
-                        (double) target.x - 1,
-                        (double) target.y - 1,
-                        (double) target.z - 1,
-                        (double) target.x + 1,
-                        (double) target.y + 1,
-                        (double) target.z + 1);
+        AxisAlignedBB boundingBox = AxisAlignedBB.getBoundingBox(
+                (double) target.x - 1,
+                (double) target.y - 1,
+                (double) target.z - 1,
+                (double) target.x + 1,
+                (double) target.y + 1,
+                (double) target.z + 1);
         for (Entity entity : (List<Entity>) world.getEntitiesWithinAABB(EntityCow.class, boundingBox)) {
             // Check for exact class match, because we don't want to transform subclasses.
             if (entity.getClass() == EntityCow.class) {

@@ -29,8 +29,7 @@ public class TileEntityVanish extends TileEntity {
 
     @Override
     public void updateEntity() {
-        if (this.worldObj.getTotalWorldTime() >= this.returnTime)
-            rebuildBlock();
+        if (this.worldObj.getTotalWorldTime() >= this.returnTime) rebuildBlock();
     }
 
     private void rebuildBlock() {
@@ -53,8 +52,7 @@ public class TileEntityVanish extends TileEntity {
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         this.pair = new NameMetaPair(tag.getString("oldName"), tag.getInteger("oldMeta"));
-        if (tag.hasKey("oldTag"))
-            this.tag = tag.getCompoundTag("oldTag");
+        if (tag.hasKey("oldTag")) this.tag = tag.getCompoundTag("oldTag");
         this.returnTime = tag.getLong("returnTime");
     }
 

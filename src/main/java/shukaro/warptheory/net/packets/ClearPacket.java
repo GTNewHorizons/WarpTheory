@@ -5,8 +5,7 @@ import io.netty.buffer.ByteBuf;
 public class ClearPacket implements IWarpPacket {
     public int id;
 
-    public ClearPacket() {
-    }
+    public ClearPacket() {}
 
     public ClearPacket(int id) {
         this.id = id;

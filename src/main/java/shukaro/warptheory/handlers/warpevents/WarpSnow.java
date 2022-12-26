@@ -1,5 +1,6 @@
 package shukaro.warptheory.handlers.warpevents;
 
+import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,8 +13,6 @@ import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.MiscHelper;
 import shukaro.warptheory.util.RandomBlockHelper;
 
-import java.util.Set;
-
 public class WarpSnow extends IWorldTickWarpEvent {
     public WarpSnow(int minWarp) {
         super("biomeSnow", minWarp, world -> 16 + world.rand.nextInt(16));
@@ -23,8 +22,7 @@ public class WarpSnow extends IWorldTickWarpEvent {
     @SuppressWarnings("unchecked")
     public boolean canDo(World world, EntityPlayer player) {
         for (String n : (Set<String>) MiscHelper.getWarpTag(player).func_150296_c()) {
-            if (n.startsWith("biome") && !n.equals(getName()))
-                return false;
+            if (n.startsWith("biome") && !n.equals(getName())) return false;
         }
         return true;
     }
@@ -33,8 +31,7 @@ public class WarpSnow extends IWorldTickWarpEvent {
     @SuppressWarnings("unchecked")
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
         BlockCoord target =
-                RandomBlockHelper.randomBlock(
-                        world, player, 16, block -> MiscHelper.hasNonSolidNeighbor(world, block));
+                RandomBlockHelper.randomBlock(world, player, 16, block -> MiscHelper.hasNonSolidNeighbor(world, block));
         if (target == null) {
             return 0;
         }
@@ -65,7 +62,9 @@ public class WarpSnow extends IWorldTickWarpEvent {
         }
 
         Block belowBlock = below.getBlock(world);
-        if ((belowBlock == Blocks.ice || belowBlock == Blocks.snow || belowBlock == Blocks.snow_layer) && target.isAir(world) && above.isAir(world)) {
+        if ((belowBlock == Blocks.ice || belowBlock == Blocks.snow || belowBlock == Blocks.snow_layer)
+                && target.isAir(world)
+                && above.isAir(world)) {
             EntitySnowman snowGolem = new EntitySnowman(world);
             snowGolem.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 3600 * 20));
             RandomBlockHelper.setLocation(world, snowGolem, target);

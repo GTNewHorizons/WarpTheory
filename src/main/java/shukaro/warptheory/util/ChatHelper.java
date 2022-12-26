@@ -2,14 +2,13 @@ package shukaro.warptheory.util;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
-
-import java.util.List;
-import java.util.Random;
 
 public class ChatHelper {
     private static Random rand = new Random();
@@ -28,15 +27,15 @@ public class ChatHelper {
     }
 
     public static String getUsername(IChatComponent message) {
-        if (!message.getUnformattedText().contains("<") || !message.getUnformattedText().contains(">"))
-            return "";
+        if (!message.getUnformattedText().contains("<")
+                || !message.getUnformattedText().contains(">")) return "";
         return message.getUnformattedText().split(" ")[0].replace("<", "").replace(">", "");
     }
 
     @SideOnly(Side.CLIENT)
     public static String getFormattedUsername(IChatComponent message) {
-        if (!message.getFormattedText().contains("<") || !message.getFormattedText().contains(">"))
-            return "";
+        if (!message.getFormattedText().contains("<")
+                || !message.getFormattedText().contains(">")) return "";
         return message.getFormattedText().split(" ")[0];
     }
 
@@ -60,16 +59,15 @@ public class ChatHelper {
                     c = String.valueOf(word.charAt(i) + String.valueOf(word.charAt(i + 1)));
                     i++;
                 } else
-                    c = rand.nextInt(5) == 0 ? FormatCodes.RandomChar.code + String.valueOf(word.charAt(i)) + FormatCodes.Reset.code : String.valueOf(word.charAt(i));
-                if (rand.nextBoolean())
-                    newWord = newWord + c;
-                else
-                    newWord = c + newWord;
+                    c = rand.nextInt(5) == 0
+                            ? FormatCodes.RandomChar.code + String.valueOf(word.charAt(i)) + FormatCodes.Reset.code
+                            : String.valueOf(word.charAt(i));
+                if (rand.nextBoolean()) newWord = newWord + c;
+                else newWord = c + newWord;
             }
             if (rand.nextBoolean())
                 newText = newText + (newWord.length() > 0 && newText.length() > 0 ? " " : "") + newWord;
-            else
-                newText = newWord + (newWord.length() > 0 && newText.length() > 0 ? " " : "") + newText;
+            else newText = newWord + (newWord.length() > 0 && newText.length() > 0 ? " " : "") + newText;
         }
         return FormatCodes.Reset.code + newText + FormatCodes.Reset.code;
     }

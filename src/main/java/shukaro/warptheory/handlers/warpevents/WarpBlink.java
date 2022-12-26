@@ -17,15 +17,15 @@ public class WarpBlink extends IWorldTickWarpEvent {
     @Override
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
         for (int i = 0; i < 8; i++) {
-            BlockCoord target =
-                    RandomBlockHelper.randomBlock(
-                            world, player, 16, block -> isBlockValid(world, block));
+            BlockCoord target = RandomBlockHelper.randomBlock(world, player, 16, block -> isBlockValid(world, block));
             if (target == null) {
                 continue;
             }
 
-            player.rotationPitch = (world.rand.nextInt(45) + world.rand.nextFloat()) - (world.rand.nextInt(45) + world.rand.nextFloat());
-            player.rotationYaw = (world.rand.nextInt(360) + world.rand.nextFloat()) - (world.rand.nextInt(360) + world.rand.nextFloat());
+            player.rotationPitch = (world.rand.nextInt(45) + world.rand.nextFloat())
+                    - (world.rand.nextInt(45) + world.rand.nextFloat());
+            player.rotationYaw = (world.rand.nextInt(360) + world.rand.nextFloat())
+                    - (world.rand.nextInt(360) + world.rand.nextFloat());
             double dX = target.x + 0.5;
             double dY = target.y + 0.01;
             double dZ = target.z + 0.5;

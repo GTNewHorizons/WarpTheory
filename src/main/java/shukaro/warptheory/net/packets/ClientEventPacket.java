@@ -6,8 +6,7 @@ public class ClientEventPacket implements IWarpPacket {
     public int id;
     public int amount;
 
-    public ClientEventPacket() {
-    }
+    public ClientEventPacket() {}
 
     public ClientEventPacket(int id, int amount) {
         this.id = id;

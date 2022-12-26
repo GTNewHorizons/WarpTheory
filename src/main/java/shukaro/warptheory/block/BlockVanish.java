@@ -2,12 +2,15 @@ package shukaro.warptheory.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -18,9 +21,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import shukaro.warptheory.util.Constants;
-
-import java.util.List;
-import java.util.Random;
 
 public class BlockVanish extends BlockContainer {
     public IIcon icon;
@@ -49,7 +49,7 @@ public class BlockVanish extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
         return null;
     }
 
@@ -60,8 +60,8 @@ public class BlockVanish extends BlockContainer {
     }
 
     @Override
-    public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB axisalignedbb, List arraylist, Entity entity) {
-    }
+    public void addCollisionBoxesToList(
+            World world, int i, int j, int k, AxisAlignedBB axisalignedbb, List arraylist, Entity entity) {}
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k) {

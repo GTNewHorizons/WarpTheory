@@ -5,8 +5,7 @@ import io.netty.buffer.ByteBuf;
 public class FakeRainPacket implements IWarpPacket {
     public int eventLevel;
 
-    public FakeRainPacket() {
-    }
+    public FakeRainPacket() {}
 
     public FakeRainPacket(int eventLevel) {
         this.eventLevel = eventLevel;

@@ -83,21 +83,29 @@ public class PacketDispatcher {
     }
 
     private static void sendToServer(IWarpPacket packet) {
-        getClientOutboundChannel().attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
+        getClientOutboundChannel()
+                .attr(FMLOutboundHandler.FML_MESSAGETARGET)
+                .set(FMLOutboundHandler.OutboundTarget.TOSERVER);
         getClientOutboundChannel().writeOutbound(packet);
     }
 
     private static void sendToPlayer(IWarpPacket packet, EntityPlayer player) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            getServerOutboundChannel().attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
-            getServerOutboundChannel().attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
+            getServerOutboundChannel()
+                    .attr(FMLOutboundHandler.FML_MESSAGETARGET)
+                    .set(FMLOutboundHandler.OutboundTarget.PLAYER);
+            getServerOutboundChannel()
+                    .attr(FMLOutboundHandler.FML_MESSAGETARGETARGS)
+                    .set(player);
             getServerOutboundChannel().writeOutbound(packet);
         }
     }
 
     private static void sendToAll(IWarpPacket packet) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            getServerOutboundChannel().attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
+            getServerOutboundChannel()
+                    .attr(FMLOutboundHandler.FML_MESSAGETARGET)
+                    .set(FMLOutboundHandler.OutboundTarget.ALL);
             getServerOutboundChannel().writeOutbound(packet);
         }
     }
@@ -105,16 +113,24 @@ public class PacketDispatcher {
     private static void sendToAllAround(IWarpPacket packet, int dim, int x, int y, int z, int range) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
             NetworkRegistry.TargetPoint tp = new NetworkRegistry.TargetPoint(dim, x, y, z, range);
-            getServerOutboundChannel().attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
-            getServerOutboundChannel().attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(tp);
+            getServerOutboundChannel()
+                    .attr(FMLOutboundHandler.FML_MESSAGETARGET)
+                    .set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
+            getServerOutboundChannel()
+                    .attr(FMLOutboundHandler.FML_MESSAGETARGETARGS)
+                    .set(tp);
             getServerOutboundChannel().writeOutbound(packet);
         }
     }
 
     private static void sendToAllInDim(IWarpPacket packet, int dim) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            getServerOutboundChannel().attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.DIMENSION);
-            getServerOutboundChannel().attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(dim);
+            getServerOutboundChannel()
+                    .attr(FMLOutboundHandler.FML_MESSAGETARGET)
+                    .set(FMLOutboundHandler.OutboundTarget.DIMENSION);
+            getServerOutboundChannel()
+                    .attr(FMLOutboundHandler.FML_MESSAGETARGETARGS)
+                    .set(dim);
             getServerOutboundChannel().writeOutbound(packet);
         }
     }

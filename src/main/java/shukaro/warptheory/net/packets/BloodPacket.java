@@ -5,8 +5,7 @@ import io.netty.buffer.ByteBuf;
 public class BloodPacket implements IWarpPacket {
     public int dim, eventLevel, x, y, z;
 
-    public BloodPacket() {
-    }
+    public BloodPacket() {}
 
     public BloodPacket(int dim, int eventLevel, int x, int y, int z) {
         this.dim = dim;

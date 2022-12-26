@@ -9,8 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class RenderDoppelganger extends RenderBiped {
-    private static final ResourceLocation FALLBACK_TEXTURE =
-            new ResourceLocation("textures/entity/steve.png");
+    private static final ResourceLocation FALLBACK_TEXTURE = new ResourceLocation("textures/entity/steve.png");
 
     public RenderDoppelganger() {
         super(new ModelBiped(0.0F), 0.5F);

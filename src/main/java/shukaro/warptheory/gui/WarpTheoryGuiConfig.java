@@ -2,20 +2,25 @@ package shukaro.warptheory.gui;
 
 import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 import shukaro.warptheory.handlers.ConfigHandler;
 import shukaro.warptheory.util.Constants;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ark on 3/8/2015.
  */
 public class WarpTheoryGuiConfig extends GuiConfig {
     public WarpTheoryGuiConfig(GuiScreen parent) {
-        super(parent, getConfigObjects(), Constants.modID, false, false, cpw.mods.fml.client.config.GuiConfig.getAbridgedConfigPath(ConfigHandler.config.toString()));
+        super(
+                parent,
+                getConfigObjects(),
+                Constants.modID,
+                false,
+                false,
+                cpw.mods.fml.client.config.GuiConfig.getAbridgedConfigPath(ConfigHandler.config.toString()));
     }
 
     private static List<IConfigElement> getConfigObjects() {

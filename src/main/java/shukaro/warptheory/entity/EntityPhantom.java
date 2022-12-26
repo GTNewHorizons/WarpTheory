@@ -10,11 +10,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class EntityPhantom extends EntityLiving implements IHurtable {
-    public static final ImmutableList<ResourceLocation> SKINS =
-            ImmutableList.of(
-                    // Add more textures here if you want more varied phantoms.
-                    new ResourceLocation("warptheory", "textures/entities/phantom.png"),
-                    new ResourceLocation("textures/entity/steve.png"));
+    public static final ImmutableList<ResourceLocation> SKINS = ImmutableList.of(
+            // Add more textures here if you want more varied phantoms.
+            new ResourceLocation("warptheory", "textures/entities/phantom.png"),
+            new ResourceLocation("textures/entity/steve.png"));
 
     protected static final int SKIN_DATA_WATCHER_ID = 16;
     protected static final String SKIN_NBT_TAG = "skin";

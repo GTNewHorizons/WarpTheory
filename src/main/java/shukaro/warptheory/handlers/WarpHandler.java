@@ -2,6 +2,12 @@ package shukaro.warptheory.handlers;
 
 import baubles.api.BaublesApi;
 import gnu.trove.map.hash.THashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -14,13 +20,6 @@ import shukaro.warptheory.util.NameMetaPair;
 import thaumcraft.api.IWarpingGear;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.lib.research.PlayerKnowledge;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 public class WarpHandler {
     public static final PlayerKnowledge Knowledge = Thaumcraft.proxy.getPlayerKnowledge();
@@ -42,8 +41,7 @@ public class WarpHandler {
     }
 
     public static void initEvents() {
-        Arrays.stream(WarpEventRegistry.values())
-                .forEach(warpEvent -> warpEvent.createWarpEvent(warpEvents::add));
+        Arrays.stream(WarpEventRegistry.values()).forEach(warpEvent -> warpEvent.createWarpEvent(warpEvents::add));
 
         addDecayMapping(Blocks.grass, Blocks.dirt);
         addDecayMapping(Blocks.dirt, 0, Blocks.sand);
@@ -90,19 +88,17 @@ public class WarpHandler {
         removeWarp(player, getTotalWarp(player));
     }
 
-    //add function to remove 5 warp, only at 50+
+    // add function to remove 5 warp, only at 50+
     public static void purgeWarpMinor(EntityPlayer player) {
         int[] warp = getIndividualWarps(player);
         if (warp[0] + warp[1] + warp[2] >= 50) {
             removeWarp(player, 5);
             ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purgeminor"));
-        } else
-            ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purgefailed"));
+        } else ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purgefailed"));
     }
 
     public static void removeWarp(EntityPlayer player, int amount) {
-        if (amount <= 0)
-            return;
+        if (amount <= 0) return;
         String name = player.getDisplayName();
         int wp = Knowledge.getWarpPerm(name);
         int wn = Knowledge.getWarpSticky(name);
@@ -116,13 +112,11 @@ public class WarpHandler {
 
         Knowledge.addWarpTemp(name, -amount);
         amount -= wt;
-        if (amount <= 0)
-            return;
+        if (amount <= 0) return;
 
         Knowledge.addWarpSticky(name, -amount);
         amount -= wn;
-        if (amount <= 0)
-            return;
+        if (amount <= 0) return;
 
         if (ConfigHandler.allowPermWarpRemoval) {
             amount = (int) Math.ceil(amount / ConfigHandler.permWarpMult);
@@ -140,7 +134,9 @@ public class WarpHandler {
 
     public static int[] getIndividualWarps(EntityPlayer player) {
         String userName = player.getDisplayName();
-        int[] totals = new int[]{Knowledge.getWarpPerm(userName), Knowledge.getWarpSticky(userName), Knowledge.getWarpTemp(userName)};
+        int[] totals = new int[] {
+            Knowledge.getWarpPerm(userName), Knowledge.getWarpSticky(userName), Knowledge.getWarpTemp(userName)
+        };
         return totals;
     }
 
@@ -149,8 +145,7 @@ public class WarpHandler {
         int count = 0;
         while (w > 0) {
             IWarpEvent event = queueOneEvent(player, w);
-            if (event == null)
-                return w;
+            if (event == null) return w;
             w -= event.getCost();
             count += 1;
         }
@@ -159,8 +154,7 @@ public class WarpHandler {
 
     public static IWarpEvent queueOneEvent(EntityPlayer player, int maxSeverity) {
         IWarpEvent event = getAppropriateEvent(player, maxSeverity);
-        if (event != null)
-            queueEvent(player, event);
+        if (event != null) queueEvent(player, event);
         return event;
     }
 
@@ -168,62 +162,51 @@ public class WarpHandler {
         ArrayList<IWarpEvent> shuffled = (ArrayList<IWarpEvent>) warpEvents.clone();
         Collections.shuffle(shuffled);
         for (IWarpEvent e : shuffled) {
-            if (e.getSeverity() <= maxSeverity)
-                return e;
+            if (e.getSeverity() <= maxSeverity) return e;
         }
         return null;
     }
 
     public static int getWarpFromGear(EntityPlayer player) {
         int w = getFinalWarp(player.getCurrentEquippedItem(), player);
-        for (int a = 0; a < 4; a++)
-            w += getFinalWarp(player.inventory.armorItemInSlot(a), player);
+        for (int a = 0; a < 4; a++) w += getFinalWarp(player.inventory.armorItemInSlot(a), player);
         IInventory baubles = BaublesApi.getBaubles(player);
-        for (int i = 0; i < 4; i++)
-            w += getFinalWarp(baubles.getStackInSlot(i), player);
+        for (int i = 0; i < 4; i++) w += getFinalWarp(baubles.getStackInSlot(i), player);
         return w;
     }
 
     public static int getFinalWarp(ItemStack stack, EntityPlayer player) {
-        if (stack == null || !(stack.getItem() instanceof IWarpingGear))
-            return 0;
+        if (stack == null || !(stack.getItem() instanceof IWarpingGear)) return 0;
         IWarpingGear armor = (IWarpingGear) stack.getItem();
         return armor.getWarp(stack, player);
     }
 
     public static IWarpEvent getEventFromName(String name) {
         for (IWarpEvent event : warpEvents) {
-            if (event.getName().equals(name))
-                return event;
+            if (event.getName().equals(name)) return event;
         }
         return null;
     }
 
     public static void queueEvent(EntityPlayer player, IWarpEvent event) {
         String queue;
-        if (!MiscHelper.getWarpTag(player).hasKey("queuedEvents"))
-            queue = "";
-        else
-            queue = MiscHelper.getWarpTag(player).getString("queuedEvents");
+        if (!MiscHelper.getWarpTag(player).hasKey("queuedEvents")) queue = "";
+        else queue = MiscHelper.getWarpTag(player).getString("queuedEvents");
         queue += event.getName() + " ";
         MiscHelper.getWarpTag(player).setString("queuedEvents", queue);
     }
 
     public static IWarpEvent dequeueEvent(EntityPlayer player) {
         String queue;
-        if (!MiscHelper.getWarpTag(player).hasKey("queuedEvents"))
-            queue = "";
-        else
-            queue = MiscHelper.getWarpTag(player).getString("queuedEvents");
+        if (!MiscHelper.getWarpTag(player).hasKey("queuedEvents")) queue = "";
+        else queue = MiscHelper.getWarpTag(player).getString("queuedEvents");
         if (queue.length() > 0) {
             ArrayList<String> names = new ArrayList<String>();
-            for (String n : queue.split(" "))
-                names.add(n);
+            for (String n : queue.split(" ")) names.add(n);
             Collections.shuffle(names);
             String todo = names.remove(player.worldObj.rand.nextInt(names.size()));
             queue = "";
-            for (String n : names)
-                queue += n + " ";
+            for (String n : names) queue += n + " ";
             MiscHelper.getWarpTag(player).setString("queuedEvents", queue);
             return getEventFromName(todo);
         }
@@ -231,28 +214,23 @@ public class WarpHandler {
     }
 
     public static void setUnavoidableCount(EntityPlayer player, int count) {
-        if (ConfigHandler.disableRebound)
-            return;
+        if (ConfigHandler.disableRebound) return;
         UUID uuid = player.getUniqueID();
         Unavoidable.put(uuid, Math.max(0, count));
     }
 
     public static void addUnavoidableCount(EntityPlayer player, int count) {
-        if (ConfigHandler.disableRebound)
-            return;
+        if (ConfigHandler.disableRebound) return;
         UUID uuid = player.getUniqueID();
-        if (!Unavoidable.containsKey(uuid))
-            Unavoidable.put(uuid, 0);
+        if (!Unavoidable.containsKey(uuid)) Unavoidable.put(uuid, 0);
         count = Math.max(0, count + Unavoidable.get(uuid));
         Unavoidable.put(uuid, count);
     }
 
     public static int getUnavoidableCount(EntityPlayer player) {
-        if (ConfigHandler.disableRebound)
-            return 0;
+        if (ConfigHandler.disableRebound) return 0;
         UUID uuid = player.getUniqueID();
-        if (!Unavoidable.containsKey(uuid))
-            Unavoidable.put(uuid, 0);
+        if (!Unavoidable.containsKey(uuid)) Unavoidable.put(uuid, 0);
         return Unavoidable.get(uuid);
     }
 }

@@ -1,5 +1,8 @@
 package shukaro.warptheory.util;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -8,37 +11,43 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 public class BlockCoord implements Comparable {
     public int x, y, z;
 
-    private static final BlockCoord[] sideOffsets =
-            {
-                    new BlockCoord(0, -1, 0), new BlockCoord(0, 1, 0),
-                    new BlockCoord(0, 0, -1), new BlockCoord(0, 0, 1),
-                    new BlockCoord(-1, 0, 0), new BlockCoord(1, 0, 0)};
+    private static final BlockCoord[] sideOffsets = {
+        new BlockCoord(0, -1, 0), new BlockCoord(0, 1, 0),
+        new BlockCoord(0, 0, -1), new BlockCoord(0, 0, 1),
+        new BlockCoord(-1, 0, 0), new BlockCoord(1, 0, 0)
+    };
 
-    private static final BlockCoord[] nearbyOffsets =
-            {
-                    new BlockCoord(-1, 1, 1), new BlockCoord(0, 1, 1),
-                    new BlockCoord(1, 1, 1), new BlockCoord(-1, 0, 1),
-                    new BlockCoord(0, 0, 1), new BlockCoord(1, 0, 1),
-                    new BlockCoord(-1, -1, 1), new BlockCoord(0, -1, 1),
-                    new BlockCoord(1, -1, 1),
-
-                    new BlockCoord(-1, 1, 0), new BlockCoord(0, 1, 0),
-                    new BlockCoord(1, 1, 0), new BlockCoord(-1, 0, 0),
-                    new BlockCoord(1, 0, 0), new BlockCoord(-1, -1, 0),
-                    new BlockCoord(0, -1, 0), new BlockCoord(1, -1, 0),
-
-                    new BlockCoord(-1, 1, -1), new BlockCoord(0, 1, -1),
-                    new BlockCoord(1, 1, -1), new BlockCoord(-1, 0, -1),
-                    new BlockCoord(0, 0, -1), new BlockCoord(1, 0, -1),
-                    new BlockCoord(-1, -1, -1), new BlockCoord(0, -1, -1),
-                    new BlockCoord(1, -1, -1)};
+    private static final BlockCoord[] nearbyOffsets = {
+        new BlockCoord(-1, 1, 1),
+        new BlockCoord(0, 1, 1),
+        new BlockCoord(1, 1, 1),
+        new BlockCoord(-1, 0, 1),
+        new BlockCoord(0, 0, 1),
+        new BlockCoord(1, 0, 1),
+        new BlockCoord(-1, -1, 1),
+        new BlockCoord(0, -1, 1),
+        new BlockCoord(1, -1, 1),
+        new BlockCoord(-1, 1, 0),
+        new BlockCoord(0, 1, 0),
+        new BlockCoord(1, 1, 0),
+        new BlockCoord(-1, 0, 0),
+        new BlockCoord(1, 0, 0),
+        new BlockCoord(-1, -1, 0),
+        new BlockCoord(0, -1, 0),
+        new BlockCoord(1, -1, 0),
+        new BlockCoord(-1, 1, -1),
+        new BlockCoord(0, 1, -1),
+        new BlockCoord(1, 1, -1),
+        new BlockCoord(-1, 0, -1),
+        new BlockCoord(0, 0, -1),
+        new BlockCoord(1, 0, -1),
+        new BlockCoord(-1, -1, -1),
+        new BlockCoord(0, -1, -1),
+        new BlockCoord(1, -1, -1)
+    };
 
     public BlockCoord(int x, int y, int z) {
         this.x = x;
@@ -68,13 +77,11 @@ public class BlockCoord implements Comparable {
         this(array[0], array[1], array[2]);
     }
 
-    public BlockCoord() {
-    }
+    public BlockCoord() {}
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof BlockCoord))
-            return false;
+        if (!(o instanceof BlockCoord)) return false;
         BlockCoord t = (BlockCoord) o;
         return (this.x == t.x) && (this.y == t.y) && (this.z == t.z);
     }
@@ -236,7 +243,7 @@ public class BlockCoord implements Comparable {
     }
 
     public int[] intArray() {
-        return new int[]{this.x, this.y, this.z};
+        return new int[] {this.x, this.y, this.z};
     }
 
     public BlockCoord set(int i, int j, int k) {
@@ -265,8 +272,7 @@ public class BlockCoord implements Comparable {
             for (int y = minY; y < maxY; y++) {
                 for (int z = minZ; z < maxZ; z++) {
                     BlockCoord t = new BlockCoord(x, y, z);
-                    if (t.blockEquals(world, block, meta))
-                        matches.add(t);
+                    if (t.blockEquals(world, block, meta)) matches.add(t);
                 }
             }
         }
@@ -298,7 +304,9 @@ public class BlockCoord implements Comparable {
     }
 
     public boolean blockEquals(World world, BlockCoord c) {
-        return c.getBlock(world) == null && this.getBlock(world) == null || !(c.getBlock(world) == null ^ this.getBlock(world) == null) && (c.getBlock(world).equals(this.getBlock(world)) && c.getMeta(world) == this.getMeta(world));
+        return c.getBlock(world) == null && this.getBlock(world) == null
+                || !(c.getBlock(world) == null ^ this.getBlock(world) == null)
+                        && (c.getBlock(world).equals(this.getBlock(world)) && c.getMeta(world) == this.getMeta(world));
     }
 
     public boolean blockEquals(World world, Block block, int meta) {
@@ -306,7 +314,9 @@ public class BlockCoord implements Comparable {
     }
 
     public boolean blockEquals(IBlockAccess world, BlockCoord c) {
-        return c.getBlock(world) == null && this.getBlock(world) == null || !(c.getBlock(world) == null ^ this.getBlock(world) == null) && (c.getBlock(world).equals(this.getBlock(world)) && c.getMeta(world) == this.getMeta(world));
+        return c.getBlock(world) == null && this.getBlock(world) == null
+                || !(c.getBlock(world) == null ^ this.getBlock(world) == null)
+                        && (c.getBlock(world).equals(this.getBlock(world)) && c.getMeta(world) == this.getMeta(world));
     }
 
     public boolean blockEquals(IBlockAccess world, Block block, int meta) {
@@ -329,10 +339,8 @@ public class BlockCoord implements Comparable {
 
             for (BlockCoord j : t.getAdjacent()) {
                 if (j.blockEquals(world, block, meta)) {
-                    if (j.equals(c))
-                        return true;
-                    if (!traversed.contains(j) && !toTraverse.contains(j))
-                        toTraverse.add(j);
+                    if (j.equals(c)) return true;
+                    if (!traversed.contains(j) && !toTraverse.contains(j)) toTraverse.add(j);
                 }
             }
         }
@@ -377,7 +385,8 @@ public class BlockCoord implements Comparable {
     }
 
     public ItemStack getStack(IBlockAccess access) {
-        return new ItemStack(access.getBlock(this.x, this.y, this.z), 1, access.getBlockMetadata(this.x, this.y, this.z));
+        return new ItemStack(
+                access.getBlock(this.x, this.y, this.z), 1, access.getBlockMetadata(this.x, this.y, this.z));
     }
 
     @Override

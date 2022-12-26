@@ -32,10 +32,8 @@ public class FakeResearch extends ResearchItem {
 
         ResearchItem realResearch = ResearchCategories.getResearch(realKey);
 
-        if (realResearch.icon_item != null)
-            fake = new FakeResearch(key, col, row, realResearch.icon_item);
-        else
-            fake = new FakeResearch(key, col, row, realResearch.icon_resource);
+        if (realResearch.icon_item != null) fake = new FakeResearch(key, col, row, realResearch.icon_item);
+        else fake = new FakeResearch(key, col, row, realResearch.icon_resource);
 
         fake.real = realResearch;
 
@@ -45,8 +43,7 @@ public class FakeResearch extends ResearchItem {
     }
 
     private void link() {
-        if (real.siblings == null)
-            real.setSiblings(this.key);
+        if (real.siblings == null) real.setSiblings(this.key);
         else {
             String[] sibs = new String[real.siblings.length + 1];
 
@@ -56,29 +53,23 @@ public class FakeResearch extends ResearchItem {
 
             real.setSiblings(sibs);
         }
-
     }
 
-
-    //redirect functions to get info from real research
+    // redirect functions to get info from real research
     @SideOnly(Side.CLIENT)
     @Override
     public String getName() {
         return this.real.getName();
     }
 
-
     @Override
     public ResearchPage[] getPages() {
         return this.real.getPages();
     }
-
 
     @SideOnly(Side.CLIENT)
     @Override
     public String getText() {
         return this.real.getText();
     }
-
 }
-

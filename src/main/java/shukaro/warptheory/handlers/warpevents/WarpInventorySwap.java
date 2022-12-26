@@ -1,14 +1,13 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import shukaro.warptheory.handlers.IWarpEvent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import shukaro.warptheory.handlers.IWarpEvent;
 
 public class WarpInventorySwap extends IWarpEvent {
     public WarpInventorySwap(int minWarp) {
@@ -17,8 +16,7 @@ public class WarpInventorySwap extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayer player) {
-        if (world.isRemote)
-            return true;
+        if (world.isRemote) return true;
 
         ItemStack[] inventory = player.inventory.mainInventory;
         // Find empty and full slots in the player's main inventory (excluding hotbar).
