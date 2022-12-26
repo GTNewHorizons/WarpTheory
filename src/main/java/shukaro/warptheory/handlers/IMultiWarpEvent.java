@@ -7,14 +7,13 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import shukaro.warptheory.util.MiscHelper;
-
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 /**
  * A world tick warp event that has multiple "levels" depending on player warp.
@@ -30,10 +29,10 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
      * greatest to least integer.
      */
     protected final ImmutableList<Map.Entry<Integer, String>> reversedEventLevels;
+
     protected final Function<World, Integer> incrementFunction;
 
-    protected IMultiWarpEvent(
-            String name, int minWarp, int numLevels, Function<World, Integer> incrementFunction) {
+    protected IMultiWarpEvent(String name, int minWarp, int numLevels, Function<World, Integer> incrementFunction) {
         super(name, minWarp);
         this.incrementFunction = incrementFunction;
 
@@ -43,8 +42,7 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
             builder.put(i, name + i);
         }
         this.eventLevels = builder.build();
-        this.reversedEventLevels =
-                ImmutableList.copyOf(Lists.reverse(Lists.newArrayList(eventLevels.entrySet())));
+        this.reversedEventLevels = ImmutableList.copyOf(Lists.reverse(Lists.newArrayList(eventLevels.entrySet())));
 
         FMLCommonHandler.instance().bus().register(this);
     }
@@ -53,8 +51,7 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
      * Returns the number of successful triggers of the event. {@code eventLevel} is the
      * {@code 0}-indexed event level.
      */
-    public abstract int triggerEvent(
-            int eventLevel, int eventAmount, World world, EntityPlayer player);
+    public abstract int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player);
 
     public ImmutableBiMap<Integer, String> getEventLevels() {
         return eventLevels;
@@ -110,8 +107,7 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
     @SubscribeEvent
     @SuppressWarnings("unchecked")
     public void onTick(TickEvent.WorldTickEvent e) {
-        if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER)
-            return;
+        if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER) return;
 
         for (EntityPlayer player : (List<EntityPlayer>) e.world.playerEntities) {
             for (Map.Entry<Integer, String> entry : reversedEventLevels) {
@@ -121,7 +117,7 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
                     int eventAmount = MiscHelper.getWarpTag(player).getInteger(tag);
                     int decrement = triggerEvent(entry.getKey(), eventAmount, e.world, player);
                     decreaseTag(player, tag, decrement);
-                    break;  // Just do one event at a time.
+                    break; // Just do one event at a time.
                 }
             }
         }

@@ -5,13 +5,12 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import shukaro.warptheory.util.MiscHelper;
-
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+import shukaro.warptheory.util.MiscHelper;
 
 /**
  * A world tick warp event that can set timers.
@@ -24,8 +23,7 @@ public abstract class ITimerWarpEvent extends IWarpEvent {
      */
     protected final ImmutableMap<String, String> timers;
 
-    protected ITimerWarpEvent(
-            String name, int minWarp, Function<World, Integer> incrementFunction, String... timers) {
+    protected ITimerWarpEvent(String name, int minWarp, Function<World, Integer> incrementFunction, String... timers) {
         super(name, minWarp);
         this.incrementFunction = incrementFunction;
 
@@ -47,8 +45,7 @@ public abstract class ITimerWarpEvent extends IWarpEvent {
     /**
      * Called each time any timer ticks.
      */
-    public void timerTick(World world, EntityPlayer player, String timer, int timerCount) {
-    }
+    public void timerTick(World world, EntityPlayer player, String timer, int timerCount) {}
 
     /**
      * Returns {@code 0} if the player does not have the timer tag.
@@ -78,8 +75,7 @@ public abstract class ITimerWarpEvent extends IWarpEvent {
     @SubscribeEvent
     @SuppressWarnings("unchecked")
     public void onTick(TickEvent.WorldTickEvent e) {
-        if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER)
-            return;
+        if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER) return;
 
         for (EntityPlayer player : (List<EntityPlayer>) e.world.playerEntities) {
             boolean hasTimer = false;

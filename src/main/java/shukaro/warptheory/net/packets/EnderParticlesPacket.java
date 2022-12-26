@@ -5,8 +5,7 @@ import io.netty.buffer.ByteBuf;
 public class EnderParticlesPacket implements IWarpPacket {
     public double x, y, z;
 
-    public EnderParticlesPacket() {
-    }
+    public EnderParticlesPacket() {}
 
     public EnderParticlesPacket(double x, double y, double z) {
         this.x = x;

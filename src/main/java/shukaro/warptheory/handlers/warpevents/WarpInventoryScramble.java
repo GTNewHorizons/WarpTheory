@@ -1,14 +1,13 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import com.google.common.collect.Lists;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import shukaro.warptheory.handlers.IWarpEvent;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 
 public class WarpInventoryScramble extends IWarpEvent {
     public WarpInventoryScramble(int minWarp) {
@@ -17,8 +16,7 @@ public class WarpInventoryScramble extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayer player) {
-        if (world.isRemote)
-            return true;
+        if (world.isRemote) return true;
 
         List<ItemStack> inventoryContents = Lists.newArrayList(player.inventory.mainInventory);
         // We won't move the player's currently selected item.
@@ -32,8 +30,7 @@ public class WarpInventoryScramble extends IWarpEvent {
         Collections.shuffle(inventoryContents);
         for (int i = 0; i < inventoryContents.size(); i++) {
             // Skip over the currently selected index.
-            player.inventory.mainInventory[i >= player.inventory.currentItem ? i + 1 : i] =
-                    inventoryContents.get(i);
+            player.inventory.mainInventory[i >= player.inventory.currentItem ? i + 1 : i] = inventoryContents.get(i);
         }
 
         player.inventory.inventoryChanged = true;

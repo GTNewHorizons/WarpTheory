@@ -36,24 +36,28 @@ public class PacketHandler extends SimpleChannelInboundHandler<IWarpPacket> {
                     EntityPlayer player = MiscHelper.getPlayerByEntityID(dec.player);
                     int ears = MiscHelper.getWarpTag(player).getInteger("ears");
                     MiscHelper.getWarpTag(player).setInteger("ears", --ears);
-                    if (ears <= 0)
-                        MiscHelper.getWarpTag(player).removeTag("ears");
+                    if (ears <= 0) MiscHelper.getWarpTag(player).removeTag("ears");
                 }
             }
         } else if (handler instanceof NetHandlerPlayClient) {
             if (msg instanceof EnderParticlesPacket) {
                 EnderParticlesPacket blink = (EnderParticlesPacket) msg;
                 EntityPlayer player = WarpTheory.proxy.getPlayer();
-                if (player == null)
-                    return;
+                if (player == null) return;
                 World world = player.worldObj;
                 for (int l = 0; l < 128; ++l)
-                    world.spawnParticle("portal", blink.x + world.rand.nextDouble() - world.rand.nextDouble(), blink.y + world.rand.nextDouble() - world.rand.nextDouble(), blink.z + world.rand.nextDouble() - world.rand.nextDouble(), (double) (world.rand.nextFloat() - 0.5F) * 0.2F, (double) (world.rand.nextFloat() - 0.5F) * 0.2F, (double) (world.rand.nextFloat() - 0.5F) * 0.2F);
+                    world.spawnParticle(
+                            "portal",
+                            blink.x + world.rand.nextDouble() - world.rand.nextDouble(),
+                            blink.y + world.rand.nextDouble() - world.rand.nextDouble(),
+                            blink.z + world.rand.nextDouble() - world.rand.nextDouble(),
+                            (double) (world.rand.nextFloat() - 0.5F) * 0.2F,
+                            (double) (world.rand.nextFloat() - 0.5F) * 0.2F,
+                            (double) (world.rand.nextFloat() - 0.5F) * 0.2F);
             } else if (msg instanceof VelocityPacket) {
                 VelocityPacket wind = (VelocityPacket) msg;
                 EntityPlayer player = WarpTheory.proxy.getPlayer();
-                if (player != null)
-                    player.addVelocity(wind.x, wind.y, wind.z);
+                if (player != null) player.addVelocity(wind.x, wind.y, wind.z);
             } else if (msg instanceof BloodPacket) {
                 BloodPacket blood = (BloodPacket) msg;
                 BlockCoord block = new BlockCoord(blood.x, blood.y, blood.z);
@@ -76,8 +80,7 @@ public class PacketHandler extends SimpleChannelInboundHandler<IWarpPacket> {
                 ClientEventPacket start = (ClientEventPacket) msg;
                 if (start.id == 0) {
                     EntityPlayer player = WarpTheory.proxy.getPlayer();
-                    if (player != null)
-                        MiscHelper.modEventInt(player, "ears", start.amount);
+                    if (player != null) MiscHelper.modEventInt(player, "ears", start.amount);
                 }
             } else if (msg instanceof FakeRainPacket) {
                 FakeRainPacket packet = (FakeRainPacket) msg;

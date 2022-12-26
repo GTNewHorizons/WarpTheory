@@ -3,6 +3,9 @@ package shukaro.warptheory.handlers;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,15 +14,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import shukaro.warptheory.util.MiscHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
-
 public class WarpCommand implements ICommand {
-    private Supplier<ImmutableMap<String, IWarpEvent>> nameMap =
-            Suppliers.memoize(this::getNameMap)::get;
-    private Supplier<ImmutableList<String>> timers =
-            Suppliers.memoize(this::getTimers)::get;
+    private Supplier<ImmutableMap<String, IWarpEvent>> nameMap = Suppliers.memoize(this::getNameMap)::get;
+    private Supplier<ImmutableList<String>> timers = Suppliers.memoize(this::getTimers)::get;
 
     @Override
     public String getCommandName() {
@@ -40,8 +37,7 @@ public class WarpCommand implements ICommand {
     public void processCommand(ICommandSender sender, String[] args) {
         if (args.length == 0 || args.length > 2) {
             String events = "";
-            for (String name : nameMap.get().keySet())
-                events += name + " ";
+            for (String name : nameMap.get().keySet()) events += name + " ";
             sender.addChatMessage(new ChatComponentText("Invalid Syntax, available events are: " + events));
             sender.addChatMessage(new ChatComponentText("Additional commands: print purge"));
         } else {
@@ -123,19 +119,18 @@ public class WarpCommand implements ICommand {
         if (args.length == 1) {
             ArrayList<String> completions = new ArrayList<String>();
             for (String name : nameMap.get().keySet()) {
-                if (name.startsWith(args[0]))
-                    completions.add(name);
+                if (name.startsWith(args[0])) completions.add(name);
             }
             return completions;
         } else if (args.length == 2) {
             ArrayList<String> completions = new ArrayList<String>();
-            for (EntityPlayer serverPlayer : (ArrayList<EntityPlayer>) MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
+            for (EntityPlayer serverPlayer :
+                    (ArrayList<EntityPlayer>) MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
                 if (serverPlayer.getCommandSenderName().startsWith(args[1]))
                     completions.add(serverPlayer.getCommandSenderName());
             }
             return completions;
-        } else
-            return null;
+        } else return null;
     }
 
     @Override
@@ -159,8 +154,7 @@ public class WarpCommand implements ICommand {
         ImmutableMap.Builder<String, IWarpEvent> builder = ImmutableMap.builder();
         for (IWarpEvent e : WarpHandler.warpEvents) {
             if (e instanceof IMultiWarpEvent) {
-                ((IMultiWarpEvent) e).getEventLevels().values()
-                        .forEach(name -> builder.put(name, e));
+                ((IMultiWarpEvent) e).getEventLevels().values().forEach(name -> builder.put(name, e));
             } else {
                 builder.put(e.getName(), e);
             }
@@ -175,8 +169,7 @@ public class WarpCommand implements ICommand {
         ImmutableList.Builder<String> builder = ImmutableList.builder();
         for (IWarpEvent e : WarpHandler.warpEvents) {
             if (e instanceof ITimerWarpEvent) {
-                ((ITimerWarpEvent) e).getTimers().values()
-                        .forEach(builder::add);
+                ((ITimerWarpEvent) e).getTimers().values().forEach(builder::add);
             }
         }
         return builder.build();

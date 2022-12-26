@@ -5,14 +5,14 @@ package shukaro.warptheory.util;
  */
 public class Constants {
 
-    //Mod Properties
+    // Mod Properties
     public static final String modID = "WarpTheory";
     public static final String modName = "WarpTheory";
     public static final String modVersion = "GRADLETOKEN_VERSION";
 
-    //Research Categories
+    // Research Categories
     public static final String CATEGORY_WARPTHEORY = "WT_Category";
-    //Items
+    // Items
     public static final String ITEM_WARPCLEANSERMINOR = "warptheory.cleanserminor";
     public static final String ITEM_WARPCLEANSER = "warptheory.cleanser";
     public static final String ITEM_PURE_TALISMAN = "warptheory.amulet";

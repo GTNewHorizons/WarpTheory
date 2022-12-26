@@ -4,6 +4,12 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.SkinManager;
 import net.minecraft.entity.Entity;
@@ -29,13 +35,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.FormatCodes;
-
-import javax.annotation.Nullable;
-import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class EntityDoppelganger extends EntityCreature implements IHurtable {
     /**
@@ -81,7 +80,8 @@ public class EntityDoppelganger extends EntityCreature implements IHurtable {
         this.player = new WeakReference<>(player);
         this.dataWatcher.updateObject(UUID_DATA_WATCHER_ID, player.getUniqueID().toString());
 
-        String name = StatCollector.translateToLocalFormatted("chat.warptheory.doppelganger.name", player.getDisplayName());
+        String name =
+                StatCollector.translateToLocalFormatted("chat.warptheory.doppelganger.name", player.getDisplayName());
         this.setCustomNameTag(name);
 
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth());
@@ -100,7 +100,8 @@ public class EntityDoppelganger extends EntityCreature implements IHurtable {
 
         GameProfile gameProfile = gameProfileCache.get(uuid);
         if (gameProfile == null) {
-            gameProfile = Minecraft.getMinecraft().func_152347_ac().fillProfileProperties(new GameProfile(uuid, null), true);
+            gameProfile =
+                    Minecraft.getMinecraft().func_152347_ac().fillProfileProperties(new GameProfile(uuid, null), true);
             gameProfileCache.put(uuid, gameProfile);
         }
 
@@ -109,8 +110,7 @@ public class EntityDoppelganger extends EntityCreature implements IHurtable {
 
         if (textureMap.containsKey(MinecraftProfileTexture.Type.SKIN)) {
             return skinManager.func_152792_a(
-                    textureMap.get(MinecraftProfileTexture.Type.SKIN),
-                    MinecraftProfileTexture.Type.SKIN);
+                    textureMap.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN);
         }
 
         return null;
@@ -127,12 +127,14 @@ public class EntityDoppelganger extends EntityCreature implements IHurtable {
             if (getHealth() > e.ammount) {
                 ChatHelper.sendToPlayer(
                         entityPlayer,
-                        FormatCodes.Purple.code + FormatCodes.Italic.code
+                        FormatCodes.Purple.code
+                                + FormatCodes.Italic.code
                                 + StatCollector.translateToLocal("chat.warptheory.doppelganger.hurt"));
             } else {
                 ChatHelper.sendToPlayer(
                         entityPlayer,
-                        FormatCodes.Purple.code + FormatCodes.Italic.code
+                        FormatCodes.Purple.code
+                                + FormatCodes.Italic.code
                                 + StatCollector.translateToLocal("chat.warptheory.doppelganger.die"));
             }
         }

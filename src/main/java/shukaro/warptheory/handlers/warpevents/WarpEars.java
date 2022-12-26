@@ -35,12 +35,14 @@ public class WarpEars extends IWarpEvent {
     @SideOnly(Side.CLIENT)
     public void onMessageReceived(ClientChatReceivedEvent e) {
         EntityPlayer player = WarpTheory.proxy.getPlayer();
-        if (player == null || ChatHelper.getUsername(e.message).length() == 0 || player.getCommandSenderName().equals(ChatHelper.getUsername(e.message)))
-            return;
+        if (player == null
+                || ChatHelper.getUsername(e.message).length() == 0
+                || player.getCommandSenderName().equals(ChatHelper.getUsername(e.message))) return;
 
         // Warp ears
         if (MiscHelper.getWarpTag(player).hasKey(name)) {
-            e.message = new ChatComponentText(ChatHelper.getFormattedUsername(e.message) + " " + ChatHelper.garbleMessage(e.message));
+            e.message = new ChatComponentText(
+                    ChatHelper.getFormattedUsername(e.message) + " " + ChatHelper.garbleMessage(e.message));
             PacketDispatcher.sendEarDecrementEvent(player);
             decreaseTag(player, name, 1);
         }

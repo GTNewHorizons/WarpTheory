@@ -2,6 +2,8 @@ package shukaro.warptheory.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+import java.util.Locale;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +19,6 @@ import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.FormatCodes;
 import thaumcraft.api.ThaumcraftApiHelper;
-
-import java.util.List;
-import java.util.Locale;
 
 public class ItemSomething extends Item {
     private IIcon icon;
@@ -76,13 +75,14 @@ public class ItemSomething extends Item {
     @Override
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
         if (!world.isRemote) {
-            player.addChatMessage(new ChatComponentText(FormatCodes.Purple.code + FormatCodes.Italic.code + StatCollector.translateToLocal("chat.warptheory.addwarp")));
+            player.addChatMessage(new ChatComponentText(FormatCodes.Purple.code
+                    + FormatCodes.Italic.code
+                    + StatCollector.translateToLocal("chat.warptheory.addwarp")));
             ThaumcraftApiHelper.addWarpToPlayer(player, 4 + world.rand.nextInt(4), false);
             ThaumcraftApiHelper.addWarpToPlayer(player, 5 + world.rand.nextInt(5), true);
             ThaumcraftApiHelper.addStickyWarpToPlayer(player, 5 + world.rand.nextInt(5));
         }
-        if (!player.capabilities.isCreativeMode)
-            stack.stackSize--;
+        if (!player.capabilities.isCreativeMode) stack.stackSize--;
 
         return stack;
     }
@@ -100,6 +100,8 @@ public class ItemSomething extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced) {
-        infoList.add(FormatCodes.DarkGrey.code + FormatCodes.Italic.code + StatCollector.translateToLocal("tooltip.warptheory.something"));
+        infoList.add(FormatCodes.DarkGrey.code
+                + FormatCodes.Italic.code
+                + StatCollector.translateToLocal("tooltip.warptheory.something"));
     }
 }

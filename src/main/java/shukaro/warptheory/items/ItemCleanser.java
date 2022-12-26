@@ -2,6 +2,8 @@ package shukaro.warptheory.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+import java.util.Locale;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +19,6 @@ import shukaro.warptheory.handlers.WarpHandler;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.FormatCodes;
-
-import java.util.List;
-import java.util.Locale;
 
 public class ItemCleanser extends Item {
     private IIcon icon1;
@@ -52,7 +51,8 @@ public class ItemCleanser extends Item {
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister reg) {
-        this.icon1 = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemCleanser"); //that's what renders inHand apparently
+        this.icon1 = reg.registerIcon(
+                Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemCleanser"); // that's what renders inHand apparently
         this.icon2 = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemCleanserOpaque");
     }
 
@@ -67,7 +67,6 @@ public class ItemCleanser extends Item {
     public IIcon getIconFromDamage(int meta) {
         return this.icon1;
     }
-
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -90,8 +89,7 @@ public class ItemCleanser extends Item {
     protected void purgeWarp(EntityPlayer player) {
         if (WarpHandler.getTotalWarp(player) > 0)
             ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purge"));
-        else
-            ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purgefail"));
+        else ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purgefail"));
 
         WarpHandler.purgeWarp(player);
     }
@@ -103,8 +101,7 @@ public class ItemCleanser extends Item {
             purgeWarp(player);
         }
 
-        if (!player.capabilities.isCreativeMode)
-            stack.stackSize--;
+        if (!player.capabilities.isCreativeMode) stack.stackSize--;
 
         return stack.stackSize <= 0 ? null : stack;
     }
@@ -126,6 +123,7 @@ public class ItemCleanser extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced) {
-        infoList.add(FormatCodes.DarkGrey.code + FormatCodes.Italic.code + StatCollector.translateToLocal(getToolTip()));
+        infoList.add(
+                FormatCodes.DarkGrey.code + FormatCodes.Italic.code + StatCollector.translateToLocal(getToolTip()));
     }
 }

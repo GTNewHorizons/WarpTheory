@@ -1,15 +1,13 @@
 package shukaro.warptheory.util;
 
+import java.util.function.Predicate;
+import javax.annotation.Nullable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-import java.util.function.Predicate;
-
 public final class RandomBlockHelper {
-    private RandomBlockHelper() {
-    }
+    private RandomBlockHelper() {}
 
     /**
      * Returns a random air block within a cube of the given "radius", centered on the player, or
@@ -28,8 +26,7 @@ public final class RandomBlockHelper {
     @Nullable
     public static BlockCoord randomDoubleAirBlock(World world, EntityPlayer player, int radius) {
         return randomBlock(
-                world, player, radius,
-                block -> block.isAir(world) && world.isAirBlock(block.x, block.y + 1, block.z));
+                world, player, radius, block -> block.isAir(world) && world.isAirBlock(block.x, block.y + 1, block.z));
     }
 
     /**
@@ -40,7 +37,9 @@ public final class RandomBlockHelper {
     @Nullable
     public static BlockCoord randomTripleAirBlock(World world, EntityPlayer player, int radius) {
         return randomBlock(
-                world, player, radius,
+                world,
+                player,
+                radius,
                 block -> block.isAir(world)
                         && world.isAirBlock(block.x, block.y + 1, block.z)
                         && world.isAirBlock(block.x, block.y + 2, block.z));
@@ -51,8 +50,7 @@ public final class RandomBlockHelper {
      * if the random block doesn't pass {@code isValid}.
      */
     @Nullable
-    public static BlockCoord randomBlock(
-            World world, EntityPlayer player, int radius, Predicate<BlockCoord> isValid) {
+    public static BlockCoord randomBlock(World world, EntityPlayer player, int radius, Predicate<BlockCoord> isValid) {
         int x = (int) player.posX + world.rand.nextInt(radius) - world.rand.nextInt(radius);
         int y = (int) player.posY + world.rand.nextInt(radius) - world.rand.nextInt(radius);
         int z = (int) player.posZ + world.rand.nextInt(radius) - world.rand.nextInt(radius);
@@ -66,6 +64,7 @@ public final class RandomBlockHelper {
                 location.x + world.rand.nextDouble(),
                 location.y + world.rand.nextDouble(),
                 location.z + world.rand.nextDouble(),
-                360.0f * world.rand.nextFloat(), 180.0f * world.rand.nextFloat() - 90.0f);
+                360.0f * world.rand.nextFloat(),
+                180.0f * world.rand.nextFloat() - 90.0f);
     }
 }

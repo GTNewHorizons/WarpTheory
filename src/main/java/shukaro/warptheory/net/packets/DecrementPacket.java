@@ -6,8 +6,7 @@ public class DecrementPacket implements IWarpPacket {
     public int id;
     public int player;
 
-    public DecrementPacket() {
-    }
+    public DecrementPacket() {}
 
     public DecrementPacket(int id, int player) {
         this.id = id;

@@ -5,8 +5,7 @@ import io.netty.buffer.ByteBuf;
 public class VelocityPacket implements IWarpPacket {
     public double x, y, z;
 
-    public VelocityPacket() {
-    }
+    public VelocityPacket() {}
 
     public VelocityPacket(double x, double y, double z) {
         this.x = x;

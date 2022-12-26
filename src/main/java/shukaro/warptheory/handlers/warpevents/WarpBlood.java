@@ -29,9 +29,7 @@ public class WarpBlood extends IMultiWarpEvent {
     public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player) {
         int successful = 0;
         for (int i = 0; i < 6; i++) {
-            BlockCoord target =
-                    RandomBlockHelper.randomBlock(
-                            world, player, 8, block -> isBlockValid(world, block));
+            BlockCoord target = RandomBlockHelper.randomBlock(world, player, 8, block -> isBlockValid(world, block));
             if (target == null) {
                 continue;
             }
@@ -56,8 +54,7 @@ public class WarpBlood extends IMultiWarpEvent {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onClientTick(TickEvent.ClientTickEvent e) {
-        if (e.phase != TickEvent.Phase.END)
-            return;
+        if (e.phase != TickEvent.Phase.END) return;
 
         World world = Minecraft.getMinecraft().theWorld;
         if (world != null && world.getTotalWorldTime() % 5 == 0 && bloody.get(world.provider.dimensionId) != null) {

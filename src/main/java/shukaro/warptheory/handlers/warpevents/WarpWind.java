@@ -14,7 +14,11 @@ public class WarpWind extends IWorldTickWarpEvent {
 
     @Override
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
-        PacketDispatcher.sendWindEvent(player, world.rand.nextDouble() - world.rand.nextDouble(), world.rand.nextDouble(), world.rand.nextDouble() - world.rand.nextDouble());
+        PacketDispatcher.sendWindEvent(
+                player,
+                world.rand.nextDouble() - world.rand.nextDouble(),
+                world.rand.nextDouble(),
+                world.rand.nextDouble() - world.rand.nextDouble());
         return 1;
     }
 

@@ -8,6 +8,9 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,11 +33,11 @@ import shukaro.warptheory.research.WarpResearch;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.NameGenerator;
 
-import java.io.File;
-import java.io.InputStream;
-import java.nio.file.Files;
-
-@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, guiFactory = "shukaro.warptheory.gui.GuiFactory",
+@Mod(
+        modid = Constants.modID,
+        name = Constants.modName,
+        version = Constants.modVersion,
+        guiFactory = "shukaro.warptheory.gui.GuiFactory",
         dependencies = "required-after:Forge@[10.13.2,);required-after:Baubles;required-after:Thaumcraft@[4.2.3.5,);")
 public class WarpTheory {
     @SidedProxy(clientSide = "shukaro.warptheory.net.ClientProxy", serverSide = "shukaro.warptheory.net.CommonProxy")
@@ -59,8 +62,7 @@ public class WarpTheory {
         logger = event.getModLog();
         try {
             File folder = new File(event.getModConfigurationDirectory() + "/warptheory/");
-            if (!folder.exists())
-                folder.mkdirs();
+            if (!folder.exists()) folder.mkdirs();
             File normalFile = new File(event.getModConfigurationDirectory() + "/warptheory/normal.txt");
             if (!normalFile.exists()) {
                 InputStream in = WarpTheory.class.getResourceAsStream("/assets/warptheory/names/normal.txt");

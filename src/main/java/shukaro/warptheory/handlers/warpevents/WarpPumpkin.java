@@ -19,8 +19,7 @@ public class WarpPumpkin extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayer player) {
-        if (world.isRemote)
-            return true;
+        if (world.isRemote) return true;
 
         // This should be guaranteed to be true, since we check in canDo().
         // But check again just to be safe (in case the code changes).

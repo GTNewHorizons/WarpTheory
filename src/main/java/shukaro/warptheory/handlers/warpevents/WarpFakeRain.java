@@ -52,8 +52,7 @@ public class WarpFakeRain extends IMultiWarpEvent {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onClientTick(TickEvent.ClientTickEvent e) {
-        if (e.phase != TickEvent.Phase.END)
-            return;
+        if (e.phase != TickEvent.Phase.END) return;
 
         if (rainLevel >= 0) {
             World world = Minecraft.getMinecraft().theWorld;
@@ -70,7 +69,8 @@ public class WarpFakeRain extends IMultiWarpEvent {
                     EntityFX fx;
                     switch (rainLevel) {
                         case 1:
-                            fx = new EntityRainParticleFX(world, target.x, y, target.z, world.rand.nextFloat() + 0.2f, 0.0f, 0.0f);
+                            fx = new EntityRainParticleFX(
+                                    world, target.x, y, target.z, world.rand.nextFloat() + 0.2f, 0.0f, 0.0f);
                             break;
 
                         case 0:

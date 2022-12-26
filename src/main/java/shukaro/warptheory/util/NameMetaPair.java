@@ -46,12 +46,9 @@ public class NameMetaPair {
     }
 
     public ItemStack getStack() {
-        if (isValidBlock())
-            return new ItemStack(getBlock(), 1, getMetadata());
-        else if (isValidItem())
-            return new ItemStack(getItem(), 1, getMetadata());
-        else
-            return null;
+        if (isValidBlock()) return new ItemStack(getBlock(), 1, getMetadata());
+        else if (isValidItem()) return new ItemStack(getItem(), 1, getMetadata());
+        else return null;
     }
 
     public boolean isValidBlock() {

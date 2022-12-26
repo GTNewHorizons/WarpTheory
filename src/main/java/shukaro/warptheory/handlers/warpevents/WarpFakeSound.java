@@ -20,8 +20,7 @@ public class WarpFakeSound extends IWorldTickWarpEvent {
         this(name, minWarp, sound, distance, 1.0f, 1.0f);
     }
 
-    public WarpFakeSound(
-            String name, int minWarp, String sound, int distance, float volume, float pitch) {
+    public WarpFakeSound(String name, int minWarp, String sound, int distance, float volume, float pitch) {
         super(name, minWarp, world -> 1);
         this.sound = sound;
         this.distance = distance;
@@ -31,7 +30,8 @@ public class WarpFakeSound extends IWorldTickWarpEvent {
 
     @Override
     public void sendChatMessage(EntityPlayer player) {
-        // No message. Otherwise kinda spoils the surprise.  Nobody will pay attention if they see "fake explosion happened!" message
+        // No message. Otherwise kinda spoils the surprise.  Nobody will pay attention if they see "fake explosion
+        // happened!" message
     }
 
     @Override

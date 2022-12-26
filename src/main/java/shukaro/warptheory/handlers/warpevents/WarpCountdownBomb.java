@@ -39,9 +39,17 @@ public class WarpCountdownBomb extends ITimerWarpEvent {
             // Spawn some particles
             int numParticles = 8 * (10 - timerCount);
             double particleSpeed = 0.3;
-            ((WorldServer) world).func_147487_a(
-                    "fireworksSpark", player.posX, player.posY, player.posZ,
-                    numParticles, 0.0d, 0.0d, 0.0d, particleSpeed);
+            ((WorldServer) world)
+                    .func_147487_a(
+                            "fireworksSpark",
+                            player.posX,
+                            player.posY,
+                            player.posZ,
+                            numParticles,
+                            0.0d,
+                            0.0d,
+                            0.0d,
+                            particleSpeed);
 
             if (timerCount > 0) {
                 world.playSoundAtEntity(player, "game.tnt.primed", 1.0F, 1.0F);

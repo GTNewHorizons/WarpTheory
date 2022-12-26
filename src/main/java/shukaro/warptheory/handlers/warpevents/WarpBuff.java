@@ -1,12 +1,11 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import com.google.common.collect.ImmutableList;
+import java.util.Collection;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import shukaro.warptheory.handlers.IWarpEvent;
-
-import java.util.Collection;
 
 public class WarpBuff extends IWarpEvent {
     private final ImmutableList<PotionEffect> potionEffects;
@@ -19,8 +18,7 @@ public class WarpBuff extends IWarpEvent {
     @Override
     @SuppressWarnings("unchecked")
     public boolean doEvent(World world, EntityPlayer player) {
-        if (world.isRemote)
-            return true;
+        if (world.isRemote) return true;
 
         for (PotionEffect effect : potionEffects) {
             int id = effect.getPotionID();
