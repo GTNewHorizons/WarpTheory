@@ -32,11 +32,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.FormatCodes;
 
-public class EntityDoppelganger extends EntityCreature implements IHurtable {
+public class EntityDoppelganger extends EntityCreature implements IHealable, IHurtable {
     /**
      * The number of ticks we will wait between each attempt to find our player.
      */
@@ -117,6 +118,25 @@ public class EntityDoppelganger extends EntityCreature implements IHurtable {
     }
 
     @Override
+    public void onHeal(LivingHealEvent e) {
+        if (e.amount <= 0.5f) {
+            // The doppelgänger's passive regen also counts as healing, but we don't want to pass
+            // that on to the player. So check for larger than 0.5f healing amount.
+            return;
+        }
+
+        EntityPlayer entityPlayer = player.get();
+        if (entityPlayer != null && entityPlayer.getHealth() < entityPlayer.getMaxHealth()) {
+            entityPlayer.heal(e.amount);
+            ChatHelper.sendToPlayer(
+                    entityPlayer,
+                    FormatCodes.Purple.code
+                            + FormatCodes.Italic.code
+                            + StatCollector.translateToLocal("chat.warptheory.doppelganger.heal"));
+        }
+    }
+
+    @Override
     public void onHurt(LivingHurtEvent e) {
         EntityPlayer entityPlayer = player.get();
         if (entityPlayer != null) {
@@ -176,6 +196,8 @@ public class EntityDoppelganger extends EntityCreature implements IHurtable {
                 healWait--;
             } else {
                 healWait = HEAL_WAIT_TICKS;
+                // If you increase the healing amount here, you may also need to modify onHeal()
+                // to prevent passing this healing on to the player.
                 heal(0.5f);
             }
         } else {

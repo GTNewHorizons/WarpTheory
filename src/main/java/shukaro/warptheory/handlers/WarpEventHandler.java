@@ -6,7 +6,9 @@ import static thaumcraft.common.config.Config.wuss;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import shukaro.warptheory.entity.IHealable;
 import shukaro.warptheory.entity.IHurtable;
 
 public class WarpEventHandler {
@@ -39,6 +41,13 @@ public class WarpEventHandler {
                 if (event != null && event.canDo(player.worldObj, player) && appliable)
                     event.doEvent(player.worldObj, player);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void livingHeal(LivingHealEvent e) {
+        if (e.entityLiving instanceof IHealable) {
+            ((IHealable) e.entityLiving).onHeal(e);
         }
     }
 
