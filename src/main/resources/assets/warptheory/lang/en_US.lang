@@ -96,6 +96,7 @@ chat.warptheory.countdownbomb.1=1
 chat.warptheory.countdownbomb.0=BOOM!
 chat.warptheory.doppelganger=You feel beside yourself...
 chat.warptheory.doppelganger.name=%s's Doppelgänger
+chat.warptheory.doppelganger.heal=You feel your doppelgänger helping you
 chat.warptheory.doppelganger.hurt=You feel your doppelgänger cry out
 chat.warptheory.doppelganger.die=You feel your doppelgänger fade away
 chat.warptheory.enderpearl=You cough up something strange
