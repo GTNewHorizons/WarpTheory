@@ -125,9 +125,15 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
             return;
         }
 
+        float currentDamage = getMaxHealth() - getHealth();
+        float amount = Math.min(e.amount, currentDamage);
+        if (amount <= 0f) {
+            return;
+        }
+
         EntityPlayer entityPlayer = player.get();
         if (entityPlayer != null && entityPlayer.getHealth() < entityPlayer.getMaxHealth()) {
-            entityPlayer.heal(e.amount);
+            entityPlayer.heal(amount);
             ChatHelper.sendToPlayer(
                     entityPlayer,
                     FormatCodes.Purple.code
