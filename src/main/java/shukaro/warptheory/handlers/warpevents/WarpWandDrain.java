@@ -2,6 +2,8 @@ package shukaro.warptheory.handlers.warpevents;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import java.util.Collections;
+import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
@@ -21,28 +23,34 @@ public class WarpWandDrain extends IWorldTickWarpEvent {
 
     @Override
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
-        // If we try to drain more vis than the player's wand has, it'll fail, so we'll have to
-        // try to drain a little at a time.
-        int successful = 0;
-        while (successful < eventAmount) {
+        // In order to avoid this event being too punishing, here's how the trigger works:
+        //
+        // * We'll drain a small amount of vis from random aspects, up to all of them, based on the
+        //   event amount. If event amount > # of primal aspects, the excess is ignored.
+        // * If we were able to drain any vis at all, we'll clear the event entirely, to avoid the
+        //   situation where players accumulate a massive queue of wand drain events while not
+        //   holding a wand for a while.
+        boolean successful = false;
+        List<Aspect> primalAspects = Aspect.getPrimalAspects();
+        Collections.shuffle(primalAspects);
+
+        for (int i = 0; i < primalAspects.size() && i < eventAmount; i++) {
             AspectList aspectList = new AspectList();
-            for (Aspect aspect : Aspect.getPrimalAspects()) {
-                int amount = Math.max(0, world.rand.nextInt(10 * 100) - 100);
-                aspectList.add(aspect, amount);
-            }
+            int amount = Math.max(0, world.rand.nextInt(10 * 100) - 100);
+            aspectList.add(primalAspects.get(i), amount);
 
             if (ThaumcraftApiHelper.consumeVisFromInventory(player, aspectList)) {
-                successful++;
-            } else {
-                break;
+                successful = true;
             }
         }
 
-        if (successful > 0) {
+        if (successful) {
             world.playSoundAtEntity(player, "thaumcraft:zap", 1.0F, 1.0F);
             super.sendChatMessage(player);
+            return eventAmount;
+        } else {
+            return 0;
         }
-        return successful;
     }
 
     @Override
