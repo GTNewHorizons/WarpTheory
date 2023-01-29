@@ -1,12 +1,14 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpInsomnia extends IWorldTickWarpEvent {
+
     public WarpInsomnia(int minWarp) {
         super("insomnia", minWarp, world -> 120 + world.rand.nextInt(240));
     }

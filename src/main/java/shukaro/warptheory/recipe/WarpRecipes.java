@@ -1,8 +1,10 @@
 package shukaro.warptheory.recipe;
 
 import java.util.ArrayList;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+
 import shukaro.warptheory.handlers.ConfigHandler;
 import shukaro.warptheory.items.WarpItems;
 import shukaro.warptheory.research.WarpResearch;
@@ -13,6 +15,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
 public class WarpRecipes {
+
     public static ArrayList<ItemStack> meats = new ArrayList<ItemStack>();
 
     private static void initMeats() {
@@ -33,16 +36,10 @@ public class WarpRecipes {
                             5,
                             new AspectList().add(Aspect.ELDRITCH, 16).add(Aspect.EXCHANGE, 16),
                             new ItemStack(Items.nether_star),
-                            new ItemStack[] {
-                                ItemApi.getItem("itemResource", 14),
-                                new ItemStack(Items.ghast_tear),
-                                new ItemStack(Items.diamond),
-                                new ItemStack(Items.quartz),
-                                ItemApi.getItem("itemResource", 14),
-                                new ItemStack(Items.ghast_tear),
-                                new ItemStack(Items.diamond),
-                                new ItemStack(Items.quartz)
-                            }));
+                            new ItemStack[] { ItemApi.getItem("itemResource", 14), new ItemStack(Items.ghast_tear),
+                                    new ItemStack(Items.diamond), new ItemStack(Items.quartz),
+                                    ItemApi.getItem("itemResource", 14), new ItemStack(Items.ghast_tear),
+                                    new ItemStack(Items.diamond), new ItemStack(Items.quartz) }));
 
             WarpResearch.recipes.put(
                     "PureTear",
@@ -52,16 +49,10 @@ public class WarpRecipes {
                             5,
                             new AspectList().add(Aspect.ELDRITCH, 16).add(Aspect.EXCHANGE, 16),
                             new ItemStack(Items.nether_star),
-                            new ItemStack[] {
-                                ItemApi.getItem("itemResource", 14),
-                                new ItemStack(Items.ghast_tear),
-                                new ItemStack(Items.diamond),
-                                new ItemStack(Items.quartz),
-                                ItemApi.getItem("itemResource", 14),
-                                new ItemStack(Items.ghast_tear),
-                                new ItemStack(Items.diamond),
-                                new ItemStack(Items.quartz)
-                            }));
+                            new ItemStack[] { ItemApi.getItem("itemResource", 14), new ItemStack(Items.ghast_tear),
+                                    new ItemStack(Items.diamond), new ItemStack(Items.quartz),
+                                    ItemApi.getItem("itemResource", 14), new ItemStack(Items.ghast_tear),
+                                    new ItemStack(Items.diamond), new ItemStack(Items.quartz) }));
 
             WarpResearch.recipes.put(
                     "PureAmulet",
@@ -69,30 +60,20 @@ public class WarpRecipes {
                             Constants.ITEM_PURE_TALISMAN,
                             new ItemStack(WarpItems.itemAmulet),
                             10,
-                            new AspectList()
-                                    .add(Aspect.ELDRITCH, 32)
-                                    .add(Aspect.EXCHANGE, 32)
-                                    .add(Aspect.MAGIC, 64),
+                            new AspectList().add(Aspect.ELDRITCH, 32).add(Aspect.EXCHANGE, 32).add(Aspect.MAGIC, 64),
                             ItemApi.getItem("itemBaubleBlanks", 0),
-                            new ItemStack[] {
-                                new ItemStack(WarpItems.itemCleanser),
-                                new ItemStack(Items.gold_ingot),
-                                new ItemStack(Items.diamond),
-                                ItemApi.getItem("itemResource", 14),
-                                new ItemStack(WarpItems.itemCleanser),
-                                new ItemStack(Items.gold_ingot),
-                                new ItemStack(Items.diamond),
-                                ItemApi.getItem("itemResource", 14)
-                            }));
+                            new ItemStack[] { new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot),
+                                    new ItemStack(Items.diamond), ItemApi.getItem("itemResource", 14),
+                                    new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot),
+                                    new ItemStack(Items.diamond), ItemApi.getItem("itemResource", 14) }));
 
-            for (ItemStack meat : meats)
-                WarpResearch.recipes.put(
-                        "WarpChunk" + meat,
-                        ThaumcraftApi.addCrucibleRecipe(
-                                Constants.ITEM_SOMETHING,
-                                new ItemStack(WarpItems.itemSomething),
-                                meat,
-                                new AspectList().add(Aspect.ELDRITCH, 16).add(Aspect.EXCHANGE, 8)));
+            for (ItemStack meat : meats) WarpResearch.recipes.put(
+                    "WarpChunk" + meat,
+                    ThaumcraftApi.addCrucibleRecipe(
+                            Constants.ITEM_SOMETHING,
+                            new ItemStack(WarpItems.itemSomething),
+                            meat,
+                            new AspectList().add(Aspect.ELDRITCH, 16).add(Aspect.EXCHANGE, 8)));
             ThaumcraftApi.addWarpToItem(new ItemStack(WarpItems.itemSomething), 1);
 
             WarpResearch.recipes.put(
@@ -113,12 +94,8 @@ public class WarpRecipes {
                             5,
                             new AspectList().add(Aspect.ELDRITCH, 16).add(Aspect.EXCHANGE, 16),
                             new ItemStack(Items.ghast_tear),
-                            new ItemStack[] {
-                                ItemApi.getItem("itemResource", 14),
-                                ItemApi.getItem("itemResource", 14),
-                                new ItemStack(Items.quartz),
-                                new ItemStack(Items.quartz)
-                            }));
+                            new ItemStack[] { ItemApi.getItem("itemResource", 14), ItemApi.getItem("itemResource", 14),
+                                    new ItemStack(Items.quartz), new ItemStack(Items.quartz) }));
 
             WarpResearch.recipes.put(
                     "PureTear",
@@ -128,12 +105,8 @@ public class WarpRecipes {
                             5,
                             new AspectList().add(Aspect.ELDRITCH, 16).add(Aspect.EXCHANGE, 16),
                             new ItemStack(Items.ghast_tear),
-                            new ItemStack[] {
-                                ItemApi.getItem("itemResource", 14),
-                                ItemApi.getItem("itemResource", 14),
-                                new ItemStack(Items.quartz),
-                                new ItemStack(Items.quartz)
-                            }));
+                            new ItemStack[] { ItemApi.getItem("itemResource", 14), ItemApi.getItem("itemResource", 14),
+                                    new ItemStack(Items.quartz), new ItemStack(Items.quartz) }));
 
             WarpResearch.recipes.put(
                     "PureAmulet",
@@ -141,26 +114,18 @@ public class WarpRecipes {
                             Constants.ITEM_PURE_TALISMAN,
                             new ItemStack(WarpItems.itemAmulet),
                             10,
-                            new AspectList()
-                                    .add(Aspect.ELDRITCH, 32)
-                                    .add(Aspect.EXCHANGE, 32)
-                                    .add(Aspect.MAGIC, 64),
+                            new AspectList().add(Aspect.ELDRITCH, 32).add(Aspect.EXCHANGE, 32).add(Aspect.MAGIC, 64),
                             ItemApi.getItem("itemBaubleBlanks", 0),
-                            new ItemStack[] {
-                                new ItemStack(WarpItems.itemCleanser),
-                                new ItemStack(Items.gold_ingot),
-                                new ItemStack(WarpItems.itemCleanser),
-                                new ItemStack(Items.gold_ingot)
-                            }));
+                            new ItemStack[] { new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot),
+                                    new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot) }));
 
-            for (ItemStack meat : meats)
-                WarpResearch.recipes.put(
-                        "WarpChunk" + meat,
-                        ThaumcraftApi.addCrucibleRecipe(
-                                Constants.ITEM_SOMETHING,
-                                new ItemStack(WarpItems.itemSomething),
-                                meat,
-                                new AspectList().add(Aspect.ELDRITCH, 8)));
+            for (ItemStack meat : meats) WarpResearch.recipes.put(
+                    "WarpChunk" + meat,
+                    ThaumcraftApi.addCrucibleRecipe(
+                            Constants.ITEM_SOMETHING,
+                            new ItemStack(WarpItems.itemSomething),
+                            meat,
+                            new AspectList().add(Aspect.ELDRITCH, 8)));
             ThaumcraftApi.addWarpToItem(new ItemStack(WarpItems.itemSomething), 1);
 
             WarpResearch.recipes.put(

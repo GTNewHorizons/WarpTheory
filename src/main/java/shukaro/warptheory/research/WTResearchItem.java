@@ -2,6 +2,7 @@ package shukaro.warptheory.research;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import shukaro.warptheory.util.Constants;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.research.ResearchItem;
@@ -10,6 +11,7 @@ import thaumcraft.api.research.ResearchItem;
  * Created by Ark on 3/8/2015.
  */
 public class WTResearchItem extends ResearchItem {
+
     public WTResearchItem(String key) {
         super(key, Constants.CATEGORY_WARPTHEORY);
     }

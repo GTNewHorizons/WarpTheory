@@ -6,6 +6,7 @@ package shukaro.warptheory.util;
  * @author MachineMuse
  */
 public enum FormatCodes {
+
     Black("\u00A70"),
     DarkBlue("\u00A71"),
     DarkGreen("\u00A72"),

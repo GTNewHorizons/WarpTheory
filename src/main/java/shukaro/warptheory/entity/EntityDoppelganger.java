@@ -1,15 +1,13 @@
 package shukaro.warptheory.entity;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import javax.annotation.Nullable;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.SkinManager;
 import net.minecraft.entity.Entity;
@@ -34,10 +32,18 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.FormatCodes;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class EntityDoppelganger extends EntityCreature implements IHealable, IHurtable {
+
     /**
      * The number of ticks we will wait between each attempt to find our player.
      */
@@ -81,8 +87,8 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
         this.player = new WeakReference<>(player);
         this.dataWatcher.updateObject(UUID_DATA_WATCHER_ID, player.getUniqueID().toString());
 
-        String name =
-                StatCollector.translateToLocalFormatted("chat.warptheory.doppelganger.name", player.getDisplayName());
+        String name = StatCollector
+                .translateToLocalFormatted("chat.warptheory.doppelganger.name", player.getDisplayName());
         this.setCustomNameTag(name);
 
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth());
@@ -101,8 +107,8 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
 
         GameProfile gameProfile = gameProfileCache.get(uuid);
         if (gameProfile == null) {
-            gameProfile =
-                    Minecraft.getMinecraft().func_152347_ac().fillProfileProperties(new GameProfile(uuid, null), true);
+            gameProfile = Minecraft.getMinecraft().func_152347_ac()
+                    .fillProfileProperties(new GameProfile(uuid, null), true);
             gameProfileCache.put(uuid, gameProfile);
         }
 
@@ -111,7 +117,8 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
 
         if (textureMap.containsKey(MinecraftProfileTexture.Type.SKIN)) {
             return skinManager.func_152792_a(
-                    textureMap.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN);
+                    textureMap.get(MinecraftProfileTexture.Type.SKIN),
+                    MinecraftProfileTexture.Type.SKIN);
         }
 
         return null;
@@ -136,8 +143,7 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
             entityPlayer.heal(amount);
             ChatHelper.sendToPlayer(
                     entityPlayer,
-                    FormatCodes.Purple.code
-                            + FormatCodes.Italic.code
+                    FormatCodes.Purple.code + FormatCodes.Italic.code
                             + StatCollector.translateToLocal("chat.warptheory.doppelganger.heal"));
         }
     }
@@ -153,14 +159,12 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
             if (getHealth() > e.ammount) {
                 ChatHelper.sendToPlayer(
                         entityPlayer,
-                        FormatCodes.Purple.code
-                                + FormatCodes.Italic.code
+                        FormatCodes.Purple.code + FormatCodes.Italic.code
                                 + StatCollector.translateToLocal("chat.warptheory.doppelganger.hurt"));
             } else {
                 ChatHelper.sendToPlayer(
                         entityPlayer,
-                        FormatCodes.Purple.code
-                                + FormatCodes.Italic.code
+                        FormatCodes.Purple.code + FormatCodes.Italic.code
                                 + StatCollector.translateToLocal("chat.warptheory.doppelganger.die"));
             }
         }
@@ -185,8 +189,8 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
                     findPlayerWait = FIND_PLAYER_WAIT_TICKS;
 
                     UUID uuidObj = UUID.fromString(uuid);
-                    List<EntityPlayerMP> players =
-                            MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+                    List<EntityPlayerMP> players = MinecraftServer.getServer()
+                            .getConfigurationManager().playerEntityList;
                     for (EntityPlayerMP entityPlayer : players) {
                         if (entityPlayer.getUniqueID().equals(uuidObj)) {
                             player = new WeakReference<>(entityPlayer);

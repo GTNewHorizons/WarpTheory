@@ -1,13 +1,15 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import shukaro.warptheory.net.PacketDispatcher;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpWind extends IWorldTickWarpEvent {
+
     public WarpWind(int minWarp) {
         super("wind", minWarp, world -> 5 + world.rand.nextInt(10));
     }

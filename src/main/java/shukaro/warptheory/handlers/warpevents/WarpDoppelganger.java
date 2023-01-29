@@ -2,12 +2,14 @@ package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.entity.EntityDoppelganger;
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.RandomBlockHelper;
 
 public class WarpDoppelganger extends IWorldTickWarpEvent {
+
     public WarpDoppelganger(int minWarp) {
         super("doppelganger", minWarp, world -> 1);
     }

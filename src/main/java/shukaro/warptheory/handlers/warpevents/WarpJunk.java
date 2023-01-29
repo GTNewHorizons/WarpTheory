@@ -1,15 +1,19 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import com.google.common.collect.ImmutableList;
 import java.util.function.Supplier;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 
+import com.google.common.collect.ImmutableList;
+
 public class WarpJunk extends IWarpEvent {
+
     private static final ImmutableList<Supplier<ItemStack>> JUNK = ImmutableList.of(
             () -> new ItemStack(Items.wheat_seeds),
             () -> new ItemStack(Items.rotten_flesh),

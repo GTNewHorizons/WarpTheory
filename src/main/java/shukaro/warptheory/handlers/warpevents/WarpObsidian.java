@@ -3,10 +3,12 @@ package shukaro.warptheory.handlers.warpevents;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 import shukaro.warptheory.util.BlockCoord;
 
 public class WarpObsidian extends IWarpEvent {
+
     public WarpObsidian(int minWarp) {
         super("obsidian", minWarp);
     }

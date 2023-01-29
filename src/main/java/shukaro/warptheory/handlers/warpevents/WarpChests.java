@@ -1,18 +1,21 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import java.util.ArrayList;
 import java.util.Random;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import shukaro.warptheory.util.MiscHelper;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpChests extends IWorldTickWarpEvent {
+
     public WarpChests(int minWarp) {
         super("chests", minWarp, world -> 15 + world.rand.nextInt(30));
     }
@@ -32,22 +35,20 @@ public class WarpChests extends IWorldTickWarpEvent {
         TileEntityChest inv2 = chestInventories.get(world.rand.nextInt(chestInventories.size()));
 
         if (world.rand.nextInt(10) == 0) {
-            if (world.rand.nextBoolean())
-                world.playSoundEffect(
-                        inv1.xCoord,
-                        inv1.yCoord + 0.5D,
-                        inv1.zCoord,
-                        "random.chestopen",
-                        0.5F,
-                        world.rand.nextFloat() * 0.1F + 0.9F);
-            else
-                world.playSoundEffect(
-                        inv2.xCoord,
-                        inv2.yCoord + 0.5D,
-                        inv2.zCoord,
-                        "random.chestclosed",
-                        0.5F,
-                        world.rand.nextFloat() * 0.1F + 0.9F);
+            if (world.rand.nextBoolean()) world.playSoundEffect(
+                    inv1.xCoord,
+                    inv1.yCoord + 0.5D,
+                    inv1.zCoord,
+                    "random.chestopen",
+                    0.5F,
+                    world.rand.nextFloat() * 0.1F + 0.9F);
+            else world.playSoundEffect(
+                    inv2.xCoord,
+                    inv2.yCoord + 0.5D,
+                    inv2.zCoord,
+                    "random.chestclosed",
+                    0.5F,
+                    world.rand.nextFloat() * 0.1F + 0.9F);
             successful++;
         }
 
@@ -65,8 +66,7 @@ public class WarpChests extends IWorldTickWarpEvent {
             inv1.setInventorySlotContents(firstSlot, secondContents);
             inv2.setInventorySlotContents(secondSlot, firstContents);
         }
-        return inv1.isItemValidForSlot(firstSlot, secondContents)
-                && inv2.isItemValidForSlot(secondSlot, firstContents)
+        return inv1.isItemValidForSlot(firstSlot, secondContents) && inv2.isItemValidForSlot(secondSlot, firstContents)
                 && (firstContents != null || secondContents != null);
     }
 

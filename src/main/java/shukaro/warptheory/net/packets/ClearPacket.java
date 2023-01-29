@@ -3,6 +3,7 @@ package shukaro.warptheory.net.packets;
 import io.netty.buffer.ByteBuf;
 
 public class ClearPacket implements IWarpPacket {
+
     public int id;
 
     public ClearPacket() {}

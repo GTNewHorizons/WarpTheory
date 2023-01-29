@@ -1,15 +1,19 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 
+import com.google.common.collect.Lists;
+
 public class WarpInventoryScramble extends IWarpEvent {
+
     public WarpInventoryScramble(int minWarp) {
         super("inventoryscramble", minWarp);
     }

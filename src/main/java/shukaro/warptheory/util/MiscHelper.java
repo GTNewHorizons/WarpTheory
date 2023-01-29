@@ -1,9 +1,7 @@
 package shukaro.warptheory.util;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
+
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -13,21 +11,26 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
+
 import shukaro.warptheory.entity.EntityDropParticleFX;
 import shukaro.warptheory.handlers.WarpHandler;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class MiscHelper {
+
     public static EntityPlayer getPlayerByName(String name) {
-        for (EntityPlayer serverPlayer :
-                (ArrayList<EntityPlayer>) MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
+        for (EntityPlayer serverPlayer : (ArrayList<EntityPlayer>) MinecraftServer.getServer()
+                .getConfigurationManager().playerEntityList) {
             if (serverPlayer.getCommandSenderName().equals(name)) return serverPlayer;
         }
         return null;
     }
 
     public static EntityPlayer getPlayerByEntityID(int id) {
-        for (EntityPlayer serverPlayer :
-                (ArrayList<EntityPlayer>) MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
+        for (EntityPlayer serverPlayer : (ArrayList<EntityPlayer>) MinecraftServer.getServer()
+                .getConfigurationManager().playerEntityList) {
             if (serverPlayer.getEntityId() == id) return serverPlayer;
         }
         return null;
@@ -66,15 +69,13 @@ public class MiscHelper {
         NameMetaPair pair = new NameMetaPair(coord.getBlock(world), coord.getMeta(world));
         boolean contained = true;
         for (int i = 0; i < 6; i++) {
-            if (i != 1
-                    && (!coord.copy().offset(i).getBlock(world).isOpaqueCube()
-                            && coord.copy().offset(i).getBlock(world) != Blocks.water)) contained = false;
+            if (i != 1 && (!coord.copy().offset(i).getBlock(world).isOpaqueCube()
+                    && coord.copy().offset(i).getBlock(world) != Blocks.water))
+                contained = false;
         }
         BlockCoord cover = coord.copy().offset(1);
-        return contained
-                && (coord.isAir(world) || WarpHandler.decayMappings.containsKey(pair))
-                && (cover.isAir(world)
-                        || cover.getBlock(world) == Blocks.log
+        return contained && (coord.isAir(world) || WarpHandler.decayMappings.containsKey(pair))
+                && (cover.isAir(world) || cover.getBlock(world) == Blocks.log
                         || cover.getBlock(world) == Blocks.log2
                         || cover.getBlock(world) instanceof IPlantable);
     }
@@ -91,8 +92,7 @@ public class MiscHelper {
 
     @SideOnly(Side.CLIENT)
     public static void spawnDripParticle(World world, int x, int y, int z, float r, float g, float b) {
-        if (world.isAirBlock(x, y - 2, z)
-                && !world.isAirBlock(x, y - 1, z)
+        if (world.isAirBlock(x, y - 2, z) && !world.isAirBlock(x, y - 1, z)
                 && world.getBlock(x, y - 1, z).getMaterial().blocksMovement()) {
             double px = x + world.rand.nextFloat();
             double py = y - 1.05D;

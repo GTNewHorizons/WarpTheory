@@ -4,11 +4,13 @@ import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.RandomBlockHelper;
 
 public class WarpWither extends IWorldTickWarpEvent {
+
     public WarpWither(int minWarp) {
         super("wither", minWarp, world -> 1);
     }
@@ -31,7 +33,11 @@ public class WarpWither extends IWorldTickWarpEvent {
         world.spawnParticle("hugeexplosion", target.x, target.y, target.z, 1.0D, 0.0D, 0.0D);
         EntityWither wither = new EntityWither(world);
         wither.setLocationAndAngles(
-                target.x + 0.5D, target.y - 0.5D, target.z + 0.5D, world.rand.nextFloat(), world.rand.nextFloat());
+                target.x + 0.5D,
+                target.y - 0.5D,
+                target.z + 0.5D,
+                world.rand.nextFloat(),
+                world.rand.nextFloat());
         wither.func_82206_m();
 
         if (world.spawnEntityInWorld(wither)) {

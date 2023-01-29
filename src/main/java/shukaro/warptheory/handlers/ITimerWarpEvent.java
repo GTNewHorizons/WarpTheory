@@ -1,22 +1,27 @@
 package shukaro.warptheory.handlers;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+
+import shukaro.warptheory.util.MiscHelper;
+
 import com.google.common.collect.ImmutableMap;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import shukaro.warptheory.util.MiscHelper;
 
 /**
- * A world tick warp event that can set timers.
- * Override {@link #onTick(TickEvent.WorldTickEvent)} to change the tick interval.
+ * A world tick warp event that can set timers. Override {@link #onTick(TickEvent.WorldTickEvent)} to change the tick
+ * interval.
  */
 public abstract class ITimerWarpEvent extends IWarpEvent {
+
     protected final Function<World, Integer> incrementFunction;
     /**
      * Map from timer prefix to full timer tag.
@@ -37,8 +42,8 @@ public abstract class ITimerWarpEvent extends IWarpEvent {
     }
 
     /**
-     * Returns the number of successful triggers of the event.
-     * This method will not be called while any timers are still active.
+     * Returns the number of successful triggers of the event. This method will not be called while any timers are still
+     * active.
      */
     public abstract int triggerEvent(int eventAmount, World world, EntityPlayer player);
 

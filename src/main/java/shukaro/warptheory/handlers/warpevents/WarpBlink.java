@@ -1,15 +1,17 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import shukaro.warptheory.net.PacketDispatcher;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.RandomBlockHelper;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpBlink extends IWorldTickWarpEvent {
+
     public WarpBlink(int minWarp) {
         super("blink", minWarp, world -> 10 + world.rand.nextInt(20));
     }
@@ -40,9 +42,7 @@ public class WarpBlink extends IWorldTickWarpEvent {
     }
 
     private static boolean isBlockValid(World world, BlockCoord block) {
-        return block.isAir(world)
-                && block.copy().offset(1).isAir(world)
-                && block.copy().offset(0).isTopSolid(world);
+        return block.isAir(world) && block.copy().offset(1).isAir(world) && block.copy().offset(0).isTopSolid(world);
     }
 
     @Override

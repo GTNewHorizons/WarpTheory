@@ -4,9 +4,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 
 public class WarpPumpkin extends IWarpEvent {
+
     public WarpPumpkin(int minWarp) {
         super("pumpkin", minWarp);
     }

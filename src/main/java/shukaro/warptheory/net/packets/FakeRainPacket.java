@@ -3,6 +3,7 @@ package shukaro.warptheory.net.packets;
 import io.netty.buffer.ByteBuf;
 
 public class FakeRainPacket implements IWarpPacket {
+
     public int eventLevel;
 
     public FakeRainPacket() {}

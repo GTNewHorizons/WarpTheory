@@ -3,9 +3,11 @@ package shukaro.warptheory.handlers.warpevents;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 
 public class WarpEnderPearl extends IWarpEvent {
+
     public WarpEnderPearl(int minWarp) {
         super("enderpearl", minWarp);
     }

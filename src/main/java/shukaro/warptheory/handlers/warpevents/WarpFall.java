@@ -1,22 +1,25 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.block.WarpBlocks;
 import shukaro.warptheory.handlers.IWarpEvent;
 import shukaro.warptheory.net.PacketDispatcher;
 import shukaro.warptheory.tile.TileEntityVanish;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.MiscHelper;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.relauncher.Side;
 
 public class WarpFall extends IWarpEvent {
+
     private static Map<String, BlockCoord> originalPositions = new HashMap<String, BlockCoord>();
     private static Map<String, Long> returnTimes = new HashMap<String, Long>();
 
@@ -55,7 +58,11 @@ public class WarpFall extends IWarpEvent {
                             for (int k = (int) player.posZ - 5; k < player.posZ + 5; k++) {
                                 if (!e.world.isAirBlock(i, j, k)) {
                                     TileEntityVanish vanish = new TileEntityVanish(
-                                            e.world, i, j, k, returnTimes.get(player.getCommandSenderName()));
+                                            e.world,
+                                            i,
+                                            j,
+                                            k,
+                                            returnTimes.get(player.getCommandSenderName()));
                                     if (e.world.setBlock(i, j, k, WarpBlocks.blockVanish, 0, 0))
                                         e.world.setTileEntity(i, j, k, vanish);
                                     e.world.markBlockForUpdate(i, j, k);

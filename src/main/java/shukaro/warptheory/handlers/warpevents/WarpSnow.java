@@ -1,6 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import java.util.Set;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,12 +9,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.MiscHelper;
 import shukaro.warptheory.util.RandomBlockHelper;
 
 public class WarpSnow extends IWorldTickWarpEvent {
+
     public WarpSnow(int minWarp) {
         super("biomeSnow", minWarp, world -> 16 + world.rand.nextInt(16));
     }
@@ -30,8 +33,8 @@ public class WarpSnow extends IWorldTickWarpEvent {
     @Override
     @SuppressWarnings("unchecked")
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
-        BlockCoord target =
-                RandomBlockHelper.randomBlock(world, player, 16, block -> MiscHelper.hasNonSolidNeighbor(world, block));
+        BlockCoord target = RandomBlockHelper
+                .randomBlock(world, player, 16, block -> MiscHelper.hasNonSolidNeighbor(world, block));
         if (target == null) {
             return 0;
         }

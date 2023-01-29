@@ -1,21 +1,23 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.entity.EntityRainParticleFX;
 import shukaro.warptheory.handlers.IMultiWarpEvent;
 import shukaro.warptheory.net.PacketDispatcher;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.RandomBlockHelper;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class WarpFakeRain extends IMultiWarpEvent {
+
     public static int rainLevel = -1;
 
     public WarpFakeRain(int minWarp) {
@@ -70,7 +72,13 @@ public class WarpFakeRain extends IMultiWarpEvent {
                     switch (rainLevel) {
                         case 1:
                             fx = new EntityRainParticleFX(
-                                    world, target.x, y, target.z, world.rand.nextFloat() + 0.2f, 0.0f, 0.0f);
+                                    world,
+                                    target.x,
+                                    y,
+                                    target.z,
+                                    world.rand.nextFloat() + 0.2f,
+                                    0.0f,
+                                    0.0f);
                             break;
 
                         case 0:

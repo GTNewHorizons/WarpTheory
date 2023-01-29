@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 
 public class WarpInventorySwap extends IWarpEvent {
+
     public WarpInventorySwap(int minWarp) {
         super("inventoryswap", minWarp);
     }

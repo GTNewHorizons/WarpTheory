@@ -2,9 +2,11 @@ package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 
 public class WarpMessage extends IWarpEvent {
+
     private static final int NUM_MESSAGES = 9;
 
     public WarpMessage(int minWarp) {

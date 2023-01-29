@@ -1,25 +1,27 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.MultimapBuilder;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IMultiWarpEvent;
 import shukaro.warptheory.net.PacketDispatcher;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.MiscHelper;
 import shukaro.warptheory.util.RandomBlockHelper;
 
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.MultimapBuilder;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class WarpBlood extends IMultiWarpEvent {
-    public static ListMultimap<Integer, BlockCoord> bloody =
-            MultimapBuilder.hashKeys().arrayListValues().build();
-    public static ListMultimap<Integer, BlockCoord> blackBloody =
-            MultimapBuilder.hashKeys().arrayListValues().build();
+
+    public static ListMultimap<Integer, BlockCoord> bloody = MultimapBuilder.hashKeys().arrayListValues().build();
+    public static ListMultimap<Integer, BlockCoord> blackBloody = MultimapBuilder.hashKeys().arrayListValues().build();
 
     public WarpBlood(int minWarp) {
         super("blood", minWarp, 2, world -> 64 + world.rand.nextInt(128));
@@ -46,8 +48,7 @@ public class WarpBlood extends IMultiWarpEvent {
     }
 
     private static boolean isBlockValid(World world, BlockCoord block) {
-        return world.isAirBlock(block.x, block.y - 1, block.z)
-                && !block.isAir(world)
+        return world.isAirBlock(block.x, block.y - 1, block.z) && !block.isAir(world)
                 && world.getBlock(block.x, block.y, block.z).getMaterial().blocksMovement();
     }
 

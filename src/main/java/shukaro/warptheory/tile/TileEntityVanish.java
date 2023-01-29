@@ -6,9 +6,11 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.util.NameMetaPair;
 
 public class TileEntityVanish extends TileEntity {
+
     private NameMetaPair pair;
     private NBTTagCompound tag;
     private long returnTime;
@@ -34,8 +36,7 @@ public class TileEntityVanish extends TileEntity {
 
     private void rebuildBlock() {
         this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, this.pair.getBlock(), this.pair.getMetadata(), 0);
-        if (this.tag != null)
-            this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord).readFromNBT(this.tag);
+        if (this.tag != null) this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord).readFromNBT(this.tag);
         this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
     }
 

@@ -1,9 +1,8 @@
 package shukaro.warptheory.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Locale;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,12 +13,16 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.handlers.WarpHandler;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.FormatCodes;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemPaper extends Item {
+
     private IIcon icon;
 
     public ItemPaper() {
@@ -76,10 +79,20 @@ public class ItemPaper extends Item {
             else if (totalWarp <= 50) severity = StatCollector.translateToLocal("chat.warptheory.majorwarp");
             else severity = StatCollector.translateToLocal("chat.warptheory.deadlywarp");
             player.addChatMessage(new ChatComponentText(FormatCodes.Purple.code + FormatCodes.Italic.code + severity));
-            player.addChatMessage(new ChatComponentText(" (" + individualWarps[0] + " "
-                    + StatCollector.translateToLocal("chat.warptheory.permanentwarp") + ", "
-                    + individualWarps[1] + " " + StatCollector.translateToLocal("chat.warptheory.normalwarp") + ", "
-                    + individualWarps[2] + " " + StatCollector.translateToLocal("chat.warptheory.tempwarp") + ")"));
+            player.addChatMessage(
+                    new ChatComponentText(
+                            " (" + individualWarps[0]
+                                    + " "
+                                    + StatCollector.translateToLocal("chat.warptheory.permanentwarp")
+                                    + ", "
+                                    + individualWarps[1]
+                                    + " "
+                                    + StatCollector.translateToLocal("chat.warptheory.normalwarp")
+                                    + ", "
+                                    + individualWarps[2]
+                                    + " "
+                                    + StatCollector.translateToLocal("chat.warptheory.tempwarp")
+                                    + ")"));
         }
 
         if (!player.capabilities.isCreativeMode && WarpHandler.getTotalWarp(player) > 10) stack.stackSize--;
@@ -90,8 +103,8 @@ public class ItemPaper extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced) {
-        infoList.add(FormatCodes.DarkGrey.code
-                + FormatCodes.Italic.code
-                + StatCollector.translateToLocal("tooltip.warptheory.paper"));
+        infoList.add(
+                FormatCodes.DarkGrey.code + FormatCodes.Italic.code
+                        + StatCollector.translateToLocal("tooltip.warptheory.paper"));
     }
 }

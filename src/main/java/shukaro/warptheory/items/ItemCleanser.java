@@ -1,9 +1,8 @@
 package shukaro.warptheory.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Locale;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,13 +13,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.handlers.WarpHandler;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.FormatCodes;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCleanser extends Item {
+
     private IIcon icon1;
     private IIcon icon2;
 
@@ -51,8 +54,9 @@ public class ItemCleanser extends Item {
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister reg) {
-        this.icon1 = reg.registerIcon(
-                Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemCleanser"); // that's what renders inHand apparently
+        this.icon1 = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemCleanser"); // that's what
+                                                                                                      // renders inHand
+                                                                                                      // apparently
         this.icon2 = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemCleanserOpaque");
     }
 

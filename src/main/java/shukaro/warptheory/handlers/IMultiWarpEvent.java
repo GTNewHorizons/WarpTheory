@@ -1,32 +1,37 @@
 package shukaro.warptheory.handlers;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+
+import shukaro.warptheory.util.MiscHelper;
+
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
-import shukaro.warptheory.util.MiscHelper;
 
 /**
  * A world tick warp event that has multiple "levels" depending on player warp.
  */
 public abstract class IMultiWarpEvent extends IWarpEvent {
+
     /**
      * This bi-map will iterate from least to greatest integer.
      */
     protected final ImmutableBiMap<Integer, String> eventLevels;
 
     /**
-     * A list of the entries in {@code eventLevels}, in reversed order, so we can iterate from
-     * greatest to least integer.
+     * A list of the entries in {@code eventLevels}, in reversed order, so we can iterate from greatest to least
+     * integer.
      */
     protected final ImmutableList<Map.Entry<Integer, String>> reversedEventLevels;
 
@@ -48,8 +53,7 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
     }
 
     /**
-     * Returns the number of successful triggers of the event. {@code eventLevel} is the
-     * {@code 0}-indexed event level.
+     * Returns the number of successful triggers of the event. {@code eventLevel} is the {@code 0}-indexed event level.
      */
     public abstract int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player);
 
@@ -66,15 +70,11 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
         int totalWarp = WarpHandler.getTotalWarp(player);
 
         /*
-         * The math here is as follows:
-         *   1. We start at event level 0.
-         *   2. For each event level i > 0, the chance of the event getting "promoted" to that warp
-         *      level scales linearly with player warp:
-         *   3. The promotion chance starts at 0% with warp <= (i + 1) * minWarp
-         *   4. The promotion chance maxes out at 50% with warp >= (i + 2) * minWarp
-         *   5. Events must successfully promote past all prior levels to promote to the next level.
-         *      So with infinite warp, the chance of level 0 is 50% (failing to promote to level 1),
-         *      the chance of level 1 is 25%, and so on.
+         * The math here is as follows: 1. We start at event level 0. 2. For each event level i > 0, the chance of the
+         * event getting "promoted" to that warp level scales linearly with player warp: 3. The promotion chance starts
+         * at 0% with warp <= (i + 1) * minWarp 4. The promotion chance maxes out at 50% with warp >= (i + 2) * minWarp
+         * 5. Events must successfully promote past all prior levels to promote to the next level. So with infinite
+         * warp, the chance of level 0 is 50% (failing to promote to level 1), the chance of level 1 is 25%, and so on.
          */
         for (int i = 1; i < eventLevels.size(); i++) {
             int promotionWarp = MathHelper.clamp_int(totalWarp - (i + 1) * minWarp, 0, minWarp);

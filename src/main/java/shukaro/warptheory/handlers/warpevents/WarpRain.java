@@ -2,9 +2,11 @@ package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 
 public class WarpRain extends IWarpEvent {
+
     public WarpRain(int minWarp) {
         super("rain", minWarp);
     }

@@ -3,12 +3,14 @@ package shukaro.warptheory.entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.world.World;
+
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 /**
  * A creeper that explodes, but the explosion doesn't do any damage.
  */
 public class EntityFakeCreeper extends EntityCreeper {
+
     /**
      * The fake creeper will be passive until this many ticks has elapsed.
      */

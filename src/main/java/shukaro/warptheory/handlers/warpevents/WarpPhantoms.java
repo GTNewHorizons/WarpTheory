@@ -2,12 +2,14 @@ package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.entity.EntityPhantom;
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.RandomBlockHelper;
 
 public class WarpPhantoms extends IWorldTickWarpEvent {
+
     public WarpPhantoms(int minWarp) {
         super("phantoms", minWarp, world -> 1 + world.rand.nextInt(5));
     }

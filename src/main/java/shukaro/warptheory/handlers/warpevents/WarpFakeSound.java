@@ -1,12 +1,14 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpFakeSound extends IWorldTickWarpEvent {
+
     protected final String sound;
     protected final int distance; // radius in blocks about player in which it can occur
     protected final float volume;
@@ -30,14 +32,14 @@ public class WarpFakeSound extends IWorldTickWarpEvent {
 
     @Override
     public void sendChatMessage(EntityPlayer player) {
-        // No message. Otherwise kinda spoils the surprise.  Nobody will pay attention if they see "fake explosion
+        // No message. Otherwise kinda spoils the surprise. Nobody will pay attention if they see "fake explosion
         // happened!" message
     }
 
     @Override
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
         // (-distance, distance) swing
-        // [0, 2*distance] - distance ~= [-distance, distance]  more or less
+        // [0, 2*distance] - distance ~= [-distance, distance] more or less
         int targetX = (int) player.posX + world.rand.nextInt(2 * distance) - (distance);
         int targetY = (int) player.posY + world.rand.nextInt(2 * distance) - (distance);
         int targetZ = (int) player.posZ + world.rand.nextInt(2 * distance) - (distance);

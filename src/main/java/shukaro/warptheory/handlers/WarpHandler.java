@@ -1,27 +1,30 @@
 package shukaro.warptheory.handlers;
 
-import baubles.api.BaublesApi;
-import gnu.trove.map.hash.THashMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.MiscHelper;
 import shukaro.warptheory.util.NameMetaPair;
 import thaumcraft.api.IWarpingGear;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.lib.research.PlayerKnowledge;
+import baubles.api.BaublesApi;
+import gnu.trove.map.hash.THashMap;
 
 public class WarpHandler {
+
     public static final PlayerKnowledge Knowledge = Thaumcraft.proxy.getPlayerKnowledge();
     private static HashMap<UUID, Integer> Unavoidable = new HashMap<UUID, Integer>();
     public static ArrayList<IWarpEvent> warpEvents = new ArrayList<IWarpEvent>();
@@ -105,9 +108,9 @@ public class WarpHandler {
         int wt = Knowledge.getWarpTemp(name);
         // reset the warp counter so
         // 1) if partial warp reduction, reset the counter so vanilla TC warp events would fire
-        //    the same behavior can be observed on TC sanitizing soap
+        // the same behavior can be observed on TC sanitizing soap
         // 2) if total warp reduction, the counter would be reduced to 0, so vanilla TC warp events would
-        //    no longer fire
+        // no longer fire
         Knowledge.setWarpCounter(name, wp + wn + wt - amount);
 
         Knowledge.addWarpTemp(name, -amount);
@@ -134,9 +137,8 @@ public class WarpHandler {
 
     public static int[] getIndividualWarps(EntityPlayer player) {
         String userName = player.getDisplayName();
-        int[] totals = new int[] {
-            Knowledge.getWarpPerm(userName), Knowledge.getWarpSticky(userName), Knowledge.getWarpTemp(userName)
-        };
+        int[] totals = new int[] { Knowledge.getWarpPerm(userName), Knowledge.getWarpSticky(userName),
+                Knowledge.getWarpTemp(userName) };
         return totals;
     }
 

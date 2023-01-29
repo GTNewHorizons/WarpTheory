@@ -1,6 +1,5 @@
 package shukaro.warptheory.entity;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,7 +8,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import com.google.common.collect.ImmutableList;
+
 public class EntityPhantom extends EntityLiving implements IHurtable {
+
     public static final ImmutableList<ResourceLocation> SKINS = ImmutableList.of(
             // Add more textures here if you want more varied phantoms.
             new ResourceLocation("warptheory", "textures/entities/phantom.png"),

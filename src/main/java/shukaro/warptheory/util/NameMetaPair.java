@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class NameMetaPair {
+
     private String name;
     private int meta;
 

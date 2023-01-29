@@ -1,17 +1,20 @@
 package shukaro.warptheory.util;
 
 import java.util.function.Predicate;
+
 import javax.annotation.Nullable;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public final class RandomBlockHelper {
+
     private RandomBlockHelper() {}
 
     /**
-     * Returns a random air block within a cube of the given "radius", centered on the player, or
-     * null if the random block was not an air block.
+     * Returns a random air block within a cube of the given "radius", centered on the player, or null if the random
+     * block was not an air block.
      */
     @Nullable
     public static BlockCoord randomAirBlock(World world, EntityPlayer player, int radius) {
@@ -19,20 +22,21 @@ public final class RandomBlockHelper {
     }
 
     /**
-     * Returns a random air block within a cube of the given "radius", centered on the player, with
-     * the block above also being air; or returns null if the random block did not satisfy those
-     * conditions.
+     * Returns a random air block within a cube of the given "radius", centered on the player, with the block above also
+     * being air; or returns null if the random block did not satisfy those conditions.
      */
     @Nullable
     public static BlockCoord randomDoubleAirBlock(World world, EntityPlayer player, int radius) {
         return randomBlock(
-                world, player, radius, block -> block.isAir(world) && world.isAirBlock(block.x, block.y + 1, block.z));
+                world,
+                player,
+                radius,
+                block -> block.isAir(world) && world.isAirBlock(block.x, block.y + 1, block.z));
     }
 
     /**
-     * Returns a random air block within a cube of the given "radius", centered on the player, with
-     * the two blocks above also being air; or returns null if the random block did not satisfy
-     * those conditions.
+     * Returns a random air block within a cube of the given "radius", centered on the player, with the two blocks above
+     * also being air; or returns null if the random block did not satisfy those conditions.
      */
     @Nullable
     public static BlockCoord randomTripleAirBlock(World world, EntityPlayer player, int radius) {
@@ -40,14 +44,13 @@ public final class RandomBlockHelper {
                 world,
                 player,
                 radius,
-                block -> block.isAir(world)
-                        && world.isAirBlock(block.x, block.y + 1, block.z)
+                block -> block.isAir(world) && world.isAirBlock(block.x, block.y + 1, block.z)
                         && world.isAirBlock(block.x, block.y + 2, block.z));
     }
 
     /**
-     * Returns a random block within a cube of the given "radius", centered on the player, or null
-     * if the random block doesn't pass {@code isValid}.
+     * Returns a random block within a cube of the given "radius", centered on the player, or null if the random block
+     * doesn't pass {@code isValid}.
      */
     @Nullable
     public static BlockCoord randomBlock(World world, EntityPlayer player, int radius, Predicate<BlockCoord> isValid) {

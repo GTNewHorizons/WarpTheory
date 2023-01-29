@@ -1,16 +1,18 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.MiscHelper;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class WarpTongue extends IWarpEvent {
+
     public WarpTongue(int minWarp) {
         super("tongue", minWarp);
         MinecraftForge.EVENT_BUS.register(this);

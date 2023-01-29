@@ -3,6 +3,7 @@ package shukaro.warptheory.net.packets;
 import io.netty.buffer.ByteBuf;
 
 public class VelocityPacket implements IWarpPacket {
+
     public double x, y, z;
 
     public VelocityPacket() {}

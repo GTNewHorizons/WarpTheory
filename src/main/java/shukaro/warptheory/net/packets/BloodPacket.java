@@ -3,6 +3,7 @@ package shukaro.warptheory.net.packets;
 import io.netty.buffer.ByteBuf;
 
 public class BloodPacket implements IWarpPacket {
+
     public int dim, eventLevel, x, y, z;
 
     public BloodPacket() {}

@@ -3,9 +3,11 @@ package shukaro.warptheory.handlers.warpevents;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 
 public class WarpLightning extends IWorldTickWarpEvent {
+
     public WarpLightning(int minWarp) {
         super("lightning", minWarp, world -> 5 + world.rand.nextInt(10));
     }

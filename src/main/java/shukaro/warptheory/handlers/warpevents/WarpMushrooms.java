@@ -2,6 +2,7 @@ package shukaro.warptheory.handlers.warpevents;
 
 import java.util.List;
 import java.util.Set;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityMooshroom;
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.MiscHelper;
@@ -16,6 +18,7 @@ import shukaro.warptheory.util.RandomBlockHelper;
 import thaumcraft.common.config.ConfigBlocks;
 
 public class WarpMushrooms extends IWorldTickWarpEvent {
+
     public WarpMushrooms(int minWarp) {
         super("biomeMushrooms", minWarp, world -> 16 + world.rand.nextInt(16));
     }
@@ -32,8 +35,8 @@ public class WarpMushrooms extends IWorldTickWarpEvent {
     @Override
     @SuppressWarnings("unchecked")
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
-        BlockCoord target =
-                RandomBlockHelper.randomBlock(world, player, 16, block -> MiscHelper.hasNonSolidNeighbor(world, block));
+        BlockCoord target = RandomBlockHelper
+                .randomBlock(world, player, 16, block -> MiscHelper.hasNonSolidNeighbor(world, block));
         if (target == null) {
             return 0;
         }

@@ -3,6 +3,7 @@ package shukaro.warptheory.util;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -12,42 +13,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockCoord implements Comparable {
+
     public int x, y, z;
 
-    private static final BlockCoord[] sideOffsets = {
-        new BlockCoord(0, -1, 0), new BlockCoord(0, 1, 0),
-        new BlockCoord(0, 0, -1), new BlockCoord(0, 0, 1),
-        new BlockCoord(-1, 0, 0), new BlockCoord(1, 0, 0)
-    };
+    private static final BlockCoord[] sideOffsets = { new BlockCoord(0, -1, 0), new BlockCoord(0, 1, 0),
+            new BlockCoord(0, 0, -1), new BlockCoord(0, 0, 1), new BlockCoord(-1, 0, 0), new BlockCoord(1, 0, 0) };
 
-    private static final BlockCoord[] nearbyOffsets = {
-        new BlockCoord(-1, 1, 1),
-        new BlockCoord(0, 1, 1),
-        new BlockCoord(1, 1, 1),
-        new BlockCoord(-1, 0, 1),
-        new BlockCoord(0, 0, 1),
-        new BlockCoord(1, 0, 1),
-        new BlockCoord(-1, -1, 1),
-        new BlockCoord(0, -1, 1),
-        new BlockCoord(1, -1, 1),
-        new BlockCoord(-1, 1, 0),
-        new BlockCoord(0, 1, 0),
-        new BlockCoord(1, 1, 0),
-        new BlockCoord(-1, 0, 0),
-        new BlockCoord(1, 0, 0),
-        new BlockCoord(-1, -1, 0),
-        new BlockCoord(0, -1, 0),
-        new BlockCoord(1, -1, 0),
-        new BlockCoord(-1, 1, -1),
-        new BlockCoord(0, 1, -1),
-        new BlockCoord(1, 1, -1),
-        new BlockCoord(-1, 0, -1),
-        new BlockCoord(0, 0, -1),
-        new BlockCoord(1, 0, -1),
-        new BlockCoord(-1, -1, -1),
-        new BlockCoord(0, -1, -1),
-        new BlockCoord(1, -1, -1)
-    };
+    private static final BlockCoord[] nearbyOffsets = { new BlockCoord(-1, 1, 1), new BlockCoord(0, 1, 1),
+            new BlockCoord(1, 1, 1), new BlockCoord(-1, 0, 1), new BlockCoord(0, 0, 1), new BlockCoord(1, 0, 1),
+            new BlockCoord(-1, -1, 1), new BlockCoord(0, -1, 1), new BlockCoord(1, -1, 1), new BlockCoord(-1, 1, 0),
+            new BlockCoord(0, 1, 0), new BlockCoord(1, 1, 0), new BlockCoord(-1, 0, 0), new BlockCoord(1, 0, 0),
+            new BlockCoord(-1, -1, 0), new BlockCoord(0, -1, 0), new BlockCoord(1, -1, 0), new BlockCoord(-1, 1, -1),
+            new BlockCoord(0, 1, -1), new BlockCoord(1, 1, -1), new BlockCoord(-1, 0, -1), new BlockCoord(0, 0, -1),
+            new BlockCoord(1, 0, -1), new BlockCoord(-1, -1, -1), new BlockCoord(0, -1, -1),
+            new BlockCoord(1, -1, -1) };
 
     public BlockCoord(int x, int y, int z) {
         this.x = x;
@@ -220,17 +199,17 @@ public class BlockCoord implements Comparable {
         return adjacent;
     }
     // This causes a crash because ???
-    //    {
-    //        return new BlockCoord[]
-    //        {
-    //            new BlockCoord(x + 1, y, z),
-    //            new BlockCoord(x - 1, y, z),
-    //            new BlockCoord(x, y + 1, z),
-    //            new BlockCoord(x, y - 1, z),
-    //            new BlockCoord(x, y, z + 1),
-    //            new BlockCoord(x, y, z - 1)
-    //        };
-    //    }
+    // {
+    // return new BlockCoord[]
+    // {
+    // new BlockCoord(x + 1, y, z),
+    // new BlockCoord(x - 1, y, z),
+    // new BlockCoord(x, y + 1, z),
+    // new BlockCoord(x, y - 1, z),
+    // new BlockCoord(x, y, z + 1),
+    // new BlockCoord(x, y, z - 1)
+    // };
+    // }
 
     public List<BlockCoord> getNearby() {
         List<BlockCoord> nearby = new ArrayList<BlockCoord>();
@@ -243,7 +222,7 @@ public class BlockCoord implements Comparable {
     }
 
     public int[] intArray() {
-        return new int[] {this.x, this.y, this.z};
+        return new int[] { this.x, this.y, this.z };
     }
 
     public BlockCoord set(int i, int j, int k) {
@@ -386,7 +365,9 @@ public class BlockCoord implements Comparable {
 
     public ItemStack getStack(IBlockAccess access) {
         return new ItemStack(
-                access.getBlock(this.x, this.y, this.z), 1, access.getBlockMetadata(this.x, this.y, this.z));
+                access.getBlock(this.x, this.y, this.z),
+                1,
+                access.getBlockMetadata(this.x, this.y, this.z));
     }
 
     @Override

@@ -1,20 +1,24 @@
 package shukaro.warptheory.handlers;
 
-import com.google.common.base.Suppliers;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+
 import shukaro.warptheory.util.MiscHelper;
 
+import com.google.common.base.Suppliers;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+
 public class WarpCommand implements ICommand {
+
     private Supplier<ImmutableMap<String, IWarpEvent>> nameMap = Suppliers.memoize(this::getNameMap)::get;
     private Supplier<ImmutableList<String>> timers = Suppliers.memoize(this::getTimers)::get;
 
@@ -124,8 +128,8 @@ public class WarpCommand implements ICommand {
             return completions;
         } else if (args.length == 2) {
             ArrayList<String> completions = new ArrayList<String>();
-            for (EntityPlayer serverPlayer :
-                    (ArrayList<EntityPlayer>) MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
+            for (EntityPlayer serverPlayer : (ArrayList<EntityPlayer>) MinecraftServer.getServer()
+                    .getConfigurationManager().playerEntityList) {
                 if (serverPlayer.getCommandSenderName().startsWith(args[1]))
                     completions.add(serverPlayer.getCommandSenderName());
             }

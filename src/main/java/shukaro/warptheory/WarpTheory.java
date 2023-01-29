@@ -1,20 +1,15 @@
 package shukaro.warptheory;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
+
 import org.apache.logging.log4j.Logger;
+
 import shukaro.warptheory.block.WarpBlocks;
 import shukaro.warptheory.entity.EntityDoppelganger;
 import shukaro.warptheory.entity.EntityFakeCreeper;
@@ -32,6 +27,14 @@ import shukaro.warptheory.recipe.WarpRecipes;
 import shukaro.warptheory.research.WarpResearch;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.NameGenerator;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
 
 @Mod(
         modid = Constants.modID,
@@ -40,6 +43,7 @@ import shukaro.warptheory.util.NameGenerator;
         guiFactory = "shukaro.warptheory.gui.GuiFactory",
         dependencies = "required-after:Forge@[10.13.2,);required-after:Baubles;required-after:Thaumcraft@[4.2.3.5,);")
 public class WarpTheory {
+
     @SidedProxy(clientSide = "shukaro.warptheory.net.ClientProxy", serverSide = "shukaro.warptheory.net.CommonProxy")
     public static CommonProxy proxy;
 

@@ -1,18 +1,22 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import com.google.common.collect.ImmutableList;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IMultiWarpEvent;
 
+import com.google.common.collect.ImmutableList;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+
 public class WarpGregTechFakeSound extends IMultiWarpEvent {
+
     /** How many times to play the alarm sound. */
     private static final int ALARM_PLAY_TIMES = 8;
 
-    private static final ImmutableList<String> SOUNDS =
-            ImmutableList.of("ic2:tools.Wrench", "ic2:machines.InterruptOne", "nuclearcontrol:alarm-default");
+    private static final ImmutableList<String> SOUNDS = ImmutableList
+            .of("ic2:tools.Wrench", "ic2:machines.InterruptOne", "nuclearcontrol:alarm-default");
 
     public WarpGregTechFakeSound(int minWarp) {
         super("gtfakesound", minWarp, SOUNDS.size(), world -> ALARM_PLAY_TIMES);

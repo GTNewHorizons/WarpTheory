@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.entity.EntityFakeCreeper;
 import shukaro.warptheory.entity.EntityPassiveCreeper;
@@ -13,6 +14,7 @@ import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.RandomBlockHelper;
 
 public class WarpFriend extends IMultiWarpEvent {
+
     public WarpFriend(int minWarp) {
         super("friend", minWarp, 3, world -> 1);
     }

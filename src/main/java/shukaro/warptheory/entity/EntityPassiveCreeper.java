@@ -5,6 +5,7 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.world.World;
 
 public class EntityPassiveCreeper extends EntityCreeper {
+
     public EntityPassiveCreeper(World world) {
         super(world);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);

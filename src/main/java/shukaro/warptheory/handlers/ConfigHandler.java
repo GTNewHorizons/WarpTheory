@@ -1,15 +1,16 @@
 package shukaro.warptheory.handlers;
 
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.io.File;
 import java.util.Arrays;
+
 import net.minecraftforge.common.config.Configuration;
+
 import shukaro.warptheory.util.Constants;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
- * Created by Ark on 3/7/2015.
- * code in part provided by pahimar and TheOldOne822
+ * Created by Ark on 3/7/2015. code in part provided by pahimar and TheOldOne822
  */
 public class ConfigHandler {
 
@@ -30,7 +31,8 @@ public class ConfigHandler {
 
             config.addCustomCategoryComment("general", "Change the inner workings of the mod requires restart");
             config.addCustomCategoryComment(
-                    "warp_effects", "Toggle specific warp effect, If all disabled Pure Tear will not work");
+                    "warp_effects",
+                    "Toggle specific warp effect, If all disabled Pure Tear will not work");
             config.setCategoryRequiresMcRestart("general", true);
 
             loadConfiguration();
@@ -51,8 +53,8 @@ public class ConfigHandler {
                 0,
                 Integer.MAX_VALUE,
                 "how much more 'expensive' permanent warp is compared to normal warp");
-        allowPermWarpRemoval = config.getBoolean(
-                "allowPermWarpRemoval", "general", true, "whether items can remove permanent warp or not");
+        allowPermWarpRemoval = config
+                .getBoolean("allowPermWarpRemoval", "general", true, "whether items can remove permanent warp or not");
         allowGlobalWarpEffects = config.getBoolean(
                 "allowGlobalWarpEffects",
                 "general",

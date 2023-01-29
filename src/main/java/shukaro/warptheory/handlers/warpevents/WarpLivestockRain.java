@@ -8,6 +8,7 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.entity.EntitySafeTaintSheep;
 import shukaro.warptheory.handlers.IMultiWarpEvent;
 import shukaro.warptheory.util.BlockCoord;
@@ -17,6 +18,7 @@ import thaumcraft.common.entities.monster.EntityTaintCow;
 import thaumcraft.common.entities.monster.EntityTaintPig;
 
 public class WarpLivestockRain extends IMultiWarpEvent {
+
     public WarpLivestockRain(int minWarp) {
         super("livestock", minWarp, 3, world -> 5 + world.rand.nextInt(10));
     }

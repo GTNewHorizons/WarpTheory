@@ -3,6 +3,7 @@ package shukaro.warptheory.items;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class WarpItems {
+
     public static ItemCleanserMinor itemCleanserMinor;
     public static ItemCleanser itemCleanser;
     public static ItemAmulet itemAmulet;

@@ -1,6 +1,7 @@
 package shukaro.warptheory.entity;
 
 import java.lang.reflect.Field;
+
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -10,10 +11,12 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import thaumcraft.common.entities.monster.EntityTaintSheep;
 
 /** A version of the tainted sheep that cannot spread taint. */
 public class EntitySafeTaintSheep extends EntityTaintSheep {
+
     private final EntityAIEatGrass eatGrass = new EntityAIEatGrass(this);
     private final Field sheepTimerField;
 

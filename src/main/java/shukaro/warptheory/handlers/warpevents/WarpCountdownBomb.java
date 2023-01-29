@@ -1,16 +1,18 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+
 import shukaro.warptheory.handlers.ITimerWarpEvent;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.FormatCodes;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpCountdownBomb extends ITimerWarpEvent {
+
     private static final String COUNTDOWN = "timer";
 
     public WarpCountdownBomb(int minWarp) {
@@ -39,17 +41,16 @@ public class WarpCountdownBomb extends ITimerWarpEvent {
             // Spawn some particles
             int numParticles = 8 * (10 - timerCount);
             double particleSpeed = 0.3;
-            ((WorldServer) world)
-                    .func_147487_a(
-                            "fireworksSpark",
-                            player.posX,
-                            player.posY,
-                            player.posZ,
-                            numParticles,
-                            0.0d,
-                            0.0d,
-                            0.0d,
-                            particleSpeed);
+            ((WorldServer) world).func_147487_a(
+                    "fireworksSpark",
+                    player.posX,
+                    player.posY,
+                    player.posZ,
+                    numParticles,
+                    0.0d,
+                    0.0d,
+                    0.0d,
+                    particleSpeed);
 
             if (timerCount > 0) {
                 world.playSoundAtEntity(player, "game.tnt.primed", 1.0F, 1.0F);

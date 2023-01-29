@@ -20,10 +20,10 @@ public class WarpFakeSoundBehind extends WarpFakeSound {
     @Override
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
         double yaw = player.getRotationYawHead();
-        double targetX =
-                player.posX - (distance * Math.sin(Math.toRadians(90 - yaw))) * (Math.sin(Math.toRadians(yaw)));
-        double targetZ =
-                player.posZ - (distance * Math.sin(Math.toRadians(90 - yaw))) * (Math.cos(Math.toRadians(yaw)));
+        double targetX = player.posX
+                - (distance * Math.sin(Math.toRadians(90 - yaw))) * (Math.sin(Math.toRadians(yaw)));
+        double targetZ = player.posZ
+                - (distance * Math.sin(Math.toRadians(90 - yaw))) * (Math.cos(Math.toRadians(yaw)));
 
         world.playSoundEffect(targetX, player.posY, targetZ, sound, volume, pitch);
 

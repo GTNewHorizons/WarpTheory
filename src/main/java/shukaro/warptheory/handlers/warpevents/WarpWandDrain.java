@@ -1,17 +1,20 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import java.util.Collections;
 import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpWandDrain extends IWorldTickWarpEvent {
+
     public WarpWandDrain(int minWarp) {
         super("wanddrain", minWarp, world -> 1 + world.rand.nextInt(3));
     }
@@ -26,10 +29,10 @@ public class WarpWandDrain extends IWorldTickWarpEvent {
         // In order to avoid this event being too punishing, here's how the trigger works:
         //
         // * We'll drain a small amount of vis from random aspects, up to all of them, based on the
-        //   event amount. If event amount > # of primal aspects, the excess is ignored.
+        // event amount. If event amount > # of primal aspects, the excess is ignored.
         // * If we were able to drain any vis at all, we'll clear the event entirely, to avoid the
-        //   situation where players accumulate a massive queue of wand drain events while not
-        //   holding a wand for a while.
+        // situation where players accumulate a massive queue of wand drain events while not
+        // holding a wand for a while.
         boolean successful = false;
         List<Aspect> primalAspects = Aspect.getPrimalAspects();
         Collections.shuffle(primalAspects);

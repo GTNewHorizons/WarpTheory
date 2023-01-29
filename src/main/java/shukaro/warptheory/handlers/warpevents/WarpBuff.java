@@ -1,13 +1,17 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import com.google.common.collect.ImmutableList;
 import java.util.Collection;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 
+import com.google.common.collect.ImmutableList;
+
 public class WarpBuff extends IWarpEvent {
+
     private final ImmutableList<PotionEffect> potionEffects;
 
     public WarpBuff(String name, int minWarp, PotionEffect... effects) {

@@ -1,14 +1,16 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.ITimerWarpEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpBlazeFireball extends ITimerWarpEvent {
+
     private static final String FIREBALL_TIMER = "timer";
 
     public WarpBlazeFireball(int minWarp) {

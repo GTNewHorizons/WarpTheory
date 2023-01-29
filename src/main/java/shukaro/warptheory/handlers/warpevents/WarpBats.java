@@ -5,11 +5,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IMultiWarpEvent;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.RandomBlockHelper;
 
 public class WarpBats extends IMultiWarpEvent {
+
     public WarpBats(int minWarp) {
         super("bats", minWarp, 3, world -> 15 + world.rand.nextInt(30));
     }

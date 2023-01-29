@@ -1,20 +1,22 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.common.MinecraftForge;
+
 import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.handlers.IWarpEvent;
 import shukaro.warptheory.net.PacketDispatcher;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.MiscHelper;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class WarpEars extends IWarpEvent {
+
     public WarpEars(int minWarp) {
         super("ears", minWarp);
         MinecraftForge.EVENT_BUS.register(this);
@@ -35,9 +37,9 @@ public class WarpEars extends IWarpEvent {
     @SideOnly(Side.CLIENT)
     public void onMessageReceived(ClientChatReceivedEvent e) {
         EntityPlayer player = WarpTheory.proxy.getPlayer();
-        if (player == null
-                || ChatHelper.getUsername(e.message).length() == 0
-                || player.getCommandSenderName().equals(ChatHelper.getUsername(e.message))) return;
+        if (player == null || ChatHelper.getUsername(e.message).length() == 0
+                || player.getCommandSenderName().equals(ChatHelper.getUsername(e.message)))
+            return;
 
         // Warp ears
         if (MiscHelper.getWarpTag(player).hasKey(name)) {

@@ -2,12 +2,14 @@ package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IMultiWarpEvent;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.RandomBlockHelper;
 import thaumcraft.common.entities.monster.EntityFireBat;
 
 public class WarpFireBats extends IMultiWarpEvent {
+
     public WarpFireBats(int minWarp) {
         super("firebats", minWarp, 2, world -> 5 + world.rand.nextInt(10));
     }

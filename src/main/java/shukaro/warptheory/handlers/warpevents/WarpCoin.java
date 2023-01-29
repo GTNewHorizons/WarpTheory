@@ -3,10 +3,12 @@ package shukaro.warptheory.handlers.warpevents;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.IWarpEvent;
 import thaumcraft.common.config.ConfigItems;
 
 public class WarpCoin extends IWarpEvent {
+
     public WarpCoin(int minWarp) {
         super("coin", minWarp);
     }

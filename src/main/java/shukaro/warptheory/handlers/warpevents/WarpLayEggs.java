@@ -1,13 +1,15 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.world.World;
+
 import shukaro.warptheory.handlers.ITimerWarpEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpLayEggs extends ITimerWarpEvent {
+
     /**
      * This timer does nothing, but as long as it's still ticking, this event won't fire again.
      */
