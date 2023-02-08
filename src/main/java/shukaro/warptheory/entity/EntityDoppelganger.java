@@ -1,9 +1,9 @@
 package shukaro.warptheory.entity;
 
-import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -60,11 +60,7 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
     // This will only be populated on the client.
     protected static final Map<UUID, GameProfile> gameProfileCache = new HashMap<>();
 
-    protected int findPlayerWait;
     protected int healWait;
-
-    // This will only be set on the server.
-    protected WeakReference<EntityPlayer> player;
 
     public EntityDoppelganger(World world) {
         super(world);
@@ -75,16 +71,13 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
         tasks.addTask(5, new EntityAILookIdle(this));
         targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 
-        findPlayerWait = 0;
         healWait = HEAL_WAIT_TICKS;
-        player = new WeakReference<>(null);
     }
 
     /**
      * Should be called once shortly after construction, to initialize things like HP and name.
      */
     public void initialize(EntityPlayer player) {
-        this.player = new WeakReference<>(player);
         this.dataWatcher.updateObject(UUID_DATA_WATCHER_ID, player.getUniqueID().toString());
 
         String name = StatCollector
@@ -138,8 +131,13 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
             return;
         }
 
+        Optional<EntityPlayerMP> player = findPlayer();
+        if (!player.isPresent()) {
+            return;
+        }
+
         EntityPlayer entityPlayer = player.get();
-        if (entityPlayer != null && entityPlayer.getHealth() < entityPlayer.getMaxHealth()) {
+        if (entityPlayer.getHealth() < entityPlayer.getMaxHealth()) {
             entityPlayer.heal(amount);
             ChatHelper.sendToPlayer(
                     entityPlayer,
@@ -150,23 +148,26 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
 
     @Override
     public void onHurt(LivingHurtEvent e) {
-        EntityPlayer entityPlayer = player.get();
-        if (entityPlayer != null) {
-            DamageSource damageSource = DamageSource.causeIndirectMagicDamage(this, this);
-            float damage = Math.min(e.ammount, getHealth());
-            entityPlayer.attackEntityFrom(damageSource, damage);
+        Optional<EntityPlayerMP> player = findPlayer();
+        if (!player.isPresent()) {
+            return;
+        }
 
-            if (getHealth() > e.ammount) {
-                ChatHelper.sendToPlayer(
-                        entityPlayer,
-                        FormatCodes.Purple.code + FormatCodes.Italic.code
-                                + StatCollector.translateToLocal("chat.warptheory.doppelganger.hurt"));
-            } else {
-                ChatHelper.sendToPlayer(
-                        entityPlayer,
-                        FormatCodes.Purple.code + FormatCodes.Italic.code
-                                + StatCollector.translateToLocal("chat.warptheory.doppelganger.die"));
-            }
+        EntityPlayer entityPlayer = player.get();
+        DamageSource damageSource = DamageSource.causeIndirectMagicDamage(this, this);
+        float damage = Math.min(e.ammount, getHealth());
+        entityPlayer.attackEntityFrom(damageSource, damage);
+
+        if (getHealth() > e.ammount) {
+            ChatHelper.sendToPlayer(
+                    entityPlayer,
+                    FormatCodes.Purple.code + FormatCodes.Italic.code
+                            + StatCollector.translateToLocal("chat.warptheory.doppelganger.hurt"));
+        } else {
+            ChatHelper.sendToPlayer(
+                    entityPlayer,
+                    FormatCodes.Purple.code + FormatCodes.Italic.code
+                            + StatCollector.translateToLocal("chat.warptheory.doppelganger.die"));
         }
     }
 
@@ -179,27 +180,6 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
     @Override
     public void onUpdate() {
         super.onUpdate();
-
-        if (!worldObj.isRemote) {
-            String uuid = dataWatcher.getWatchableObjectString(UUID_DATA_WATCHER_ID);
-            if ((player.get() == null || player.get().isDead) && !uuid.isEmpty()) {
-                if (findPlayerWait > 0) {
-                    findPlayerWait--;
-                } else {
-                    findPlayerWait = FIND_PLAYER_WAIT_TICKS;
-
-                    UUID uuidObj = UUID.fromString(uuid);
-                    List<EntityPlayerMP> players = MinecraftServer.getServer()
-                            .getConfigurationManager().playerEntityList;
-                    for (EntityPlayerMP entityPlayer : players) {
-                        if (entityPlayer.getUniqueID().equals(uuidObj)) {
-                            player = new WeakReference<>(entityPlayer);
-                            return;
-                        }
-                    }
-                }
-            }
-        }
 
         if (getHealth() < getMaxHealth()) {
             if (healWait > 0) {
@@ -238,13 +218,16 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
 
     @Override
     protected void dropRareDrop(int par1) {
-        ItemStack head = new ItemStack(Items.skull, 1, 2);
-        if (player.get() != null) {
-            head.setItemDamage(3);
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setString("SkullOwner", player.get().getDisplayName());
-            head.setTagCompound(nbt);
+        Optional<EntityPlayerMP> player = findPlayer();
+        if (!player.isPresent()) {
+            return;
         }
+
+        ItemStack head = new ItemStack(Items.skull, 1, 2);
+        head.setItemDamage(3);
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setString("SkullOwner", player.get().getDisplayName());
+        head.setTagCompound(nbt);
 
         entityDropItem(head, 0.0f);
     }
@@ -264,5 +247,24 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
         if (nbt.hasKey(UUID_NBT_TAG)) {
             dataWatcher.updateObject(UUID_DATA_WATCHER_ID, nbt.getString(UUID_NBT_TAG));
         }
+    }
+
+    /** Searches the server's list of connected players for the targeted player. */
+    private Optional<EntityPlayerMP> findPlayer() {
+        if (worldObj.isRemote) {
+            return Optional.empty();
+        }
+
+        String uuid = dataWatcher.getWatchableObjectString(UUID_DATA_WATCHER_ID);
+        UUID uuidObj = UUID.fromString(uuid);
+
+        @SuppressWarnings("unchecked")
+        List<EntityPlayerMP> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+        for (EntityPlayerMP entityPlayer : players) {
+            if (entityPlayer.getUniqueID().equals(uuidObj)) {
+                return Optional.of(entityPlayer);
+            }
+        }
+        return Optional.empty();
     }
 }
