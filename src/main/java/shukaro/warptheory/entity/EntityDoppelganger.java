@@ -255,13 +255,16 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
             return Optional.empty();
         }
 
-        String uuid = dataWatcher.getWatchableObjectString(UUID_DATA_WATCHER_ID);
-        UUID uuidObj = UUID.fromString(uuid);
+        String uuidString = dataWatcher.getWatchableObjectString(UUID_DATA_WATCHER_ID);
+        if (uuidString.isEmpty()) {
+            return Optional.empty();
+        }
+        UUID uuid = UUID.fromString(uuidString);
 
         @SuppressWarnings("unchecked")
         List<EntityPlayerMP> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
         for (EntityPlayerMP entityPlayer : players) {
-            if (entityPlayer.getUniqueID().equals(uuidObj)) {
+            if (entityPlayer.getUniqueID().equals(uuid)) {
                 return Optional.of(entityPlayer);
             }
         }
