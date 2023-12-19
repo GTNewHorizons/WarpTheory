@@ -6,14 +6,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.common.MinecraftForge;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.handlers.IWarpEvent;
 import shukaro.warptheory.net.PacketDispatcher;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.MiscHelper;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class WarpEars extends IWarpEvent {
 

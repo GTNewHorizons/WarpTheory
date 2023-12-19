@@ -7,6 +7,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.config.Configuration;
 
+import cpw.mods.fml.common.Loader;
 import shukaro.warptheory.handlers.warpevents.WarpAcceleration;
 import shukaro.warptheory.handlers.warpevents.WarpBats;
 import shukaro.warptheory.handlers.warpevents.WarpBlazeFireball;
@@ -49,7 +50,6 @@ import shukaro.warptheory.handlers.warpevents.WarpTongue;
 import shukaro.warptheory.handlers.warpevents.WarpWandDrain;
 import shukaro.warptheory.handlers.warpevents.WarpWind;
 import shukaro.warptheory.handlers.warpevents.WarpWither;
-import cpw.mods.fml.common.Loader;
 
 public enum WarpEventRegistry {
 

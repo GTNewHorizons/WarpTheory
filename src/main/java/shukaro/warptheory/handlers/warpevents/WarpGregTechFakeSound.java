@@ -3,12 +3,11 @@ package shukaro.warptheory.handlers.warpevents;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-import shukaro.warptheory.handlers.IMultiWarpEvent;
-
 import com.google.common.collect.ImmutableList;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import shukaro.warptheory.handlers.IMultiWarpEvent;
 
 public class WarpGregTechFakeSound extends IMultiWarpEvent {
 

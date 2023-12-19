@@ -1,5 +1,8 @@
 package shukaro.warptheory.net;
 
+import cpw.mods.fml.common.network.FMLIndexedMessageToMessageCodec;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
 import shukaro.warptheory.net.packets.BloodPacket;
 import shukaro.warptheory.net.packets.ClearPacket;
 import shukaro.warptheory.net.packets.ClientEventPacket;
@@ -8,9 +11,6 @@ import shukaro.warptheory.net.packets.EnderParticlesPacket;
 import shukaro.warptheory.net.packets.FakeRainPacket;
 import shukaro.warptheory.net.packets.IWarpPacket;
 import shukaro.warptheory.net.packets.VelocityPacket;
-import cpw.mods.fml.common.network.FMLIndexedMessageToMessageCodec;
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
 
 public class WarpMessageToMessageCodec extends FMLIndexedMessageToMessageCodec<IWarpPacket> {
 

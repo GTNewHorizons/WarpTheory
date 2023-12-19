@@ -7,14 +7,13 @@ import java.util.function.Function;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-import shukaro.warptheory.util.MiscHelper;
-
 import com.google.common.collect.ImmutableMap;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
+import shukaro.warptheory.util.MiscHelper;
 
 /**
  * A world tick warp event that can set timers. Override {@link #onTick(TickEvent.WorldTickEvent)} to change the tick

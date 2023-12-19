@@ -6,9 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import shukaro.warptheory.handlers.IWarpEvent;
-
 import com.google.common.collect.ImmutableList;
+
+import shukaro.warptheory.handlers.IWarpEvent;
 
 public class WarpBuff extends IWarpEvent {
 

@@ -14,14 +14,14 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
+import baubles.api.BaublesApi;
+import gnu.trove.map.hash.THashMap;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.MiscHelper;
 import shukaro.warptheory.util.NameMetaPair;
 import thaumcraft.api.IWarpingGear;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.lib.research.PlayerKnowledge;
-import baubles.api.BaublesApi;
-import gnu.trove.map.hash.THashMap;
 
 public class WarpHandler {
 

@@ -6,12 +6,12 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpWandDrain extends IWorldTickWarpEvent {
 

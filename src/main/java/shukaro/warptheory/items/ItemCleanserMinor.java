@@ -8,11 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import shukaro.warptheory.handlers.WarpHandler;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.Constants;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCleanserMinor extends ItemCleanser {
 
