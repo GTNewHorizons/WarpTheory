@@ -6,6 +6,10 @@ import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.handlers.warpevents.WarpBlood;
 import shukaro.warptheory.handlers.warpevents.WarpFakeRain;
@@ -19,10 +23,6 @@ import shukaro.warptheory.net.packets.IWarpPacket;
 import shukaro.warptheory.net.packets.VelocityPacket;
 import shukaro.warptheory.util.BlockCoord;
 import shukaro.warptheory.util.MiscHelper;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
 
 @ChannelHandler.Sharable
 public class PacketHandler extends SimpleChannelInboundHandler<IWarpPacket> {

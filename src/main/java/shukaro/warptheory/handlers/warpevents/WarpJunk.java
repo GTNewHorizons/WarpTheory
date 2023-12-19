@@ -8,9 +8,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import shukaro.warptheory.handlers.IWarpEvent;
-
 import com.google.common.collect.ImmutableList;
+
+import shukaro.warptheory.handlers.IWarpEvent;
 
 public class WarpJunk extends IWarpEvent {
 
