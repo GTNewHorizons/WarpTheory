@@ -11,11 +11,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 
-import shukaro.warptheory.util.MiscHelper;
-
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+
+import shukaro.warptheory.util.MiscHelper;
 
 public class WarpCommand implements ICommand {
 

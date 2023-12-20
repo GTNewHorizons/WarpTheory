@@ -8,9 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import shukaro.warptheory.handlers.IWarpEvent;
-
 import com.google.common.collect.Lists;
+
+import shukaro.warptheory.handlers.IWarpEvent;
 
 public class WarpInventoryScramble extends IWarpEvent {
 

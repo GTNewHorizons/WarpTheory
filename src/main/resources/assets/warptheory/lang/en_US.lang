@@ -25,6 +25,10 @@ item.warptheory.paper.name=Arcane Litmus Paper
 
 # << entity names >>
 entity.WarpTheory.taintSheepSafe.name=Tainted Sheep
+entity.WarpTheory.creeperFake.name=Fake Creeper
+entity.WarpTheory.creeperPassive.name=Passive Creeper
+entity.WarpTheory.doppelganger.name=Doppelgänger
+entity.WarpTheory.phantom.name=Phantom
 
 # << tooltips >>
 tooltip.warptheory.cleanserminor=It's missing something...
