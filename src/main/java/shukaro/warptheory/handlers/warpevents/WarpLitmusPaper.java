@@ -3,10 +3,10 @@ package shukaro.warptheory.handlers.warpevents;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import shukaro.warptheory.handlers.ITimerWarpEvent;
 import shukaro.warptheory.items.WarpItems;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class WarpLitmusPaper extends ITimerWarpEvent {
 

@@ -10,14 +10,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.logging.log4j.Logger;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import shukaro.warptheory.block.WarpBlocks;
 import shukaro.warptheory.entity.EntityDoppelganger;
 import shukaro.warptheory.entity.EntityFakeCreeper;
@@ -35,6 +27,14 @@ import shukaro.warptheory.recipe.WarpRecipes;
 import shukaro.warptheory.research.WarpResearch;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.NameGenerator;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
 
 @Mod(
         modid = Constants.modID,

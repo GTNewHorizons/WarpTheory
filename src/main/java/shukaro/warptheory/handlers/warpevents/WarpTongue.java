@@ -6,10 +6,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import shukaro.warptheory.handlers.IWarpEvent;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.MiscHelper;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class WarpTongue extends IWarpEvent {
 

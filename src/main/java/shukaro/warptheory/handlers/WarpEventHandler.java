@@ -8,9 +8,9 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import shukaro.warptheory.entity.IHealable;
 import shukaro.warptheory.entity.IHurtable;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class WarpEventHandler {
 

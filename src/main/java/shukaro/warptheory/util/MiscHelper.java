@@ -12,11 +12,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
+import shukaro.warptheory.entity.EntityDropParticleFX;
+import shukaro.warptheory.handlers.WarpHandler;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import shukaro.warptheory.entity.EntityDropParticleFX;
-import shukaro.warptheory.handlers.WarpHandler;
 
 public class MiscHelper {
 

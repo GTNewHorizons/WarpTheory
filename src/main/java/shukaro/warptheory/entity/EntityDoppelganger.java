@@ -33,13 +33,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import shukaro.warptheory.util.ChatHelper;
+import shukaro.warptheory.util.FormatCodes;
+
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import shukaro.warptheory.util.ChatHelper;
-import shukaro.warptheory.util.FormatCodes;
 
 public class EntityDoppelganger extends EntityCreature implements IHealable, IHurtable {
 

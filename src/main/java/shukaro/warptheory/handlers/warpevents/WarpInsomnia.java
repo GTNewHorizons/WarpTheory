@@ -3,9 +3,9 @@ package shukaro.warptheory.handlers.warpevents;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import shukaro.warptheory.handlers.IWorldTickWarpEvent;
 
 public class WarpInsomnia extends IWorldTickWarpEvent {
 

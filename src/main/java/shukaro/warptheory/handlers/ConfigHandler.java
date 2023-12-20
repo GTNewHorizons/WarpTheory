@@ -5,9 +5,9 @@ import java.util.Arrays;
 
 import net.minecraftforge.common.config.Configuration;
 
+import shukaro.warptheory.util.Constants;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import shukaro.warptheory.util.Constants;
 
 /**
  * Created by Ark on 3/7/2015. code in part provided by pahimar and TheOldOne822

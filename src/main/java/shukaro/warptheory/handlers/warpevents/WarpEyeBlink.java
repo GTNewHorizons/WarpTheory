@@ -5,9 +5,9 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
+import shukaro.warptheory.handlers.ITimerWarpEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import shukaro.warptheory.handlers.ITimerWarpEvent;
 
 public class WarpEyeBlink extends ITimerWarpEvent {
 

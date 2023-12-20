@@ -4,10 +4,10 @@ import java.util.EnumMap;
 
 import net.minecraft.entity.player.EntityPlayer;
 
+import shukaro.warptheory.util.Constants;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
-import shukaro.warptheory.util.Constants;
 
 public class CommonProxy {
 

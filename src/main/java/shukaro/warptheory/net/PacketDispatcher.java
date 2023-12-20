@@ -3,11 +3,6 @@ package shukaro.warptheory.net;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.FMLEmbeddedChannel;
-import cpw.mods.fml.common.network.FMLOutboundHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
 import shukaro.warptheory.net.packets.BloodPacket;
 import shukaro.warptheory.net.packets.ClearPacket;
 import shukaro.warptheory.net.packets.ClientEventPacket;
@@ -16,6 +11,11 @@ import shukaro.warptheory.net.packets.EnderParticlesPacket;
 import shukaro.warptheory.net.packets.FakeRainPacket;
 import shukaro.warptheory.net.packets.IWarpPacket;
 import shukaro.warptheory.net.packets.VelocityPacket;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.FMLOutboundHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class PacketDispatcher {
 
