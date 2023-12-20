@@ -6,10 +6,10 @@ import java.util.List;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 
-import shukaro.warptheory.handlers.ConfigHandler;
-import shukaro.warptheory.util.Constants;
 import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
+import shukaro.warptheory.handlers.ConfigHandler;
+import shukaro.warptheory.util.Constants;
 
 /**
  * Created by Ark on 3/8/2015.

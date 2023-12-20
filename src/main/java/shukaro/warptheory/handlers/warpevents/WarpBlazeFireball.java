@@ -5,9 +5,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.world.World;
 
-import shukaro.warptheory.handlers.ITimerWarpEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import shukaro.warptheory.handlers.ITimerWarpEvent;
 
 public class WarpBlazeFireball extends ITimerWarpEvent {
 
