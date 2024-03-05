@@ -33,7 +33,8 @@ public class WarpInventorySwap extends IWarpEvent {
             }
         }
 
-        boolean canSwapHandItem = player.inventory.getCurrentItem() != null && !emptySlots.isEmpty();
+        boolean canSwapHandItem = player.inventory.getCurrentItem() != null && !emptySlots.isEmpty()
+                && player.inventory.currentItem < player.inventory.mainInventory.length;
         boolean canSwapInventory = !fullSlots.isEmpty();
         if (canSwapHandItem && canSwapInventory) {
             // Pick one of the two to do.

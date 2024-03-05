@@ -19,6 +19,12 @@ public class WarpInventoryScramble extends IWarpEvent {
     }
 
     @Override
+    public boolean canDo(World world, EntityPlayer player) {
+        // Combat Hotbar slots are not in the main inventory.
+        return player.inventory.currentItem < player.inventory.mainInventory.length;
+    }
+
+    @Override
     public boolean doEvent(World world, EntityPlayer player) {
         if (world.isRemote) return true;
 
