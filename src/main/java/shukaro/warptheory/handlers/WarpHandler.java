@@ -102,7 +102,7 @@ public class WarpHandler {
 
     public static void removeWarp(EntityPlayer player, int amount) {
         if (amount <= 0) return;
-        String name = player.getDisplayName();
+        String name = player.getCommandSenderName();
         int wp = Knowledge.getWarpPerm(name);
         int wn = Knowledge.getWarpSticky(name);
         int wt = Knowledge.getWarpTemp(name);
@@ -128,7 +128,7 @@ public class WarpHandler {
     }
 
     public static int getTotalWarp(EntityPlayer player) {
-        String name = player.getDisplayName();
+        String name = player.getCommandSenderName();
         int innerWarp = Knowledge.getWarpTotal(name);
         int extraPerm = Knowledge.getWarpPerm(name) * (int) Math.max(0, ConfigHandler.permWarpMult - 1);
         int outerWarp = getWarpFromGear(player);
@@ -136,7 +136,7 @@ public class WarpHandler {
     }
 
     public static int[] getIndividualWarps(EntityPlayer player) {
-        String userName = player.getDisplayName();
+        String userName = player.getCommandSenderName();
         int[] totals = new int[] { Knowledge.getWarpPerm(userName), Knowledge.getWarpSticky(userName),
                 Knowledge.getWarpTemp(userName) };
         return totals;
