@@ -1,0 +1,8 @@
+{
+  "fakewither": {
+    "category": "hostile",
+    "sounds": [
+      "WitherSpawn"
+    ]
+  }
+}

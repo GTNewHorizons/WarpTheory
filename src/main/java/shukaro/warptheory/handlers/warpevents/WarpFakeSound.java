@@ -38,6 +38,11 @@ public class WarpFakeSound extends IWorldTickWarpEvent {
 
     @Override
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
+        if (distance == 0) {
+            world.playSoundEffect(player.posX, player.posY, player.posZ, sound, volume, pitch);
+            return 1;
+        }
+
         // (-distance, distance) swing
         // [0, 2*distance] - distance ~= [-distance, distance] more or less
         int targetX = (int) player.posX + world.rand.nextInt(2 * distance) - (distance);
