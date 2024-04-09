@@ -15,7 +15,15 @@ public class EntityPhantom extends EntityLiving implements IHurtable {
     public static final ImmutableList<ResourceLocation> SKINS = ImmutableList.of(
             // Add more textures here if you want more varied phantoms.
             new ResourceLocation("warptheory", "textures/entities/phantom.png"),
-            new ResourceLocation("textures/entity/steve.png"));
+            new ResourceLocation("textures/entity/steve.png"),
+            new ResourceLocation("warptheory", "textures/entities/herobrine.png"));
+
+    public static final ImmutableList<Integer> SKIN_WEIGHTS = ImmutableList.of(
+            64, // phantom.png
+            64, // steve.png
+            1); // herobrine.png
+
+    public static final int SKIN_TOTAL_WEIGHT = SKIN_WEIGHTS.stream().mapToInt(Integer::intValue).sum();
 
     protected static final int SKIN_DATA_WATCHER_ID = 16;
     protected static final String SKIN_NBT_TAG = "skin";
@@ -37,7 +45,18 @@ public class EntityPhantom extends EntityLiving implements IHurtable {
     @Override
     protected void entityInit() {
         super.entityInit();
-        dataWatcher.addObject(SKIN_DATA_WATCHER_ID, (byte) worldObj.rand.nextInt(SKINS.size()));
+
+        byte skinId = 0;
+        int skinRoll = worldObj.rand.nextInt(SKIN_TOTAL_WEIGHT);
+        for (byte i = 0; i < SKINS.size(); i++) {
+            skinRoll -= SKIN_WEIGHTS.get(i);
+            if (skinRoll < 0) {
+                skinId = i;
+                break;
+            }
+        }
+
+        dataWatcher.addObject(SKIN_DATA_WATCHER_ID, skinId);
         dataWatcher.addObject(LIFETIME_DATA_WATCHER_ID, (short) (100 + worldObj.rand.nextInt(60 * 20)));
     }
 
