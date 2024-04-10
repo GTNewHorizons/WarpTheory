@@ -114,10 +114,10 @@ public enum WarpEventRegistry {
                     new PotionEffect(Potion.hunger.id, 30 * 20, 2),
                     new PotionEffect(Potion.moveSlowdown.id, 30 * 20, 2)),
             "WitherPotion", "wither potion", true, 80, false, false),
-    FAKE_ENDERMAN(warp -> new WarpFakeSoundBehind("fakeenderman", warp, "mob.endermen.stare", 2, 1.5f, 0.1f),
-            "FakeEnderman", "fake enderman", true, 35, false, false),
-    FAKE_WITHER(warp -> new WarpFakeSoundBehind("fakewither", warp, "mob.wither.spawn", 2), "FakeWither", "fake wither",
-            true, 150, false, false),
+    FAKE_ENDERMAN(warp -> new WarpFakeSound("fakeenderman", warp, "mob.endermen.stare", 0, 1.5f, 0.1f), "FakeEnderman",
+            "fake enderman", true, 35, false, false),
+    FAKE_WITHER(warp -> new WarpFakeSound("fakewither", warp, "warptheory:fakewither", 0, 1.5f, 0.9f), "FakeWither",
+            "fake wither", true, 150, false, false),
 
     // Requires GregTech
     GREGTECH_FAKE_SOUND(WarpGregTechFakeSound::new, "GregTechFakeSound", "GregTech fake sound", true, 30, false,
