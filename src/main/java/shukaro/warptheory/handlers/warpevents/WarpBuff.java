@@ -12,10 +12,12 @@ import shukaro.warptheory.handlers.IWarpEvent;
 
 public class WarpBuff extends IWarpEvent {
 
+    private final boolean preventCure;
     private final ImmutableList<PotionEffect> potionEffects;
 
-    public WarpBuff(String name, int minWarp, PotionEffect... effects) {
+    public WarpBuff(String name, int minWarp, boolean preventCure, PotionEffect... effects) {
         super(name, minWarp);
+        this.preventCure = preventCure;
         this.potionEffects = ImmutableList.copyOf(effects);
     }
 
@@ -40,7 +42,10 @@ public class WarpBuff extends IWarpEvent {
                 effect = new PotionEffect(id, duration, level);
             }
 
-            effect.getCurativeItems().clear();
+            if (preventCure) {
+                effect.getCurativeItems().clear();
+            }
+
             player.addPotionEffect(effect);
         }
 
