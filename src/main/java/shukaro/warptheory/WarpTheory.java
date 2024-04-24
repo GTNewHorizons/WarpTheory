@@ -31,6 +31,7 @@ import shukaro.warptheory.handlers.WarpEventHandler;
 import shukaro.warptheory.handlers.WarpHandler;
 import shukaro.warptheory.items.WarpItems;
 import shukaro.warptheory.net.CommonProxy;
+import shukaro.warptheory.recipe.WarpAspects;
 import shukaro.warptheory.recipe.WarpRecipes;
 import shukaro.warptheory.research.WarpResearch;
 import shukaro.warptheory.util.Constants;
@@ -90,6 +91,7 @@ public class WarpTheory {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent evt) {
+        WarpAspects.init();
         WarpRecipes.init();
         WarpHandler.initEvents();
 
