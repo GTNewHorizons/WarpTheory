@@ -49,9 +49,9 @@ public class WarpRecipes {
                             5,
                             new AspectList().add(Aspect.ELDRITCH, 16).add(Aspect.EXCHANGE, 16),
                             new ItemStack(Items.nether_star),
-                            new ItemStack[] { ItemApi.getItem("itemResource", 14), new ItemStack(Items.ghast_tear),
+                            new ItemStack[] { ItemApi.getItem("itemResource", 14), new ItemStack(WarpItems.itemCleanserMinor),
                                     new ItemStack(Items.diamond), new ItemStack(Items.quartz),
-                                    ItemApi.getItem("itemResource", 14), new ItemStack(Items.ghast_tear),
+                                    ItemApi.getItem("itemResource", 14), new ItemStack(WarpItems.itemCleanserMinor),
                                     new ItemStack(Items.diamond), new ItemStack(Items.quartz) }));
 
             WarpResearch.recipes.put(
@@ -104,7 +104,7 @@ public class WarpRecipes {
                             new ItemStack(WarpItems.itemCleanser),
                             5,
                             new AspectList().add(Aspect.ELDRITCH, 16).add(Aspect.EXCHANGE, 16),
-                            new ItemStack(Items.ghast_tear),
+                            new ItemStack(WarpItems.itemCleanserMinor),
                             new ItemStack[] { ItemApi.getItem("itemResource", 14), ItemApi.getItem("itemResource", 14),
                                     new ItemStack(Items.quartz), new ItemStack(Items.quartz) }));
 
