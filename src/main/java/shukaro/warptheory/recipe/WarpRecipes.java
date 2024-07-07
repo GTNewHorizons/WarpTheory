@@ -49,10 +49,11 @@ public class WarpRecipes {
                             5,
                             new AspectList().add(Aspect.ELDRITCH, 16).add(Aspect.EXCHANGE, 16),
                             new ItemStack(Items.nether_star),
-                            new ItemStack[] { ItemApi.getItem("itemResource", 14), new ItemStack(WarpItems.itemCleanserMinor),
-                                    new ItemStack(Items.diamond), new ItemStack(Items.quartz),
-                                    ItemApi.getItem("itemResource", 14), new ItemStack(WarpItems.itemCleanserMinor),
-                                    new ItemStack(Items.diamond), new ItemStack(Items.quartz) }));
+                            new ItemStack[] { ItemApi.getItem("itemResource", 14),
+                                    new ItemStack(WarpItems.itemCleanserMinor), new ItemStack(Items.diamond),
+                                    new ItemStack(Items.quartz), ItemApi.getItem("itemResource", 14),
+                                    new ItemStack(WarpItems.itemCleanserMinor), new ItemStack(Items.diamond),
+                                    new ItemStack(Items.quartz) }));
 
             WarpResearch.recipes.put(
                     "PureAmulet",
