@@ -4,5 +4,19 @@
     "sounds": [
       "WitherSpawn"
     ]
+  },
+
+  "discordping": {
+    "category": "player",
+    "sounds": [
+      "DiscordPing"
+    ]
+  },
+
+  "discordvoicechanneljoin": {
+    "category": "player",
+    "sounds": [
+      "DiscordVoiceChannelJoin"
+    ]
   }
 }
