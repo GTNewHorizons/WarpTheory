@@ -26,6 +26,7 @@ import shukaro.warptheory.handlers.warpevents.WarpEyeBlink;
 import shukaro.warptheory.handlers.warpevents.WarpFakeRain;
 import shukaro.warptheory.handlers.warpevents.WarpFakeSound;
 import shukaro.warptheory.handlers.warpevents.WarpFakeSoundBehind;
+import shukaro.warptheory.handlers.warpevents.WarpFakeSoundRateLimited;
 import shukaro.warptheory.handlers.warpevents.WarpFall;
 import shukaro.warptheory.handlers.warpevents.WarpFireBats;
 import shukaro.warptheory.handlers.warpevents.WarpFriend;
@@ -130,7 +131,15 @@ public enum WarpEventRegistry {
                 super.createWarpEvent(consumer);
             }
         }
-    };
+    },
+    FAKE_DISCORD_PING(warp -> new WarpFakeSoundRateLimited("fakediscordping", warp, "warptheory:discordping"),
+            "FakeDiscordPing", "fake discord ping", true, 50, false, false),
+    FAKE_DISCORD_VOICE_CHANNEL_JOIN(
+            warp -> new WarpFakeSoundRateLimited(
+                    "fakediscordvoicechanneljoin",
+                    warp,
+                    "warptheory:discordvoicechanneljoin"),
+            "FakeDiscordVoiceChannelJoin", "fake discord voice channel join", true, 100, false, false);
 
     private static final int MAX_WARP_FOR_EFFECTS = 200;
 
