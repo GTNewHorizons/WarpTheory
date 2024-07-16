@@ -9,14 +9,14 @@
   "discordping": {
     "category": "player",
     "sounds": [
-      "DiscordPing"
+      "discord/DiscordPing"
     ]
   },
 
   "discordvoicechanneljoin": {
     "category": "player",
     "sounds": [
-      "DiscordVoiceChannelJoin"
+      "discord/DiscordVoiceChannelJoin"
     ]
   }
 }
