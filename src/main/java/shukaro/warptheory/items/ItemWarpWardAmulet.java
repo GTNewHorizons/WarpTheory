@@ -75,7 +75,7 @@ public class ItemWarpWardAmulet extends Item implements IBauble {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
             if (player.ticksExisted % 11999 == 0)
-            player.addPotionEffect(new PotionEffect(PotionWarpWard.instance.id, 12000, 0, true));
+                player.addPotionEffect(new PotionEffect(PotionWarpWard.instance.id, 12000, 0, true));
         }
 
     }
