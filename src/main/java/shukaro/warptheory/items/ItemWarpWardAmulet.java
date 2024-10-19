@@ -81,7 +81,9 @@ public class ItemWarpWardAmulet extends Item implements IBauble {
     }
 
     @Override
-    public void onEquipped(ItemStack itemstack, EntityLivingBase player) {}
+    public void onEquipped(ItemStack itemstack, EntityLivingBase player) {
+        player.addPotionEffect(new PotionEffect(PotionWarpWard.instance.id, 12000, 0, true));
+    }
 
     @Override
     public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {}
