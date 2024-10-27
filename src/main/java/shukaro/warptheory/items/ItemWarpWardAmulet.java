@@ -74,7 +74,7 @@ public class ItemWarpWardAmulet extends Item implements IBauble {
     public void onWornTick(ItemStack itemstack, EntityLivingBase entity) {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
-            if (player.ticksExisted % 11999 == 0)
+            if (!player.isPotionActive(PotionWarpWard.instance.id))
                 player.addPotionEffect(new PotionEffect(PotionWarpWard.instance.id, 12000, 0, true));
         }
 
@@ -82,7 +82,6 @@ public class ItemWarpWardAmulet extends Item implements IBauble {
 
     @Override
     public void onEquipped(ItemStack itemstack, EntityLivingBase player) {
-        player.addPotionEffect(new PotionEffect(PotionWarpWard.instance.id, 12000, 0, true));
     }
 
     @Override
