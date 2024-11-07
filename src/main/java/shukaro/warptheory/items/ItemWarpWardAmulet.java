@@ -81,8 +81,7 @@ public class ItemWarpWardAmulet extends Item implements IBauble {
     }
 
     @Override
-    public void onEquipped(ItemStack itemstack, EntityLivingBase player) {
-    }
+    public void onEquipped(ItemStack itemstack, EntityLivingBase player) {}
 
     @Override
     public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {}
