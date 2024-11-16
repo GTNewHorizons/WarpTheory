@@ -75,6 +75,18 @@ public class WarpResearch {
                                         new ResearchPage((InfusionRecipe) recipes.get("PureAmulet")) })
                         .setParents(Constants.ITEM_WARPCLEANSER).setConcealed().registerResearchItem();
 
+        new WTResearchItem(
+                Constants.ITEM_PORTABLE_SHOWER,
+                new AspectList().add(Aspect.ELDRITCH, 6).add(Aspect.EXCHANGE, 3).add(Aspect.MAGIC, 3),
+                5,
+                5,
+                3,
+                new ItemStack(WarpItems.itemWarpWardAmulet)).setPages(
+                        new ResearchPage[] {
+                                new ResearchPage(StatCollector.translateToLocal("research.warptheory.warpwardamulet")),
+                                new ResearchPage((InfusionRecipe) recipes.get("WarpWardAmulet")) })
+                        .setParents(Constants.ITEM_PURE_TALISMAN).setConcealed().registerResearchItem();
+
         ResearchPage[] somethingPages = new ResearchPage[WarpRecipes.meats.size() + 1];
         somethingPages[0] = new ResearchPage(StatCollector.translateToLocal("research.warptheory.warpsomething"));
         int i = 1;
