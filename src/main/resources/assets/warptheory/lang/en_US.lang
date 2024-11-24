@@ -22,7 +22,7 @@ item.warptheory.cleanser.name=Pure Tear
 item.warptheory.amulet.name=Purification Talisman
 item.warptheory.something.name=Hunk of Something
 item.warptheory.paper.name=Arcane Litmus Paper
-item.warptheory.portableshower.name=Portable Shower
+
 # << entity names >>
 entity.WarpTheory.taintSheepSafe.name=Tainted Sheep
 entity.WarpTheory.creeperFake.name=Fake Creeper
