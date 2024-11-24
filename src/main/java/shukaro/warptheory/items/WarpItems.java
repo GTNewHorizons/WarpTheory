@@ -25,9 +25,9 @@ public class WarpItems {
 
         GameRegistry.registerItem(itemSomething, itemSomething.getUnlocalizedName());
         GameRegistry.registerItem(itemPaper, itemPaper.getUnlocalizedName());
-        if (Loader.isModLoaded("dreamcraft") == true) { // the item will not be loaded without nhcoremod, however it is
-                                                        // available to be functional for users outside GTNH being able
-                                                        // to add their own recipe for it.
+        if (Loader.isModLoaded("dreamcraft")) { // the item will not be loaded without nhcoremod, however it is
+                                                // available to be functional for users outside GTNH being able
+                                                // to add their own recipe for it.
             itemWarpWardAmulet = new ItemWarpWardAmulet();
             GameRegistry.registerItem(itemWarpWardAmulet, itemWarpWardAmulet.getUnlocalizedName());
         }
