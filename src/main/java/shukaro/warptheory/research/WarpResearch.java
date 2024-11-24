@@ -83,7 +83,7 @@ public class WarpResearch {
                 3,
                 new ItemStack(WarpItems.itemWarpWardAmulet)).setPages(
                         new ResearchPage[] {
-                                new ResearchPage(StatCollector.translateToLocal("research.warptheory.warpwardamulet")),
+                                new ResearchPage(StatCollector.translateToLocal("research.warptheory.portableshower")),
                                 new ResearchPage((InfusionRecipe) recipes.get("WarpWardAmulet")) })
                         .setParents(Constants.ITEM_PURE_TALISMAN).setConcealed().registerResearchItem();
 
