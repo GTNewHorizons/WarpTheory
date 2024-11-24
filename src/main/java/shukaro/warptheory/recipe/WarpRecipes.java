@@ -2,6 +2,7 @@ package shukaro.warptheory.recipe;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.common.Loader;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -67,20 +68,20 @@ public class WarpRecipes {
                                     new ItemStack(Items.diamond), ItemApi.getItem("itemResource", 14),
                                     new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot),
                                     new ItemStack(Items.diamond), ItemApi.getItem("itemResource", 14) }));
-
-            WarpResearch.recipes.put(
-                    "WarpWardAmulet",
-                    ThaumcraftApi.addInfusionCraftingRecipe(
-                            Constants.ITEM_PORTABLE_SHOWER,
-                            new ItemStack(WarpItems.itemWarpWardAmulet),
-                            10,
-                            new AspectList().add(Aspect.ELDRITCH, 32).add(Aspect.EXCHANGE, 32).add(Aspect.MAGIC, 64),
-                            ItemApi.getItem("itemBaubleBlanks", 0),
-                            new ItemStack[] { new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot),
-                                    new ItemStack(Items.diamond), ItemApi.getItem("itemResource", 14),
-                                    new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot),
-                                    new ItemStack(Items.diamond), ItemApi.getItem("itemResource", 14) }));
-
+            if (Loader.isModLoaded("dreamcraft")) {
+                WarpResearch.recipes.put(
+                        "WarpWardAmulet",
+                        ThaumcraftApi.addInfusionCraftingRecipe(
+                                Constants.ITEM_PORTABLE_SHOWER,
+                                new ItemStack(WarpItems.itemWarpWardAmulet),
+                                10,
+                                new AspectList().add(Aspect.ELDRITCH, 32).add(Aspect.EXCHANGE, 32).add(Aspect.MAGIC, 64),
+                                ItemApi.getItem("itemBaubleBlanks", 0),
+                                new ItemStack[]{new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot),
+                                        new ItemStack(Items.diamond), ItemApi.getItem("itemResource", 14),
+                                        new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot),
+                                        new ItemStack(Items.diamond), ItemApi.getItem("itemResource", 14)}));
+            }
             for (ItemStack meat : meats) WarpResearch.recipes.put(
                     "WarpChunk" + meat,
                     ThaumcraftApi.addCrucibleRecipe(
