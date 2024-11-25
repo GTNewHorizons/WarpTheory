@@ -84,6 +84,19 @@ public class WarpRecipes {
                                         new ItemStack(Items.gold_ingot), new ItemStack(Items.diamond),
                                         ItemApi.getItem("itemResource", 14) }));
             }
+            else{
+                // to define the recipe
+                WarpResearch.recipes.put(
+                        "WarpWardAmulet",
+                        ThaumcraftApi.addInfusionCraftingRecipe(
+                                Constants.ITEM_PURE_TALISMAN,
+                                new ItemStack(WarpItems.itemAmulet),
+                                10,
+                                new AspectList().add(Aspect.ELDRITCH, 32).add(Aspect.EXCHANGE, 32).add(Aspect.MAGIC, 64),
+                                ItemApi.getItem("itemBaubleBlanks", 0),
+                                new ItemStack[] { new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot),
+                                        new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot) }));
+            }
             for (ItemStack meat : meats) WarpResearch.recipes.put(
                     "WarpChunk" + meat,
                     ThaumcraftApi.addCrucibleRecipe(
