@@ -1,6 +1,5 @@
 package shukaro.warptheory.items;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class WarpItems {
