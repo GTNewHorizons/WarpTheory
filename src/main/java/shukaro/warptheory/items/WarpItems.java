@@ -16,12 +16,14 @@ public class WarpItems {
         itemCleanser = new ItemCleanser();
         itemAmulet = new ItemAmulet();
         itemWarpWardAmulet = new ItemWarpWardAmulet();
+
         itemSomething = new ItemSomething();
         itemPaper = new ItemPaper();
         GameRegistry.registerItem(itemCleanserMinor, itemCleanserMinor.getUnlocalizedName());
         GameRegistry.registerItem(itemCleanser, itemCleanser.getUnlocalizedName());
         GameRegistry.registerItem(itemAmulet, itemAmulet.getUnlocalizedName());
         GameRegistry.registerItem(itemWarpWardAmulet, itemWarpWardAmulet.getUnlocalizedName());
+
         GameRegistry.registerItem(itemSomething, itemSomething.getUnlocalizedName());
         GameRegistry.registerItem(itemPaper, itemPaper.getUnlocalizedName());
     }
