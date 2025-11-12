@@ -1,6 +1,5 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import java.util.List;
 import java.util.Set;
 
 import net.minecraft.entity.Entity;
