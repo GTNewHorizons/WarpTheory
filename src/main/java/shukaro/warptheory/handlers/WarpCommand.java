@@ -128,8 +128,7 @@ public class WarpCommand implements ICommand {
             return completions;
         } else if (args.length == 2) {
             ArrayList<String> completions = new ArrayList<String>();
-            for (EntityPlayer serverPlayer : (ArrayList<EntityPlayer>) MinecraftServer.getServer()
-                    .getConfigurationManager().playerEntityList) {
+            for (EntityPlayer serverPlayer : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
                 if (serverPlayer.getCommandSenderName().startsWith(args[1]))
                     completions.add(serverPlayer.getCommandSenderName());
             }

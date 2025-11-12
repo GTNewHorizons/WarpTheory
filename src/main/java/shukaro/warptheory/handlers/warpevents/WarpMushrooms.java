@@ -69,7 +69,7 @@ public class WarpMushrooms extends IWorldTickWarpEvent {
                 (double) target.x + 1,
                 (double) target.y + 1,
                 (double) target.z + 1);
-        for (Entity entity : (List<Entity>) world.getEntitiesWithinAABB(EntityCow.class, boundingBox)) {
+        for (Entity entity : world.getEntitiesWithinAABB(EntityCow.class, boundingBox)) {
             // Check for exact class match, because we don't want to transform subclasses.
             if (entity.getClass() == EntityCow.class) {
                 EntityMooshroom mooshroom = new EntityMooshroom(world);

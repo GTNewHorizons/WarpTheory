@@ -21,16 +21,14 @@ import shukaro.warptheory.handlers.WarpHandler;
 public class MiscHelper {
 
     public static EntityPlayer getPlayerByName(String name) {
-        for (EntityPlayer serverPlayer : (ArrayList<EntityPlayer>) MinecraftServer.getServer()
-                .getConfigurationManager().playerEntityList) {
+        for (EntityPlayer serverPlayer : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
             if (serverPlayer.getCommandSenderName().equals(name)) return serverPlayer;
         }
         return null;
     }
 
     public static EntityPlayer getPlayerByEntityID(int id) {
-        for (EntityPlayer serverPlayer : (ArrayList<EntityPlayer>) MinecraftServer.getServer()
-                .getConfigurationManager().playerEntityList) {
+        for (EntityPlayer serverPlayer : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
             if (serverPlayer.getEntityId() == id) return serverPlayer;
         }
         return null;
