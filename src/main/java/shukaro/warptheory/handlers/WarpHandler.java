@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 
 import baubles.api.BaublesApi;
@@ -234,5 +235,13 @@ public class WarpHandler {
         UUID uuid = player.getUniqueID();
         if (!Unavoidable.containsKey(uuid)) Unavoidable.put(uuid, 0);
         return Unavoidable.get(uuid);
+    }
+
+    public static int faceplateReduction(EntityPlayer player) {
+        NBTTagCompound helmetTag = player.inventory.armorInventory[0].stackTagCompound;
+        if (helmetTag != null && helmetTag.hasKey("mask") && helmetTag.getInteger("mask") == 0) {
+            return player.worldObj.rand.nextInt(2, 7);
+        }
+        return 0;
     }
 }

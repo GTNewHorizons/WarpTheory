@@ -35,6 +35,7 @@ public class WarpEventHandler {
 
         if (ticks % 2000 == 0 && warpCounter > 0 && rand.nextInt(100) <= Math.sqrt(warpCounter)) {
             int effectiveWarp = (WarpHandler.getTotalWarp(player) * 2 + warpCounter) / 3;
+            effectiveWarp -= WarpHandler.faceplateReduction(player);
             IWarpEvent queuedEvent = WarpHandler.queueOneEvent(player, effectiveWarp);
             if (queuedEvent != null) {
                 int tempWarp = WarpHandler.getIndividualWarps(player)[2];
