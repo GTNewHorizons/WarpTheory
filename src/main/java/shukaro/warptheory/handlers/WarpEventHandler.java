@@ -34,7 +34,8 @@ public class WarpEventHandler {
         Random rand = world.rand;
 
         if (ticks % 2000 == 0 && warpCounter > 0 && rand.nextInt(100) <= Math.sqrt(warpCounter)) {
-            IWarpEvent queuedEvent = WarpHandler.queueOneEvent(player, warpCounter);
+            int effectiveWarp = (WarpHandler.getTotalWarp(player) * 2 + warpCounter) / 3;
+            IWarpEvent queuedEvent = WarpHandler.queueOneEvent(player, effectiveWarp);
             if (queuedEvent != null) {
                 int tempWarp = WarpHandler.getIndividualWarps(player)[2];
                 if (tempWarp > 0) {
