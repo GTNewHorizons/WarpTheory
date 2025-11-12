@@ -24,10 +24,11 @@ public class WarpEventHandler {
         boolean tickflag = ConfigHandler.allowWarpEffects && !player.worldObj.isRemote
                 && player.ticksExisted > 0
                 && player.ticksExisted % 2000 == 0;
+        int warpCounter = WarpHandler.Knowledge.getWarpCounter(player.getCommandSenderName());
         if (tickflag && appliable
-                && WarpHandler.getTotalWarp(player) > 0
-                && player.worldObj.rand.nextInt(100) <= Math.sqrt(WarpHandler.getTotalWarp(player))) {
-            IWarpEvent event = WarpHandler.queueOneEvent(player, WarpHandler.getTotalWarp(player));
+                && warpCounter > 0
+                && player.worldObj.rand.nextInt(100) <= Math.sqrt(warpCounter)) {
+            IWarpEvent event = WarpHandler.queueOneEvent(player, warpCounter);
             if (event != null) {
                 int warpTemp = WarpHandler.getIndividualWarps(player)[2];
                 if (warpTemp > 0 && event.getCost() <= warpTemp) WarpHandler.removeWarp(player, event.getCost());
