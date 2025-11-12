@@ -3,7 +3,10 @@ package shukaro.warptheory.handlers;
 import static thaumcraft.common.config.Config.potionWarpWardID;
 import static thaumcraft.common.config.Config.wuss;
 
+import java.util.Random;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -16,30 +19,38 @@ public class WarpEventHandler {
 
     @SubscribeEvent
     public void livingUpdate(LivingEvent.LivingUpdateEvent e) {
-        if (!(e.entity instanceof EntityPlayer player)) {
-            return;
-        }
-        boolean appliable = (!player.isPotionActive(potionWarpWardID)
-                || WarpHandler.getUnavoidableCount(player) > 0) && !wuss && !player.capabilities.isCreativeMode;
-        boolean tickflag = ConfigHandler.allowWarpEffects && !player.worldObj.isRemote
-                && player.ticksExisted > 0
-                && player.ticksExisted % 2000 == 0;
+        if (!(e.entity instanceof EntityPlayer player)) return;
+
+        World world = player.worldObj;
+        if (world.isRemote || player.ticksExisted <= 0) return;
+
+        boolean canApplyWarp = !player.isPotionActive(potionWarpWardID) && !wuss && !player.capabilities.isCreativeMode
+                || WarpHandler.getUnavoidableCount(player) > 0;
+
+        if (!canApplyWarp || !ConfigHandler.allowWarpEffects) return;
+
+        int ticks = player.ticksExisted;
         int warpCounter = WarpHandler.Knowledge.getWarpCounter(player.getCommandSenderName());
-        if (tickflag && appliable
-                && warpCounter > 0
-                && player.worldObj.rand.nextInt(100) <= Math.sqrt(warpCounter)) {
-            IWarpEvent event = WarpHandler.queueOneEvent(player, warpCounter);
-            if (event != null) {
-                int warpTemp = WarpHandler.getIndividualWarps(player)[2];
-                if (warpTemp > 0 && event.getCost() <= warpTemp) WarpHandler.removeWarp(player, event.getCost());
-                else if (warpTemp > 0) WarpHandler.removeWarp(player, warpTemp);
+        Random rand = world.rand;
+
+        if (ticks % 2000 == 0 && warpCounter > 0 && rand.nextInt(100) <= Math.sqrt(warpCounter)) {
+            IWarpEvent queuedEvent = WarpHandler.queueOneEvent(player, warpCounter);
+            if (queuedEvent != null) {
+                int tempWarp = WarpHandler.getIndividualWarps(player)[2];
+                if (tempWarp > 0) {
+                    int cost = Math.min(queuedEvent.getCost(), tempWarp);
+                    WarpHandler.removeWarp(player, cost);
+                }
             }
         }
-        if (player.ticksExisted % 20 == 0 && player.worldObj.rand.nextBoolean()) {
-            IWarpEvent event = WarpHandler.dequeueEvent(player);
+
+        if (ticks % 20 == 0 && rand.nextBoolean()) {
+            IWarpEvent nextEvent = WarpHandler.dequeueEvent(player);
             WarpHandler.addUnavoidableCount(player, -1);
-            if (event != null && event.canDo(player.worldObj, player) && appliable)
-                event.doEvent(player.worldObj, player);
+
+            if (nextEvent != null && nextEvent.canDo(world, player)) {
+                nextEvent.doEvent(world, player);
+            }
         }
     }
 
