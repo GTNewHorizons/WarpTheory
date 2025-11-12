@@ -173,7 +173,7 @@ public class WarpHandler {
         int w = getFinalWarp(player.getCurrentEquippedItem(), player);
         for (int a = 0; a < 4; a++) w += getFinalWarp(player.inventory.armorItemInSlot(a), player);
         IInventory baubles = BaublesApi.getBaubles(player);
-        for (int i = 0; i < 4; i++) w += getFinalWarp(baubles.getStackInSlot(i), player);
+        for (int i = 0; i < baubles.getSizeInventory(); i++) w += getFinalWarp(baubles.getStackInSlot(i), player);
         return w;
     }
 
