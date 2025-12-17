@@ -238,7 +238,9 @@ public class WarpHandler {
     }
 
     public static int faceplateReduction(EntityPlayer player) {
-        NBTTagCompound helmetTag = player.inventory.armorInventory[0].stackTagCompound;
+        ItemStack helmet = player.inventory.armorInventory[0];
+        if (helmet == null) return 0;
+        NBTTagCompound helmetTag = helmet.stackTagCompound;
         if (helmetTag != null && helmetTag.hasKey("mask") && helmetTag.getInteger("mask") == 0) {
             return 2 + player.worldObj.rand.nextInt(5);
         }
