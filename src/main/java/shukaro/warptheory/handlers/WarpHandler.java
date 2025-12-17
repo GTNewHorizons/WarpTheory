@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 
 import baubles.api.BaublesApi;
@@ -173,7 +174,7 @@ public class WarpHandler {
         int w = getFinalWarp(player.getCurrentEquippedItem(), player);
         for (int a = 0; a < 4; a++) w += getFinalWarp(player.inventory.armorItemInSlot(a), player);
         IInventory baubles = BaublesApi.getBaubles(player);
-        for (int i = 0; i < 4; i++) w += getFinalWarp(baubles.getStackInSlot(i), player);
+        for (int i = 0; i < baubles.getSizeInventory(); i++) w += getFinalWarp(baubles.getStackInSlot(i), player);
         return w;
     }
 
@@ -234,5 +235,15 @@ public class WarpHandler {
         UUID uuid = player.getUniqueID();
         if (!Unavoidable.containsKey(uuid)) Unavoidable.put(uuid, 0);
         return Unavoidable.get(uuid);
+    }
+
+    public static int faceplateReduction(EntityPlayer player) {
+        ItemStack helmet = player.inventory.armorInventory[0];
+        if (helmet == null) return 0;
+        NBTTagCompound helmetTag = helmet.stackTagCompound;
+        if (helmetTag != null && helmetTag.hasKey("mask") && helmetTag.getInteger("mask") == 0) {
+            return 2 + player.worldObj.rand.nextInt(5);
+        }
+        return 0;
     }
 }
