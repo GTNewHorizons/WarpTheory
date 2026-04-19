@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Loader;
 import shukaro.warptheory.handlers.ConfigHandler;
 import shukaro.warptheory.items.WarpItems;
 import shukaro.warptheory.research.WarpResearch;
@@ -14,10 +13,11 @@ import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.common.config.ConfigItems;
 
 public class WarpRecipes {
 
-    public static ArrayList<ItemStack> meats = new ArrayList<ItemStack>();
+    public static ArrayList<ItemStack> meats = new ArrayList<>();
 
     private static void initMeats() {
         meats.add(new ItemStack(Items.chicken));
@@ -74,12 +74,10 @@ public class WarpRecipes {
                             Constants.ITEM_PURE_TALISMAN,
                             new ItemStack(WarpItems.itemAmulet),
                             10,
-                            new AspectList().add(Aspect.ELDRITCH, 32).add(Aspect.EXCHANGE, 32)
-                                    .add(Aspect.MAGIC, 64),
+                            new AspectList().add(Aspect.ELDRITCH, 32).add(Aspect.EXCHANGE, 32).add(Aspect.MAGIC, 64),
                             ItemApi.getItem("itemBaubleBlanks", 0),
-                            new ItemStack[]{new ItemStack(WarpItems.itemCleanser),
-                                    new ItemStack(Items.gold_ingot), new ItemStack(WarpItems.itemCleanser),
-                                    new ItemStack(Items.gold_ingot)}));
+                            new ItemStack[] { new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot),
+                                    new ItemStack(WarpItems.itemCleanser), new ItemStack(Items.gold_ingot) }));
             for (ItemStack meat : meats) WarpResearch.recipes.put(
                     "WarpChunk" + meat,
                     ThaumcraftApi.addCrucibleRecipe(
@@ -98,6 +96,31 @@ public class WarpRecipes {
                             ItemApi.getItem("itemResource", 14),
                             new ItemStack(Items.paper),
                             ItemApi.getItem("itemResource", 14)));
+
+            AspectList potionVis = new AspectList();
+            for (Aspect a : Aspect.getPrimalAspects()) {
+                potionVis.add(a, 25);
+            }
+
+            WarpResearch.recipes.put(
+                    "Potion",
+                    ThaumcraftApi.addArcaneCraftingRecipe(
+                            Constants.ITEM_POTION,
+                            new ItemStack(WarpItems.itemOblivionPotion),
+                            potionVis,
+                            "QZQ",
+                            "SBS",
+                            "GSG",
+                            'Q',
+                            new ItemStack(ConfigItems.itemResource, 1, 3), // Quicksilver
+                            'Z',
+                            new ItemStack(ConfigItems.itemZombieBrain),
+                            'S',
+                            new ItemStack(ConfigItems.itemShard, 1, 5), // Entropy Shard
+                            'B',
+                            new ItemStack(Items.potionitem), // Water Bottle
+                            'G',
+                            new ItemStack(Items.ghast_tear)));
         } else {
             WarpResearch.recipes.put(
                     "PureTearMinor",
@@ -160,6 +183,29 @@ public class WarpRecipes {
                             new AspectList().add(Aspect.WATER, 4),
                             new ItemStack(Items.paper),
                             ItemApi.getItem("itemResource", 14)));
+
+            AspectList potionVis = new AspectList();
+            for (Aspect a : Aspect.getPrimalAspects()) {
+                potionVis.add(a, 5);
+            }
+
+            WarpResearch.recipes.put(
+                    "Potion",
+                    ThaumcraftApi.addArcaneCraftingRecipe(
+                            Constants.ITEM_POTION,
+                            new ItemStack(WarpItems.itemOblivionPotion),
+                            potionVis,
+                            " Z ",
+                            "QBS",
+                            'Q',
+                            new ItemStack(ConfigItems.itemResource, 1, 3), // Quicksilver
+                            'Z',
+                            new ItemStack(ConfigItems.itemZombieBrain),
+                            'S',
+                            new ItemStack(ConfigItems.itemShard, 1, 5), // Entropy Shard
+                            'B',
+                            new ItemStack(Items.potionitem) // Water Bottle
+                    ));
         }
     }
 }
