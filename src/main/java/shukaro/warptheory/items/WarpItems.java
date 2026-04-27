@@ -10,6 +10,7 @@ public class WarpItems {
     public static ItemSomething itemSomething;
     public static ItemPaper itemPaper;
     public static ItemWarpWardAmulet itemWarpWardAmulet;
+    public static ItemOblivionPotion itemOblivionPotion;
 
     public static void initItems() {
         itemCleanserMinor = new ItemCleanserMinor();
@@ -19,6 +20,7 @@ public class WarpItems {
 
         itemSomething = new ItemSomething();
         itemPaper = new ItemPaper();
+        itemOblivionPotion = new ItemOblivionPotion();
         GameRegistry.registerItem(itemCleanserMinor, itemCleanserMinor.getUnlocalizedName());
         GameRegistry.registerItem(itemCleanser, itemCleanser.getUnlocalizedName());
         GameRegistry.registerItem(itemAmulet, itemAmulet.getUnlocalizedName());
@@ -26,5 +28,6 @@ public class WarpItems {
 
         GameRegistry.registerItem(itemSomething, itemSomething.getUnlocalizedName());
         GameRegistry.registerItem(itemPaper, itemPaper.getUnlocalizedName());
+        GameRegistry.registerItem(itemOblivionPotion, itemOblivionPotion.getUnlocalizedName());
     }
 }

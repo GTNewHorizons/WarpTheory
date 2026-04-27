@@ -19,4 +19,5 @@ public class Constants {
     public static final String ITEM_PORTABLE_SHOWER = "warptheory.portableshower";
     public static final String ITEM_SOMETHING = "warptheory.something";
     public static final String ITEM_LITMUS = "warptheory.paper";
+    public static final String ITEM_POTION = "warptheory.oblivionpotion";
 }
