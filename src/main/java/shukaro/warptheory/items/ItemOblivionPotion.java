@@ -4,14 +4,12 @@ import java.util.List;
 import java.util.Locale;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -27,10 +25,7 @@ import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.playerdata.PacketSyncAspects;
 
-public class ItemOblivionPotion extends ItemPotion {
-
-    @SideOnly(Side.CLIENT)
-    private IIcon icon;
+public class ItemOblivionPotion extends Item {
 
     public ItemOblivionPotion() {
         this.setHasSubtypes(false);
@@ -40,6 +35,7 @@ public class ItemOblivionPotion extends ItemPotion {
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         warnPlayer(player);
+        player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
         return super.onItemRightClick(stack, world, player);
     }
 
@@ -70,7 +66,7 @@ public class ItemOblivionPotion extends ItemPotion {
         for (Aspect aspect : Aspect.getPrimalAspects()) {
             WarpHandler.Knowledge.setAspectPool(name, aspect, (short) (15 + player.worldObj.rand.nextInt(5)));
         }
-        // Research is synced when opening the Thaumonomicon, but knowledge points need to be synced with a packet
+        // Research is synced when opening the Thaumonomicon, but knowledge points need to be synced with this packet
         PacketHandler.INSTANCE.sendTo(new PacketSyncAspects(player), (EntityPlayerMP) player);
     }
 
@@ -85,37 +81,13 @@ public class ItemOblivionPotion extends ItemPotion {
     }
 
     @Override
-    public String getItemStackDisplayName(ItemStack par1ItemStack) {
-        return StatCollector.translateToLocal(getUnlocalizedName() + ".name");
-    }
-
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg) {
-        this.icon = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemOblivionPotion");
-    }
-
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int meta) {
-        return icon;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
-        return icon;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean requiresMultipleRenderPasses() {
-        return false;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack stack, int meta) {
-        return 0xFFFFFF;
+    public void registerIcons(IIconRegister iconRegister) {
+        this.itemIcon = iconRegister.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemOblivionPotion");
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> l) {
-        l.add(new ItemStack(item, 1, 0));
+    public EnumAction getItemUseAction(ItemStack stack) {
+        return EnumAction.drink;
     }
 }
