@@ -76,8 +76,8 @@ public class WarpResearch {
         new WTResearchItem(
                 Constants.ITEM_PORTABLE_SHOWER,
                 new AspectList().add(Aspect.ELDRITCH, 6).add(Aspect.EXCHANGE, 3).add(Aspect.MAGIC, 3),
-                5,
-                5,
+                -2,
+                -4,
                 3,
                 new ItemStack(WarpItems.itemWarpWardAmulet))
                         .setPages(
