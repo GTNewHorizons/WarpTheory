@@ -6,6 +6,7 @@ import java.util.Locale;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -48,6 +49,13 @@ public class ItemOblivionPotion extends Item {
     @Override
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
         clearAllKnowledgeAndWarp(player);
+        if (!player.capabilities.isCreativeMode) {
+            if (stack.stackSize <= 1) {
+                return new ItemStack(Items.glass_bottle);
+            }
+            stack.stackSize--;
+            player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+        }
         return super.onEaten(stack, world, player);
     }
 
