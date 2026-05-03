@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 import shukaro.warptheory.items.WarpItems;
 import shukaro.warptheory.recipe.WarpRecipes;
@@ -42,9 +41,10 @@ public class WarpResearch {
                 -1,
                 -2,
                 2,
-                new ItemStack(WarpItems.itemCleanserMinor)).setPages(
-                        new ResearchPage(StatCollector.translateToLocal("research.warptheory.warpcleanserminor")),
-                        new ResearchPage((InfusionRecipe) recipes.get("PureTearMinor")))
+                new ItemStack(WarpItems.itemCleanserMinor))
+                        .setPages(
+                                new ResearchPage("research.warptheory.warpcleanserminor"),
+                                new ResearchPage((InfusionRecipe) recipes.get("PureTearMinor")))
                         .setParents("ELDRITCHMAJOR", Constants.ITEM_LITMUS, "FAKEELDMAJOR").setHidden()
                         .setItemTriggers(ItemApi.getItem("itemSanitySoap", 0)).registerResearchItem();
 
@@ -56,7 +56,7 @@ public class WarpResearch {
                 2,
                 new ItemStack(WarpItems.itemCleanser))
                         .setPages(
-                                new ResearchPage(StatCollector.translateToLocal("research.warptheory.warpcleanser")),
+                                new ResearchPage("research.warptheory.warpcleanser"),
                                 new ResearchPage((InfusionRecipe) recipes.get("PureTear")))
                         .setParents("ELDRITCHMAJOR", Constants.ITEM_LITMUS, "FAKEELDMAJOR").setHidden()
                         .setItemTriggers(ItemApi.getItem("itemSanitySoap", 0)).registerResearchItem();
@@ -69,7 +69,7 @@ public class WarpResearch {
                 3,
                 new ItemStack(WarpItems.itemAmulet))
                         .setPages(
-                                new ResearchPage(StatCollector.translateToLocal("research.warptheory.amulet")),
+                                new ResearchPage("research.warptheory.amulet"),
                                 new ResearchPage((InfusionRecipe) recipes.get("PureAmulet")))
                         .setParents(Constants.ITEM_WARPCLEANSER).setConcealed().registerResearchItem();
 
@@ -81,12 +81,12 @@ public class WarpResearch {
                 3,
                 new ItemStack(WarpItems.itemWarpWardAmulet))
                         .setPages(
-                                new ResearchPage(StatCollector.translateToLocal("research.warptheory.portableshower")),
+                                new ResearchPage("research.warptheory.portableshower"),
                                 new ResearchPage((InfusionRecipe) recipes.get("WarpWardAmulet")))
                         .setParents(Constants.ITEM_PURE_TALISMAN).setConcealed().registerResearchItem();
 
         ResearchPage[] somethingPages = new ResearchPage[WarpRecipes.meats.size() + 1];
-        somethingPages[0] = new ResearchPage(StatCollector.translateToLocal("research.warptheory.warpsomething"));
+        somethingPages[0] = new ResearchPage("research.warptheory.warpsomething");
         int i = 1;
         for (ItemStack meat : WarpRecipes.meats) {
             somethingPages[i] = (new ResearchPage((CrucibleRecipe) recipes.get("WarpChunk" + meat)));
@@ -111,7 +111,7 @@ public class WarpResearch {
                 2,
                 new ItemStack(WarpItems.itemPaper))
                         .setPages(
-                                new ResearchPage(StatCollector.translateToLocal("research.warptheory.paper")),
+                                new ResearchPage("research.warptheory.paper"),
                                 new ResearchPage((ShapelessArcaneRecipe) recipes.get("Litmus")))
                         .setConcealed().setParents("FAKESOAP")
                         .setAspectTriggers(Aspect.ELDRITCH, Aspect.MAGIC, Aspect.SENSES).registerResearchItem();
@@ -122,10 +122,11 @@ public class WarpResearch {
                 -2,
                 -1,
                 0,
-                new ItemStack(WarpItems.itemOblivionPotion)).setPages(
-                        new ResearchPage(StatCollector.translateToLocal("research.warptheory.oblivionpotion.1")),
-                        new ResearchPage((ShapedArcaneRecipe) recipes.get("Potion")),
-                        new ResearchPage(StatCollector.translateToLocal("research.warptheory.oblivionpotion.2")))
+                new ItemStack(WarpItems.itemOblivionPotion))
+                        .setPages(
+                                new ResearchPage("research.warptheory.oblivionpotion.1"),
+                                new ResearchPage((ShapedArcaneRecipe) recipes.get("Potion")),
+                                new ResearchPage("research.warptheory.oblivionpotion.2"))
                         .setAutoUnlock().setSpecial().registerResearchItem();
     }
 }
