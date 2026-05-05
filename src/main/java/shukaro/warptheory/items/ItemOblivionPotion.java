@@ -30,6 +30,7 @@ public class ItemOblivionPotion extends Item {
 
     public ItemOblivionPotion() {
         this.setHasSubtypes(false);
+        this.setMaxStackSize(1);
         this.setUnlocalizedName(Constants.ITEM_POTION);
     }
 
