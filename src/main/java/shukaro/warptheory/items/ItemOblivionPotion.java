@@ -3,9 +3,7 @@ package shukaro.warptheory.items;
 import java.util.List;
 import java.util.Locale;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -14,6 +12,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import shukaro.warptheory.handlers.WarpHandler;
@@ -23,8 +22,6 @@ import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchCategoryList;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.common.Thaumcraft;
-import thaumcraft.common.lib.network.PacketHandler;
-import thaumcraft.common.lib.network.playerdata.PacketSyncAspects;
 
 public class ItemOblivionPotion extends Item {
 
@@ -76,8 +73,8 @@ public class ItemOblivionPotion extends Item {
         for (Aspect aspect : Aspect.getPrimalAspects()) {
             WarpHandler.Knowledge.setAspectPool(name, aspect, (short) (15 + player.worldObj.rand.nextInt(5)));
         }
-        // Research is synced when opening the Thaumonomicon, but knowledge points need to be synced with this packet
-        PacketHandler.INSTANCE.sendTo(new PacketSyncAspects(player), (EntityPlayerMP) player);
+        // Syncs everything to the player. Kind of hacky to manually send an event like this, but it seems to work.
+        Thaumcraft.instance.networkEventHandler.playerLoggedInEvent(new PlayerEvent.PlayerLoggedInEvent(player));
     }
 
     @Override
