@@ -32,6 +32,7 @@ public class ItemOblivionPotion extends Item {
         this.setHasSubtypes(false);
         this.setMaxStackSize(1);
         this.setUnlocalizedName(Constants.ITEM_POTION);
+        this.setTextureName(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemOblivionPotion");
     }
 
     @Override
@@ -87,12 +88,6 @@ public class ItemOblivionPotion extends Item {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack item, EntityPlayer player, List<String> tooltip, boolean advanced) {
         tooltip.add(StatCollector.translateToLocal("tooltip.warptheory.oblivionpotion"));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemOblivionPotion");
     }
 
     @Override
