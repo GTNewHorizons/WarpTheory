@@ -126,7 +126,7 @@ public enum WarpEventRegistry {
             false) {
 
         @Override
-        public void createWarpEvent(Consumer<IWarpEvent> consumer) {
+        public void createWarpEvent(Consumer<IWarpEvent> consumer) { // This doesn't need a change to gregtech_nh
             if (Loader.isModLoaded("gregtech") && Loader.isModLoaded("IC2NuclearControl")) {
                 super.createWarpEvent(consumer);
             }
