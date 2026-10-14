@@ -33,15 +33,22 @@ public class WarpEventHandler {
         int warpCounter = WarpHandler.Knowledge.getWarpCounter(player.getCommandSenderName());
         Random rand = world.rand;
 
-        if (ticks % 2000 == 0 && warpCounter > 0 && rand.nextInt(100) <= Math.sqrt(warpCounter)) {
-            int effectiveWarp = (WarpHandler.getTotalWarp(player) * 2 + warpCounter) / 3;
-            effectiveWarp -= WarpHandler.faceplateReduction(player);
-            IWarpEvent queuedEvent = WarpHandler.queueOneEvent(player, effectiveWarp);
-            if (queuedEvent != null) {
-                int tempWarp = WarpHandler.getIndividualWarps(player)[2];
-                if (tempWarp > 0) {
-                    int cost = Math.min(queuedEvent.getCost(), tempWarp);
-                    WarpHandler.removeWarp(player, cost);
+        if (ticks % 2000 == 0 && warpCounter > 0) {
+            int totalWarp = WarpHandler.getTotalWarp(player);
+            // Thaumcraft never clears the warp counter between worlds, so it can be stale. Never let it exceed the
+            // player's actual warp, otherwise events fire for players with no warp at all.
+            warpCounter = Math.min(warpCounter, totalWarp);
+
+            if (warpCounter > 0 && rand.nextInt(100) <= Math.sqrt(warpCounter)) {
+                int effectiveWarp = (totalWarp * 2 + warpCounter) / 3;
+                effectiveWarp -= WarpHandler.faceplateReduction(player);
+                IWarpEvent queuedEvent = WarpHandler.queueOneEvent(player, effectiveWarp);
+                if (queuedEvent != null) {
+                    int tempWarp = WarpHandler.getIndividualWarps(player)[2];
+                    if (tempWarp > 0) {
+                        int cost = Math.min(queuedEvent.getCost(), tempWarp);
+                        WarpHandler.removeWarp(player, cost);
+                    }
                 }
             }
         }
