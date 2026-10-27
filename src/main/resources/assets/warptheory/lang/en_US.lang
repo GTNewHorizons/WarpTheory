@@ -142,5 +142,14 @@ chat.warptheory.biomeSnow=Your breath condenses in the frigid air...
 chat.warptheory.wanddrain=Your wand feels a bit warm...
 chat.warptheory.witherpotion=You feel absolutely terrible...
 
+# << /warptheory command >>
+commands.warptheory.usage=/warptheory <event> [player]
+commands.warptheory.events=Invalid Syntax, available events are: %s
+commands.warptheory.additional=Additional commands: print purge
+commands.warptheory.noeffects=No active warp effects!
+commands.warptheory.purged=Purged %s!
+commands.warptheory.notfound=Could not find warp event: %s
+commands.warptheory.triggered=Triggered warp event: %s
+
 # << Research stuff >>
 tc.research_category.WT_Category=Warp Theory

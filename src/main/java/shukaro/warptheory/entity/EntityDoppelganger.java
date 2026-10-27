@@ -26,7 +26,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -39,7 +42,6 @@ import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import shukaro.warptheory.util.ChatHelper;
-import shukaro.warptheory.util.FormatCodes;
 
 public class EntityDoppelganger extends EntityCreature implements IHealable, IHurtable {
 
@@ -55,6 +57,7 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
 
     protected static final int UUID_DATA_WATCHER_ID = 16;
     protected static final String UUID_NBT_TAG = "playerUuid";
+    protected static final String NAME_KEY = "chat.warptheory.doppelganger.name";
 
     // This will only be populated on the client.
     protected static final Map<UUID, GameProfile> gameProfileCache = new HashMap<>();
@@ -79,12 +82,22 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
     public void initialize(EntityPlayer player) {
         this.dataWatcher.updateObject(UUID_DATA_WATCHER_ID, player.getUniqueID().toString());
 
-        String name = StatCollector
-                .translateToLocalFormatted("chat.warptheory.doppelganger.name", player.getDisplayName());
-        this.setCustomNameTag(name);
+        // Store only the player name; the visible name is translated per client in func_145748_c_
+        this.setCustomNameTag(player.getDisplayName());
 
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth());
         this.setHealth(player.getHealth());
+    }
+
+    @Override
+    public String getCommandSenderName() {
+        return StatCollector.translateToLocalFormatted(NAME_KEY, getCustomNameTag());
+    }
+
+    @Override
+    public IChatComponent func_145748_c_() {
+        // Used by the name tag renderer and death messages, so each client translates it
+        return new ChatComponentTranslation(NAME_KEY, getCustomNameTag());
     }
 
     @SideOnly(Side.CLIENT)
@@ -138,10 +151,11 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
         EntityPlayer entityPlayer = player.get();
         if (entityPlayer.getHealth() < entityPlayer.getMaxHealth()) {
             entityPlayer.heal(amount);
-            ChatHelper.sendToPlayer(
+            ChatHelper.sendTranslatedToPlayer(
                     entityPlayer,
-                    FormatCodes.Purple.code + FormatCodes.Italic.code
-                            + StatCollector.translateToLocal("chat.warptheory.doppelganger.heal"));
+                    "chat.warptheory.doppelganger.heal",
+                    EnumChatFormatting.DARK_PURPLE,
+                    EnumChatFormatting.ITALIC);
         }
     }
 
@@ -158,15 +172,17 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
         entityPlayer.attackEntityFrom(damageSource, damage);
 
         if (getHealth() > e.ammount) {
-            ChatHelper.sendToPlayer(
+            ChatHelper.sendTranslatedToPlayer(
                     entityPlayer,
-                    FormatCodes.Purple.code + FormatCodes.Italic.code
-                            + StatCollector.translateToLocal("chat.warptheory.doppelganger.hurt"));
+                    "chat.warptheory.doppelganger.hurt",
+                    EnumChatFormatting.DARK_PURPLE,
+                    EnumChatFormatting.ITALIC);
         } else {
-            ChatHelper.sendToPlayer(
+            ChatHelper.sendTranslatedToPlayer(
                     entityPlayer,
-                    FormatCodes.Purple.code + FormatCodes.Italic.code
-                            + StatCollector.translateToLocal("chat.warptheory.doppelganger.die"));
+                    "chat.warptheory.doppelganger.die",
+                    EnumChatFormatting.DARK_PURPLE,
+                    EnumChatFormatting.ITALIC);
         }
     }
 

@@ -13,7 +13,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
 
 import baubles.api.BaublesApi;
 import gnu.trove.map.hash.THashMap;
@@ -97,8 +96,8 @@ public class WarpHandler {
         int[] warp = getIndividualWarps(player);
         if (warp[0] + warp[1] + warp[2] >= 50) {
             removeWarp(player, 5);
-            ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purgeminor"));
-        } else ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purgefailed"));
+            ChatHelper.sendTranslatedToPlayer(player, "chat.warptheory.purgeminor");
+        } else ChatHelper.sendTranslatedToPlayer(player, "chat.warptheory.purgefailed");
     }
 
     public static void removeWarp(EntityPlayer player, int amount) {

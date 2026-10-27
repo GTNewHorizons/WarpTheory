@@ -6,6 +6,9 @@ import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
@@ -18,6 +21,24 @@ public class ChatHelper {
 
     public static void sendToPlayer(EntityPlayer player, String message) {
         player.addChatMessage(new ChatComponentText(message));
+    }
+
+    /** Sends a lang key to the player so their own client translates it; formats are colors, BOLD or ITALIC. */
+    public static void sendTranslatedToPlayer(EntityPlayer player, String key, EnumChatFormatting... formats) {
+        player.addChatMessage(translate(key, formats));
+    }
+
+    /** Builds a chat component the receiving client translates; formats are colors, BOLD or ITALIC. */
+    public static IChatComponent translate(String key, EnumChatFormatting... formats) {
+        // Server-side StatCollector only knows en_US, so the key must reach the client untranslated
+        ChatComponentTranslation component = new ChatComponentTranslation(key);
+        ChatStyle style = component.getChatStyle();
+        for (EnumChatFormatting format : formats) {
+            if (format.isColor()) style.setColor(format);
+            else if (format == EnumChatFormatting.BOLD) style.setBold(true);
+            else if (format == EnumChatFormatting.ITALIC) style.setItalic(true);
+        }
+        return component;
     }
 
     public static void sendToAll(String message) {
