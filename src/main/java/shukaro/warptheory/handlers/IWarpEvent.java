@@ -1,7 +1,6 @@
 package shukaro.warptheory.handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import shukaro.warptheory.util.ChatHelper;
@@ -40,11 +39,7 @@ public abstract class IWarpEvent {
     }
 
     public void sendChatMessage(EntityPlayer player, String messageName) {
-        ChatHelper.sendTranslatedToPlayer(
-                player,
-                "chat.warptheory." + messageName,
-                EnumChatFormatting.DARK_PURPLE,
-                EnumChatFormatting.ITALIC);
+        ChatHelper.sendTranslatedToPlayer(player, "chat.warptheory." + messageName, ChatHelper.warpStyle());
     }
 
     /**

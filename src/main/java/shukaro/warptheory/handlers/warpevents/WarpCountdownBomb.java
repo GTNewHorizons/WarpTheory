@@ -1,6 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -32,13 +33,11 @@ public class WarpCountdownBomb extends ITimerWarpEvent {
     @Override
     public void timerTick(World world, EntityPlayer player, String timer, int timerCount) {
         if (timer.equals(COUNTDOWN)) {
-            EnumChatFormatting color = timerCount > 5 ? EnumChatFormatting.DARK_PURPLE : EnumChatFormatting.RED;
-            EnumChatFormatting format = timerCount > 2 ? EnumChatFormatting.ITALIC : EnumChatFormatting.BOLD;
-            ChatHelper.sendTranslatedToPlayer(
-                    player,
-                    String.format("chat.warptheory.%s.%d", name, timerCount),
-                    color,
-                    format);
+            ChatStyle style = new ChatStyle()
+                    .setColor(timerCount > 5 ? EnumChatFormatting.DARK_PURPLE : EnumChatFormatting.RED);
+            if (timerCount > 2) style.setItalic(true);
+            else style.setBold(true);
+            ChatHelper.sendTranslatedToPlayer(player, String.format("chat.warptheory.%s.%d", name, timerCount), style);
 
             // Spawn some particles
             int numParticles = 8 * (10 - timerCount);

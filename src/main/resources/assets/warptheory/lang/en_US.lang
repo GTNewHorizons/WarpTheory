@@ -12,9 +12,7 @@ chat.warptheory.minorwarp=There's no reaction
 chat.warptheory.averagewarp=The paper turns a sickly color
 chat.warptheory.majorwarp=The paper crumbles to dust
 chat.warptheory.deadlywarp=The paper catches fire
-chat.warptheory.permanentwarp=Permanent Warp
-chat.warptheory.normalwarp=Normal Warp
-chat.warptheory.tempwarp=Temporary Warp
+chat.warptheory.warpcounts=(%s Permanent Warp, %s Normal Warp, %s Temporary Warp)
 chat.warptheory.potionwarning.1=§c§l§nWARNING§r§c: drinking this potion will reset §lALL warp, research, scanned items, and discovered aspects§r§c!
 chat.warptheory.potionwarning.2=§cContinue drinking for §l10 seconds§r§c if you are absolutely certain you want to reset everything.
 

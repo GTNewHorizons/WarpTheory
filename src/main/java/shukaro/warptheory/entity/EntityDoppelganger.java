@@ -28,7 +28,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -151,11 +150,8 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
         EntityPlayer entityPlayer = player.get();
         if (entityPlayer.getHealth() < entityPlayer.getMaxHealth()) {
             entityPlayer.heal(amount);
-            ChatHelper.sendTranslatedToPlayer(
-                    entityPlayer,
-                    "chat.warptheory.doppelganger.heal",
-                    EnumChatFormatting.DARK_PURPLE,
-                    EnumChatFormatting.ITALIC);
+            ChatHelper
+                    .sendTranslatedToPlayer(entityPlayer, "chat.warptheory.doppelganger.heal", ChatHelper.warpStyle());
         }
     }
 
@@ -172,17 +168,10 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
         entityPlayer.attackEntityFrom(damageSource, damage);
 
         if (getHealth() > e.ammount) {
-            ChatHelper.sendTranslatedToPlayer(
-                    entityPlayer,
-                    "chat.warptheory.doppelganger.hurt",
-                    EnumChatFormatting.DARK_PURPLE,
-                    EnumChatFormatting.ITALIC);
+            ChatHelper
+                    .sendTranslatedToPlayer(entityPlayer, "chat.warptheory.doppelganger.hurt", ChatHelper.warpStyle());
         } else {
-            ChatHelper.sendTranslatedToPlayer(
-                    entityPlayer,
-                    "chat.warptheory.doppelganger.die",
-                    EnumChatFormatting.DARK_PURPLE,
-                    EnumChatFormatting.ITALIC);
+            ChatHelper.sendTranslatedToPlayer(entityPlayer, "chat.warptheory.doppelganger.die", ChatHelper.warpStyle());
         }
     }
 

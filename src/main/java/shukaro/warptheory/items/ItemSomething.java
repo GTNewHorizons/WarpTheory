@@ -10,7 +10,6 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -79,11 +78,7 @@ public class ItemSomething extends Item {
     @Override
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
         if (!world.isRemote) {
-            ChatHelper.sendTranslatedToPlayer(
-                    player,
-                    "chat.warptheory.addwarp",
-                    EnumChatFormatting.DARK_PURPLE,
-                    EnumChatFormatting.ITALIC);
+            ChatHelper.sendTranslatedToPlayer(player, "chat.warptheory.addwarp", ChatHelper.warpStyle());
             ThaumcraftApiHelper.addWarpToPlayer(player, 4 + world.rand.nextInt(4), false);
             ThaumcraftApiHelper.addWarpToPlayer(player, 5 + world.rand.nextInt(5), true);
             ThaumcraftApiHelper.addStickyWarpToPlayer(player, 5 + world.rand.nextInt(5));

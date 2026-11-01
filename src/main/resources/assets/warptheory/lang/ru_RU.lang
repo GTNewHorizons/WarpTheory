@@ -8,9 +8,7 @@ chat.warptheory.minorwarp=Нет реакции
 chat.warptheory.averagewarp=Бумага приобретает неприятный цвет
 chat.warptheory.majorwarp=Бумага рассыпается в пыль
 chat.warptheory.deadlywarp=Бумага загорается
-chat.warptheory.permanentwarp=Постоянный варп
-chat.warptheory.normalwarp=Нормальный варп
-chat.warptheory.tempwarp=Временный варп
+chat.warptheory.warpcounts=(постоянный варп: %s, нормальный варп: %s, временный варп: %s)
 
 # << Item names >>
 item.warptheory.cleanserminor.name=Нечистая слеза

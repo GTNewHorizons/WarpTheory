@@ -9,9 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -81,19 +79,13 @@ public class ItemPaper extends Item {
             else if (totalWarp <= 25) severity = "chat.warptheory.averagewarp";
             else if (totalWarp <= 50) severity = "chat.warptheory.majorwarp";
             else severity = "chat.warptheory.deadlywarp";
-            ChatHelper.sendTranslatedToPlayer(
-                    player,
-                    severity,
-                    EnumChatFormatting.DARK_PURPLE,
-                    EnumChatFormatting.ITALIC);
-            IChatComponent warps = new ChatComponentText(" (" + individualWarps[0] + " ");
-            warps.appendSibling(ChatHelper.translate("chat.warptheory.permanentwarp"));
-            warps.appendText(", " + individualWarps[1] + " ");
-            warps.appendSibling(ChatHelper.translate("chat.warptheory.normalwarp"));
-            warps.appendText(", " + individualWarps[2] + " ");
-            warps.appendSibling(ChatHelper.translate("chat.warptheory.tempwarp"));
-            warps.appendText(")");
-            player.addChatMessage(warps);
+            ChatHelper.sendTranslatedToPlayer(player, severity, ChatHelper.warpStyle());
+            player.addChatMessage(
+                    new ChatComponentTranslation(
+                            "chat.warptheory.warpcounts",
+                            individualWarps[0],
+                            individualWarps[1],
+                            individualWarps[2]));
         }
 
         if (!player.capabilities.isCreativeMode && WarpHandler.getTotalWarp(player) > 10) stack.stackSize--;
