@@ -10,7 +10,6 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -18,6 +17,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import shukaro.warptheory.WarpTheory;
+import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.FormatCodes;
 import thaumcraft.api.ThaumcraftApiHelper;
@@ -78,10 +78,7 @@ public class ItemSomething extends Item {
     @Override
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
         if (!world.isRemote) {
-            player.addChatMessage(
-                    new ChatComponentText(
-                            FormatCodes.Purple.code + FormatCodes.Italic.code
-                                    + StatCollector.translateToLocal("chat.warptheory.addwarp")));
+            ChatHelper.sendTranslatedToPlayer(player, "chat.warptheory.addwarp", ChatHelper.warpStyle());
             ThaumcraftApiHelper.addWarpToPlayer(player, 4 + world.rand.nextInt(4), false);
             ThaumcraftApiHelper.addWarpToPlayer(player, 5 + world.rand.nextInt(5), true);
             ThaumcraftApiHelper.addStickyWarpToPlayer(player, 5 + world.rand.nextInt(5));

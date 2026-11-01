@@ -91,9 +91,8 @@ public class ItemCleanser extends Item {
     }
 
     protected void purgeWarp(EntityPlayer player) {
-        if (WarpHandler.getTotalWarp(player) > 0)
-            ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purge"));
-        else ChatHelper.sendToPlayer(player, StatCollector.translateToLocal("chat.warptheory.purgefail"));
+        if (WarpHandler.getTotalWarp(player) > 0) ChatHelper.sendTranslatedToPlayer(player, "chat.warptheory.purge");
+        else ChatHelper.sendTranslatedToPlayer(player, "chat.warptheory.purgefail");
 
         WarpHandler.purgeWarp(player);
     }

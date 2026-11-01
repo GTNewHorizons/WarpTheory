@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
@@ -29,7 +30,7 @@ public class WarpCommand implements ICommand {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/warptheory <event> [player]";
+        return "commands.warptheory.usage";
     }
 
     @Override
@@ -42,8 +43,8 @@ public class WarpCommand implements ICommand {
         if (args.length == 0 || args.length > 2) {
             String events = "";
             for (String name : nameMap.get().keySet()) events += name + " ";
-            sender.addChatMessage(new ChatComponentText("Invalid Syntax, available events are: " + events));
-            sender.addChatMessage(new ChatComponentText("Additional commands: print purge"));
+            sender.addChatMessage(new ChatComponentTranslation("commands.warptheory.events", events));
+            sender.addChatMessage(new ChatComponentTranslation("commands.warptheory.additional"));
         } else {
             EntityPlayer player;
             if (args.length == 1) {
@@ -69,31 +70,31 @@ public class WarpCommand implements ICommand {
                     }
                 }
                 if (!hasEffect) {
-                    sender.addChatMessage(new ChatComponentText("No active warp effects!"));
+                    sender.addChatMessage(new ChatComponentTranslation("commands.warptheory.noeffects"));
                 }
             } else if ("purge".equals(args[0])) {
                 boolean hasEffect = false;
                 for (String name : nameMap.get().keySet()) {
                     if (MiscHelper.getWarpTag(player).getInteger(name) > 0) {
                         MiscHelper.getWarpTag(player).removeTag(name);
-                        sender.addChatMessage(new ChatComponentText("Purged " + name + "!"));
+                        sender.addChatMessage(new ChatComponentTranslation("commands.warptheory.purged", name));
                         hasEffect = true;
                     }
                 }
                 for (String timer : timers.get()) {
                     if (MiscHelper.getWarpTag(player).getInteger(timer) > 0) {
                         MiscHelper.getWarpTag(player).removeTag(timer);
-                        sender.addChatMessage(new ChatComponentText("Purged " + timer + "!"));
+                        sender.addChatMessage(new ChatComponentTranslation("commands.warptheory.purged", timer));
                         hasEffect = true;
                     }
                 }
                 if (!hasEffect) {
-                    sender.addChatMessage(new ChatComponentText("No active warp effects!"));
+                    sender.addChatMessage(new ChatComponentTranslation("commands.warptheory.noeffects"));
                 }
             } else {
                 IWarpEvent event = nameMap.get().get(args[0]);
                 if (event == null) {
-                    sender.addChatMessage(new ChatComponentText("Could not find warp event: " + args[0]));
+                    sender.addChatMessage(new ChatComponentTranslation("commands.warptheory.notfound", args[0]));
                     return;
                 }
 
@@ -102,7 +103,7 @@ public class WarpCommand implements ICommand {
                 } else {
                     event.doEvent(sender.getEntityWorld(), player);
                 }
-                sender.addChatMessage(new ChatComponentText("Triggered warp event: " + args[0]));
+                sender.addChatMessage(new ChatComponentTranslation("commands.warptheory.triggered", args[0]));
             }
         }
     }

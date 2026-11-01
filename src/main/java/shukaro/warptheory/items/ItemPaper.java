@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -18,6 +18,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.handlers.WarpHandler;
+import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.Constants;
 import shukaro.warptheory.util.FormatCodes;
 
@@ -74,25 +75,17 @@ public class ItemPaper extends Item {
             int totalWarp = WarpHandler.getTotalWarp(player);
             int[] individualWarps = WarpHandler.getIndividualWarps(player);
             String severity;
-            if (totalWarp <= 10) severity = StatCollector.translateToLocal("chat.warptheory.minorwarp");
-            else if (totalWarp <= 25) severity = StatCollector.translateToLocal("chat.warptheory.averagewarp");
-            else if (totalWarp <= 50) severity = StatCollector.translateToLocal("chat.warptheory.majorwarp");
-            else severity = StatCollector.translateToLocal("chat.warptheory.deadlywarp");
-            player.addChatMessage(new ChatComponentText(FormatCodes.Purple.code + FormatCodes.Italic.code + severity));
+            if (totalWarp <= 10) severity = "chat.warptheory.minorwarp";
+            else if (totalWarp <= 25) severity = "chat.warptheory.averagewarp";
+            else if (totalWarp <= 50) severity = "chat.warptheory.majorwarp";
+            else severity = "chat.warptheory.deadlywarp";
+            ChatHelper.sendTranslatedToPlayer(player, severity, ChatHelper.warpStyle());
             player.addChatMessage(
-                    new ChatComponentText(
-                            " (" + individualWarps[0]
-                                    + " "
-                                    + StatCollector.translateToLocal("chat.warptheory.permanentwarp")
-                                    + ", "
-                                    + individualWarps[1]
-                                    + " "
-                                    + StatCollector.translateToLocal("chat.warptheory.normalwarp")
-                                    + ", "
-                                    + individualWarps[2]
-                                    + " "
-                                    + StatCollector.translateToLocal("chat.warptheory.tempwarp")
-                                    + ")"));
+                    new ChatComponentTranslation(
+                            "chat.warptheory.warpcounts",
+                            individualWarps[0],
+                            individualWarps[1],
+                            individualWarps[2]));
         }
 
         if (!player.capabilities.isCreativeMode && WarpHandler.getTotalWarp(player) > 10) stack.stackSize--;

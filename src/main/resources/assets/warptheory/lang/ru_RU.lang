@@ -8,9 +8,7 @@ chat.warptheory.minorwarp=Нет реакции
 chat.warptheory.averagewarp=Бумага приобретает неприятный цвет
 chat.warptheory.majorwarp=Бумага рассыпается в пыль
 chat.warptheory.deadlywarp=Бумага загорается
-chat.warptheory.permanentwarp=Постоянный варп
-chat.warptheory.normalwarp=Нормальный варп
-chat.warptheory.tempwarp=Временный варп
+chat.warptheory.warpcounts=(постоянный варп: %s, нормальный варп: %s, временный варп: %s)
 
 # << Item names >>
 item.warptheory.cleanserminor.name=Нечистая слеза
@@ -119,3 +117,12 @@ chat.warptheory.pumpkin=Вы чувствуете себя жутко...
 chat.warptheory.biomeSnow=Ваше дыхание конденсируется в холодном воздухе...
 chat.warptheory.wandrain=Ваша палочка немного теплая...
 chat.warptheory.witherpotion=Вы чувствуете себя совершенно ужасно...
+
+# << /warptheory command >>
+commands.warptheory.usage=/warptheory <событие> [игрок]
+commands.warptheory.events=Неверный синтаксис, доступные события: %s
+commands.warptheory.additional=Дополнительные команды: print purge
+commands.warptheory.noeffects=Нет активных эффектов варпа!
+commands.warptheory.purged=Эффект %s снят!
+commands.warptheory.notfound=Событие варпа не найдено: %s
+commands.warptheory.triggered=Запущено событие варпа: %s

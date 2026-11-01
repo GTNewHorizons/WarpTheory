@@ -6,6 +6,9 @@ import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
@@ -18,6 +21,22 @@ public class ChatHelper {
 
     public static void sendToPlayer(EntityPlayer player, String message) {
         player.addChatMessage(new ChatComponentText(message));
+    }
+
+    /** Sends a lang key to the player so their own client translates it. */
+    public static void sendTranslatedToPlayer(EntityPlayer player, String key) {
+        sendTranslatedToPlayer(player, key, new ChatStyle());
+    }
+
+    /** Sends a lang key with the given style to the player so their own client translates it. */
+    public static void sendTranslatedToPlayer(EntityPlayer player, String key, ChatStyle style) {
+        // Server-side StatCollector only knows en_US, so the key must reach the client untranslated
+        player.addChatMessage(new ChatComponentTranslation(key).setChatStyle(style));
+    }
+
+    /** Returns a new purple italic style for warp flavor messages. */
+    public static ChatStyle warpStyle() {
+        return new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE).setItalic(true);
     }
 
     public static void sendToAll(String message) {

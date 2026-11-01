@@ -12,9 +12,7 @@ chat.warptheory.minorwarp=没什么反应.
 chat.warptheory.averagewarp=试纸呈现出一种病态的颜色.
 chat.warptheory.majorwarp=试纸碎成了粉屑.
 chat.warptheory.deadlywarp=试纸燃烧起来.
-chat.warptheory.permanentwarp=阴魂不散的扭曲.
-chat.warptheory.normalwarp=一般的扭曲.
-chat.warptheory.tempwarp=浮于表面的扭曲.
+chat.warptheory.warpcounts=(%s 阴魂不散的扭曲., %s 一般的扭曲., %s 浮于表面的扭曲.)
 
 # << Item names >>
 item.warptheory.cleanserminor.name=污秽泪水

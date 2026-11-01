@@ -1,7 +1,8 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
@@ -9,7 +10,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import shukaro.warptheory.handlers.ITimerWarpEvent;
 import shukaro.warptheory.util.ChatHelper;
-import shukaro.warptheory.util.FormatCodes;
 
 public class WarpCountdownBomb extends ITimerWarpEvent {
 
@@ -33,10 +33,11 @@ public class WarpCountdownBomb extends ITimerWarpEvent {
     @Override
     public void timerTick(World world, EntityPlayer player, String timer, int timerCount) {
         if (timer.equals(COUNTDOWN)) {
-            String color = timerCount > 5 ? FormatCodes.Purple.code : FormatCodes.Red.code;
-            String format = timerCount > 2 ? FormatCodes.Italic.code : FormatCodes.Bold.code;
-            String text = StatCollector.translateToLocal(String.format("chat.warptheory.%s.%d", name, timerCount));
-            ChatHelper.sendToPlayer(player, color + format + text);
+            ChatStyle style = new ChatStyle()
+                    .setColor(timerCount > 5 ? EnumChatFormatting.DARK_PURPLE : EnumChatFormatting.RED);
+            if (timerCount > 2) style.setItalic(true);
+            else style.setBold(true);
+            ChatHelper.sendTranslatedToPlayer(player, String.format("chat.warptheory.%s.%d", name, timerCount), style);
 
             // Spawn some particles
             int numParticles = 8 * (10 - timerCount);
