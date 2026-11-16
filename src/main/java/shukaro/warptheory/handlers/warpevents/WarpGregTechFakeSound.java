@@ -15,7 +15,7 @@ public class WarpGregTechFakeSound extends IMultiWarpEvent {
     private static final int ALARM_PLAY_TIMES = 8;
 
     private static final ImmutableList<String> SOUNDS = ImmutableList
-            .of("ic2:tools.Wrench", "ic2:machines.InterruptOne", "nuclearcontrol:alarm-default");
+            .of("gtceu:gtceu.WrenchOp", "ic2:machines.InterruptOne", "nuclearcontrol:alarm-default");
 
     public WarpGregTechFakeSound(int minWarp) {
         super("gtfakesound", minWarp, SOUNDS.size(), world -> ALARM_PLAY_TIMES);
