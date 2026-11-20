@@ -19,8 +19,8 @@ import shukaro.warptheory.util.MiscHelper;
 
 public class WarpFall extends IWarpEvent {
 
-    private static Map<String, BlockCoord> originalPositions = new HashMap<String, BlockCoord>();
-    private static Map<String, Long> returnTimes = new HashMap<String, Long>();
+    private static Map<String, BlockCoord> originalPositions = new HashMap<>();
+    private static Map<String, Long> returnTimes = new HashMap<>();
 
     public WarpFall(int minWarp) {
         super("fall", minWarp);

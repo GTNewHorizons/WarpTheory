@@ -212,7 +212,7 @@ public class BlockCoord implements Comparable {
     // }
 
     public List<BlockCoord> getNearby() {
-        List<BlockCoord> nearby = new ArrayList<BlockCoord>();
+        List<BlockCoord> nearby = new ArrayList<>();
 
         for (BlockCoord c : nearbyOffsets) {
             nearby.add(this.copy().add(c));
@@ -237,7 +237,7 @@ public class BlockCoord implements Comparable {
     }
 
     public List<BlockCoord> getRadiusMatches(World world, int radius, Block block, int meta) {
-        List<BlockCoord> matches = new ArrayList<BlockCoord>();
+        List<BlockCoord> matches = new ArrayList<>();
         BlockCoord c = this.copy();
 
         int minX = c.x - radius;
@@ -260,7 +260,7 @@ public class BlockCoord implements Comparable {
     }
 
     public List<BlockCoord> getRadiusBlocks(int radius) {
-        List<BlockCoord> matches = new ArrayList<BlockCoord>();
+        List<BlockCoord> matches = new ArrayList<>();
         BlockCoord c = this.copy();
 
         int minX = c.x - radius;
@@ -307,8 +307,8 @@ public class BlockCoord implements Comparable {
     }
 
     public boolean isConnected(World world, BlockCoord c, Block block, int meta) {
-        List<BlockCoord> traversed = new LinkedList<BlockCoord>();
-        List<BlockCoord> toTraverse = new LinkedList<BlockCoord>();
+        List<BlockCoord> traversed = new LinkedList<>();
+        List<BlockCoord> toTraverse = new LinkedList<>();
 
         toTraverse.add(this);
 

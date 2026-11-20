@@ -25,7 +25,7 @@ public class WarpChests extends IWorldTickWarpEvent {
         int successful = 0;
 
         ArrayList<IInventory> inventories = MiscHelper.getNearbyTileInventories(player, 8);
-        ArrayList<TileEntityChest> chestInventories = new ArrayList<TileEntityChest>();
+        ArrayList<TileEntityChest> chestInventories = new ArrayList<>();
         for (IInventory i : inventories) {
             if (i instanceof TileEntityChest) chestInventories.add((TileEntityChest) i);
         }
