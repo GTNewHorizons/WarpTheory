@@ -4,13 +4,13 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import com.google.common.collect.ImmutableList;
 
-public class EntityPhantom extends EntityLiving implements IHurtable {
+public class EntityPhantom extends EntityLiving {
 
     public static final ImmutableList<ResourceLocation> SKINS = ImmutableList.of(
             // Add more textures here if you want more varied phantoms.
@@ -83,8 +83,10 @@ public class EntityPhantom extends EntityLiving implements IHurtable {
     }
 
     @Override
-    public void onHurt(LivingHurtEvent e) {
-        setDead();
+    protected void damageEntity(DamageSource p_70665_1_, float p_70665_2_) {
+        if (!this.isEntityInvulnerable()) {
+            setDead();
+        }
     }
 
     @Override

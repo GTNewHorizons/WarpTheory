@@ -32,8 +32,6 @@ import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
@@ -42,7 +40,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import shukaro.warptheory.util.ChatHelper;
 
-public class EntityDoppelganger extends EntityCreature implements IHealable, IHurtable {
+public class EntityDoppelganger extends EntityCreature {
 
     /**
      * The number of ticks we will wait between each attempt to find our player.
@@ -101,7 +99,6 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
 
     @SideOnly(Side.CLIENT)
     @Nullable
-    @SuppressWarnings("unchecked")
     public ResourceLocation getPlayerSkin() {
         String uuidString = dataWatcher.getWatchableObjectString(UUID_DATA_WATCHER_ID);
         if (uuidString.isEmpty()) {
@@ -129,49 +126,41 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
     }
 
     @Override
-    public void onHeal(LivingHealEvent e) {
-        if (e.amount <= 0.5f) {
-            // The doppelgänger's passive regen also counts as healing, but we don't want to pass
-            // that on to the player. So check for larger than 0.5f healing amount.
-            return;
-        }
+    public void heal(float amount) {
+        float initialHealth = getHealth();
+        super.heal(amount);
 
-        float currentDamage = getMaxHealth() - getHealth();
-        float amount = Math.min(e.amount, currentDamage);
-        if (amount <= 0f) {
-            return;
-        }
+        float healthRestored = getHealth() - initialHealth;
+        if (healthRestored <= 0f) return;
 
         Optional<EntityPlayerMP> player = findPlayer();
-        if (!player.isPresent()) {
-            return;
-        }
+        if (!player.isPresent()) return;
 
-        EntityPlayer entityPlayer = player.get();
+        EntityPlayerMP entityPlayer = player.get();
         if (entityPlayer.getHealth() < entityPlayer.getMaxHealth()) {
-            entityPlayer.heal(amount);
+            entityPlayer.heal(healthRestored);
             ChatHelper
                     .sendTranslatedToPlayer(entityPlayer, "chat.warptheory.doppelganger.heal", ChatHelper.warpStyle());
         }
     }
 
     @Override
-    public void onHurt(LivingHurtEvent e) {
+    protected void damageEntity(DamageSource source, float amount) {
         Optional<EntityPlayerMP> player = findPlayer();
-        if (!player.isPresent()) {
-            return;
+        if (player.isPresent()) {
+            EntityPlayer entityPlayer = player.get();
+            DamageSource damageSource = DamageSource.causeIndirectMagicDamage(this, this);
+            float damage = Math.min(amount, getHealth());
+            entityPlayer.attackEntityFrom(damageSource, damage);
         }
 
-        EntityPlayer entityPlayer = player.get();
-        DamageSource damageSource = DamageSource.causeIndirectMagicDamage(this, this);
-        float damage = Math.min(e.ammount, getHealth());
-        entityPlayer.attackEntityFrom(damageSource, damage);
+        super.damageEntity(source, amount);
 
-        if (getHealth() > e.ammount) {
-            ChatHelper
-                    .sendTranslatedToPlayer(entityPlayer, "chat.warptheory.doppelganger.hurt", ChatHelper.warpStyle());
-        } else {
-            ChatHelper.sendTranslatedToPlayer(entityPlayer, "chat.warptheory.doppelganger.die", ChatHelper.warpStyle());
+        if (player.isPresent()) {
+            ChatHelper.sendTranslatedToPlayer(
+                    player.get(),
+                    isEntityAlive() ? "chat.warptheory.doppelganger.hurt" : "chat.warptheory.doppelganger.die",
+                    ChatHelper.warpStyle());
         }
     }
 
@@ -190,9 +179,7 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
                 healWait--;
             } else {
                 healWait = HEAL_WAIT_TICKS;
-                // If you increase the healing amount here, you may also need to modify onHeal()
-                // to prevent passing this healing on to the player.
-                heal(0.5f);
+                super.heal(0.5f);
             }
         } else {
             healWait = HEAL_WAIT_TICKS;
@@ -265,7 +252,6 @@ public class EntityDoppelganger extends EntityCreature implements IHealable, IHu
         }
         UUID uuid = UUID.fromString(uuidString);
 
-        @SuppressWarnings("unchecked")
         List<EntityPlayerMP> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
         for (EntityPlayerMP entityPlayer : players) {
             if (entityPlayer.getUniqueID().equals(uuid)) {

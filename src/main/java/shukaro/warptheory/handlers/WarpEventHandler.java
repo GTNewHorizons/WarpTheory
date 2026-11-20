@@ -8,12 +8,8 @@ import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import shukaro.warptheory.entity.IHealable;
-import shukaro.warptheory.entity.IHurtable;
 
 public class WarpEventHandler {
 
@@ -53,20 +49,6 @@ public class WarpEventHandler {
             if (nextEvent != null && nextEvent.canDo(world, player)) {
                 nextEvent.doEvent(world, player);
             }
-        }
-    }
-
-    @SubscribeEvent
-    public void livingHeal(LivingHealEvent e) {
-        if (e.entityLiving instanceof IHealable) {
-            ((IHealable) e.entityLiving).onHeal(e);
-        }
-    }
-
-    @SubscribeEvent
-    public void livingHurt(LivingHurtEvent e) {
-        if (e.entityLiving instanceof IHurtable) {
-            ((IHurtable) e.entityLiving).onHurt(e);
         }
     }
 }
