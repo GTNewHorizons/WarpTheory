@@ -119,7 +119,6 @@ public class WarpCommand implements ICommand {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
         if (args.length == 1) {
             ArrayList<String> completions = new ArrayList<String>();

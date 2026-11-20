@@ -1,6 +1,5 @@
 package shukaro.warptheory.util;
 
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,8 +43,7 @@ public class ChatHelper {
     }
 
     public static void sendToWorld(World world, String message) {
-        for (EntityPlayer player : (List<EntityPlayer>) world.playerEntities)
-            player.addChatMessage(new ChatComponentText(message));
+        for (EntityPlayer player : world.playerEntities) player.addChatMessage(new ChatComponentText(message));
     }
 
     public static String getUsername(IChatComponent message) {

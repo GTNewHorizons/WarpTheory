@@ -80,7 +80,7 @@ public class MiscHelper {
 
     public static ArrayList<IInventory> getNearbyTileInventories(EntityPlayer player, int range) {
         ArrayList<IInventory> nearby = new ArrayList<IInventory>();
-        for (TileEntity te : (ArrayList<TileEntity>) player.worldObj.loadedTileEntityList) {
+        for (TileEntity te : player.worldObj.loadedTileEntityList) {
             BlockCoord teCoord = new BlockCoord(te.xCoord, te.yCoord, te.zCoord);
             BlockCoord playerCoord = new BlockCoord((int) player.posX, (int) player.posY, (int) player.posZ);
             if (te instanceof IInventory && teCoord.getDistance(playerCoord) <= range) nearby.add((IInventory) te);

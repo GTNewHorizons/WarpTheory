@@ -1,6 +1,5 @@
 package shukaro.warptheory.handlers;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -104,11 +103,10 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
     }
 
     @SubscribeEvent
-    @SuppressWarnings("unchecked")
     public void onTick(TickEvent.WorldTickEvent e) {
         if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER) return;
 
-        for (EntityPlayer player : (List<EntityPlayer>) e.world.playerEntities) {
+        for (EntityPlayer player : e.world.playerEntities) {
             for (Map.Entry<Integer, String> entry : reversedEventLevels) {
                 String tag = entry.getValue();
 
