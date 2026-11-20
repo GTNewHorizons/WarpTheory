@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +36,7 @@ public class WarpCommand implements ICommand {
     }
 
     @Override
-    public List getCommandAliases() {
+    public List<String> getCommandAliases() {
         return null;
     }
 
@@ -142,9 +144,8 @@ public class WarpCommand implements ICommand {
     }
 
     @Override
-    public int compareTo(Object o) {
-        if (o instanceof ICommand) {
-            ICommand other = (ICommand) o;
+    public int compareTo(@Nonnull Object o) {
+        if (o instanceof ICommand other) {
             return this.getCommandName().compareTo(other.getCommandName());
         }
         return 0;

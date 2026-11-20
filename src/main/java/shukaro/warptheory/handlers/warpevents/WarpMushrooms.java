@@ -1,6 +1,5 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,12 +63,12 @@ public class WarpMushrooms extends IWorldTickWarpEvent {
                 (double) target.x + 1,
                 (double) target.y + 1,
                 (double) target.z + 1);
-        for (Entity entity : world.getEntitiesWithinAABB(EntityCow.class, boundingBox)) {
+        for (EntityCow entity : world.getEntitiesWithinAABB(EntityCow.class, boundingBox)) {
             // Check for exact class match, because we don't want to transform subclasses.
             if (entity.getClass() == EntityCow.class) {
                 EntityMooshroom mooshroom = new EntityMooshroom(world);
                 mooshroom.copyLocationAndAnglesFrom(entity);
-                mooshroom.setGrowingAge(((EntityCow) entity).getGrowingAge());
+                mooshroom.setGrowingAge(entity.getGrowingAge());
 
                 if (world.spawnEntityInWorld(mooshroom)) {
                     world.playSoundAtEntity(mooshroom, "dig.grass", 1.0F, 1.0F);
