@@ -11,6 +11,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
@@ -20,7 +21,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.util.Constants;
-import shukaro.warptheory.util.FormatCodes;
 import thaumcraft.common.lib.potions.PotionWarpWard;
 
 public class ItemWarpWardAmulet extends Item implements IBauble {
@@ -43,7 +43,7 @@ public class ItemWarpWardAmulet extends Item implements IBauble {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item id, CreativeTabs tab, List list) {
+    public void getSubItems(Item id, CreativeTabs tab, List<ItemStack> list) {
         list.add(new ItemStack(id, 1, 0));
     }
 
@@ -98,9 +98,9 @@ public class ItemWarpWardAmulet extends Item implements IBauble {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> infoList, boolean advanced) {
         infoList.add(
-                FormatCodes.DarkGrey.code + FormatCodes.Italic.code
+                EnumChatFormatting.DARK_GRAY + EnumChatFormatting.ITALIC.toString()
                         + StatCollector.translateToLocal("tooltip.warptheory.portableshower"));
     }
 }

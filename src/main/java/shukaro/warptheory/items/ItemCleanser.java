@@ -10,6 +10,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -20,7 +21,6 @@ import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.handlers.WarpHandler;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.Constants;
-import shukaro.warptheory.util.FormatCodes;
 
 public class ItemCleanser extends Item {
 
@@ -44,7 +44,7 @@ public class ItemCleanser extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item id, CreativeTabs tab, List list) {
+    public void getSubItems(Item id, CreativeTabs tab, List<ItemStack> list) {
         list.add(new ItemStack(id, 1, 0));
     }
 
@@ -125,8 +125,9 @@ public class ItemCleanser extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List infoList, boolean advanced) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> infoList, boolean advanced) {
         infoList.add(
-                FormatCodes.DarkGrey.code + FormatCodes.Italic.code + StatCollector.translateToLocal(getToolTip()));
+                EnumChatFormatting.DARK_GRAY + EnumChatFormatting.ITALIC.toString()
+                        + StatCollector.translateToLocal(getToolTip()));
     }
 }
