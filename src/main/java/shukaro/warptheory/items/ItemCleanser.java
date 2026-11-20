@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Locale;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
@@ -28,28 +27,9 @@ public class ItemCleanser extends Item {
     private IIcon icon2;
 
     public ItemCleanser() {
-        super();
-        this.setHasSubtypes(true);
         this.setMaxStackSize(16);
-        this.setMaxDamage(0);
         this.setCreativeTab(WarpTheory.mainTab);
-        System.out.println("You were expecting a normal log, but it was me, Dio!");
         this.setUnlocalizedName(Constants.ITEM_WARPCLEANSER);
-    }
-
-    @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return this.getUnlocalizedName();
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(Item id, CreativeTabs tab, List<ItemStack> list) {
-        list.add(new ItemStack(id, 1, 0));
-    }
-
-    protected String getIcon() {
-        return "itemCleanser";
     }
 
     @SideOnly(Side.CLIENT)

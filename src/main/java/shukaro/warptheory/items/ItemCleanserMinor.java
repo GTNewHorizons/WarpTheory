@@ -18,7 +18,6 @@ public class ItemCleanserMinor extends ItemCleanser {
     private IIcon icon;
 
     public ItemCleanserMinor() {
-        super();
         this.setUnlocalizedName(Constants.ITEM_WARPCLEANSERMINOR);
     }
 
@@ -29,11 +28,6 @@ public class ItemCleanserMinor extends ItemCleanser {
         }
 
         WarpHandler.purgeWarpMinor(player);
-    }
-
-    @Override
-    protected String getIcon() {
-        return "itemCleanserMinor";
     }
 
     @SideOnly(Side.CLIENT)

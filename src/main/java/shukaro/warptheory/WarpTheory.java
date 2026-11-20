@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.logging.log4j.Logger;
@@ -50,7 +49,7 @@ public class WarpTheory {
 
     public static Logger logger;
 
-    public static CreativeTabs mainTab = new WarpTab(StatCollector.translateToLocal("warptheory.tab"));
+    public static final CreativeTabs mainTab = new WarpTab("warptheory.tab");
 
     public static NameGenerator normalNames;
 

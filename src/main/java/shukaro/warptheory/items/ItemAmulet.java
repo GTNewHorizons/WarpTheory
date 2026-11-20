@@ -1,17 +1,13 @@
 package shukaro.warptheory.items;
 
 import java.util.List;
-import java.util.Locale;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
 import baubles.api.BaubleType;
@@ -25,44 +21,17 @@ import shukaro.warptheory.util.Constants;
 
 public class ItemAmulet extends Item implements IBauble {
 
-    private IIcon icon;
-
     public ItemAmulet() {
-        super();
-        this.setHasSubtypes(true);
         this.setMaxStackSize(1);
-        this.setMaxDamage(0);
+        this.setTextureName("warptheory:itemAmulet");
         this.setCreativeTab(WarpTheory.mainTab);
         this.setUnlocalizedName(Constants.ITEM_PURE_TALISMAN);
-    }
-
-    @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return this.getUnlocalizedName();
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(Item id, CreativeTabs tab, List<ItemStack> list) {
-        list.add(new ItemStack(id, 1, 0));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg) {
-        this.icon = reg.registerIcon(Constants.modID.toLowerCase(Locale.ENGLISH) + ":" + "itemAmulet");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.uncommon;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int meta) {
-        return this.icon;
     }
 
     @Override
