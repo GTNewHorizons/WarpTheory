@@ -10,6 +10,7 @@ import java.util.concurrent.CompletableFuture;
 import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.resources.SkinManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -106,6 +107,10 @@ public class EntityDoppelganger extends EntityCreature {
             return null;
         }
         UUID uuid = UUID.fromString(uuidString);
+
+        if (worldObj.func_152378_a(uuid) instanceof AbstractClientPlayer player) {
+            return player.getLocationSkin();
+        }
 
         GameProfile gameProfile = gameProfileCache.get(uuid);
         if (gameProfile == null) {
