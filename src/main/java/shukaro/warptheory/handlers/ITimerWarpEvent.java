@@ -1,6 +1,5 @@
 package shukaro.warptheory.handlers;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -77,11 +76,10 @@ public abstract class ITimerWarpEvent extends IWarpEvent {
     }
 
     @SubscribeEvent
-    @SuppressWarnings("unchecked")
     public void onTick(TickEvent.WorldTickEvent e) {
         if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER) return;
 
-        for (EntityPlayer player : (List<EntityPlayer>) e.world.playerEntities) {
+        for (EntityPlayer player : e.world.playerEntities) {
             boolean hasTimer = false;
             for (Map.Entry<String, String> entry : timers.entrySet()) {
                 if (MiscHelper.getWarpTag(player).hasKey(entry.getValue())) {
