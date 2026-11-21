@@ -27,7 +27,7 @@ public class WarpTheoryGuiConfig extends GuiConfig {
     }
 
     private static List<IConfigElement> getConfigObjects() {
-        List<IConfigElement> list = new ArrayList<IConfigElement>();
+        List<IConfigElement> list = new ArrayList<>();
 
         list.addAll(new ConfigElement(ConfigHandler.config.getCategory("general")).getChildElements());
 

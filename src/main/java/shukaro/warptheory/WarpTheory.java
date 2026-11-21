@@ -5,9 +5,9 @@ import java.io.InputStream;
 import java.nio.file.Files;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -48,9 +48,9 @@ public class WarpTheory {
     @SidedProxy(clientSide = "shukaro.warptheory.net.ClientProxy", serverSide = "shukaro.warptheory.net.CommonProxy")
     public static CommonProxy proxy;
 
-    public static Logger logger;
+    public static final Logger logger = LogManager.getLogger(Constants.modID);
 
-    public static CreativeTabs mainTab = new WarpTab(StatCollector.translateToLocal("warptheory.tab"));
+    public static final CreativeTabs mainTab = new WarpTab("warptheory.tab");
 
     public static NameGenerator normalNames;
 
@@ -64,7 +64,6 @@ public class WarpTheory {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
         try {
             File folder = new File(event.getModConfigurationDirectory() + "/warptheory/");
             if (!folder.exists()) folder.mkdirs();
