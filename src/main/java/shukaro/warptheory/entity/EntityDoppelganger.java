@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 import javax.annotation.Nullable;
 
@@ -108,9 +109,13 @@ public class EntityDoppelganger extends EntityCreature {
 
         GameProfile gameProfile = gameProfileCache.get(uuid);
         if (gameProfile == null) {
-            gameProfile = Minecraft.getMinecraft().func_152347_ac()
-                    .fillProfileProperties(new GameProfile(uuid, null), true);
+            gameProfile = new GameProfile(uuid, null);
             gameProfileCache.put(uuid, gameProfile);
+            CompletableFuture
+                    .supplyAsync(
+                            () -> Minecraft.getMinecraft().func_152347_ac()
+                                    .fillProfileProperties(new GameProfile(uuid, null), true))
+                    .thenAccept(p -> Minecraft.getMinecraft().func_152344_a(() -> gameProfileCache.put(uuid, p)));
         }
 
         SkinManager skinManager = Minecraft.getMinecraft().func_152342_ad();
