@@ -12,7 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockCoord implements Comparable {
+public class BlockCoord implements Comparable<BlockCoord> {
 
     public int x, y, z;
 
@@ -60,8 +60,7 @@ public class BlockCoord implements Comparable {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof BlockCoord)) return false;
-        BlockCoord t = (BlockCoord) o;
+        if (!(o instanceof BlockCoord t)) return false;
         return (this.x == t.x) && (this.y == t.y) && (this.z == t.z);
     }
 
@@ -89,26 +88,22 @@ public class BlockCoord implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        if (o instanceof BlockCoord) {
-            BlockCoord other = (BlockCoord) o;
-            if (this.x < other.x) {
-                return -1;
-            } else if (this.x > other.x) {
-                return 1;
-            } else if (this.y < other.y) {
-                return -1;
-            } else if (this.y > other.y) {
-                return 1;
-            } else if (this.z < other.z) {
-                return -1;
-            } else if (this.z > other.z) {
-                return 1;
-            } else {
-                return 0;
-            }
+    public int compareTo(BlockCoord other) {
+        if (this.x < other.x) {
+            return -1;
+        } else if (this.x > other.x) {
+            return 1;
+        } else if (this.y < other.y) {
+            return -1;
+        } else if (this.y > other.y) {
+            return 1;
+        } else if (this.z < other.z) {
+            return -1;
+        } else if (this.z > other.z) {
+            return 1;
+        } else {
+            return 0;
         }
-        return 0;
     }
 
     public int compareTo(int xCoord, int yCoord, int zCoord) {
@@ -212,7 +207,7 @@ public class BlockCoord implements Comparable {
     // }
 
     public List<BlockCoord> getNearby() {
-        List<BlockCoord> nearby = new ArrayList<BlockCoord>();
+        List<BlockCoord> nearby = new ArrayList<>();
 
         for (BlockCoord c : nearbyOffsets) {
             nearby.add(this.copy().add(c));
@@ -237,7 +232,7 @@ public class BlockCoord implements Comparable {
     }
 
     public List<BlockCoord> getRadiusMatches(World world, int radius, Block block, int meta) {
-        List<BlockCoord> matches = new ArrayList<BlockCoord>();
+        List<BlockCoord> matches = new ArrayList<>();
         BlockCoord c = this.copy();
 
         int minX = c.x - radius;
@@ -260,7 +255,7 @@ public class BlockCoord implements Comparable {
     }
 
     public List<BlockCoord> getRadiusBlocks(int radius) {
-        List<BlockCoord> matches = new ArrayList<BlockCoord>();
+        List<BlockCoord> matches = new ArrayList<>();
         BlockCoord c = this.copy();
 
         int minX = c.x - radius;
@@ -284,7 +279,7 @@ public class BlockCoord implements Comparable {
 
     public boolean blockEquals(World world, BlockCoord c) {
         return c.getBlock(world) == null && this.getBlock(world) == null
-                || !(c.getBlock(world) == null ^ this.getBlock(world) == null)
+                || (c.getBlock(world) == null) == (this.getBlock(world) == null)
                         && (c.getBlock(world).equals(this.getBlock(world)) && c.getMeta(world) == this.getMeta(world));
     }
 
@@ -294,7 +289,7 @@ public class BlockCoord implements Comparable {
 
     public boolean blockEquals(IBlockAccess world, BlockCoord c) {
         return c.getBlock(world) == null && this.getBlock(world) == null
-                || !(c.getBlock(world) == null ^ this.getBlock(world) == null)
+                || (c.getBlock(world) == null) == (this.getBlock(world) == null)
                         && (c.getBlock(world).equals(this.getBlock(world)) && c.getMeta(world) == this.getMeta(world));
     }
 
@@ -307,8 +302,8 @@ public class BlockCoord implements Comparable {
     }
 
     public boolean isConnected(World world, BlockCoord c, Block block, int meta) {
-        List<BlockCoord> traversed = new LinkedList<BlockCoord>();
-        List<BlockCoord> toTraverse = new LinkedList<BlockCoord>();
+        List<BlockCoord> traversed = new LinkedList<>();
+        List<BlockCoord> toTraverse = new LinkedList<>();
 
         toTraverse.add(this);
 

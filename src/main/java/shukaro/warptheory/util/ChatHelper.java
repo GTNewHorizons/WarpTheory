@@ -1,6 +1,5 @@
 package shukaro.warptheory.util;
 
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,8 +43,7 @@ public class ChatHelper {
     }
 
     public static void sendToWorld(World world, String message) {
-        for (EntityPlayer player : (List<EntityPlayer>) world.playerEntities)
-            player.addChatMessage(new ChatComponentText(message));
+        for (EntityPlayer player : world.playerEntities) player.addChatMessage(new ChatComponentText(message));
     }
 
     public static String getUsername(IChatComponent message) {
@@ -79,7 +77,7 @@ public class ChatHelper {
                     c = String.valueOf(word.charAt(i) + String.valueOf(word.charAt(i + 1)));
                     i++;
                 } else c = rand.nextInt(5) == 0
-                        ? FormatCodes.RandomChar.code + String.valueOf(word.charAt(i)) + FormatCodes.Reset.code
+                        ? EnumChatFormatting.OBFUSCATED + String.valueOf(word.charAt(i)) + EnumChatFormatting.RESET
                         : String.valueOf(word.charAt(i));
                 if (rand.nextBoolean()) newWord = newWord + c;
                 else newWord = c + newWord;
@@ -88,6 +86,6 @@ public class ChatHelper {
                 newText = newText + (newWord.length() > 0 && newText.length() > 0 ? " " : "") + newWord;
             else newText = newWord + (newWord.length() > 0 && newText.length() > 0 ? " " : "") + newText;
         }
-        return FormatCodes.Reset.code + newText + FormatCodes.Reset.code;
+        return EnumChatFormatting.RESET + newText + EnumChatFormatting.RESET;
     }
 }

@@ -1,7 +1,5 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import java.util.Set;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,16 +20,14 @@ public class WarpSnow extends IWorldTickWarpEvent {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean canDo(World world, EntityPlayer player) {
-        for (String n : (Set<String>) MiscHelper.getWarpTag(player).func_150296_c()) {
+        for (String n : MiscHelper.getWarpTag(player).func_150296_c()) {
             if (n.startsWith("biome") && !n.equals(getName())) return false;
         }
         return true;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
         BlockCoord target = RandomBlockHelper
                 .randomBlock(world, player, 16, block -> MiscHelper.hasNonSolidNeighbor(world, block));

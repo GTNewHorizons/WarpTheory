@@ -1,7 +1,5 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import java.util.Set;
-
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -27,9 +25,8 @@ public class WarpSwamp extends IWorldTickWarpEvent {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean canDo(World world, EntityPlayer player) {
-        for (String n : (Set<String>) MiscHelper.getWarpTag(player).func_150296_c()) {
+        for (String n : MiscHelper.getWarpTag(player).func_150296_c()) {
             if (n.startsWith("biome") && !n.equals(getName())) return false;
         }
         return true;

@@ -4,23 +4,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class WarpItems {
 
-    public static ItemCleanserMinor itemCleanserMinor;
-    public static ItemCleanser itemCleanser;
-    public static ItemAmulet itemAmulet;
-    public static ItemSomething itemSomething;
-    public static ItemPaper itemPaper;
-    public static ItemWarpWardAmulet itemWarpWardAmulet;
-    public static ItemOblivionPotion itemOblivionPotion;
+    public static final ItemCleanserMinor itemCleanserMinor = new ItemCleanserMinor();
+    public static final ItemCleanser itemCleanser = new ItemCleanser();
+    public static final ItemAmulet itemAmulet = new ItemAmulet();
+    public static final ItemSomething itemSomething = new ItemSomething();
+    public static final ItemPaper itemPaper = new ItemPaper();
+    public static final ItemWarpWardAmulet itemWarpWardAmulet = new ItemWarpWardAmulet();
+    public static final ItemOblivionPotion itemOblivionPotion = new ItemOblivionPotion();
 
     public static void initItems() {
-        itemCleanserMinor = new ItemCleanserMinor();
-        itemCleanser = new ItemCleanser();
-        itemAmulet = new ItemAmulet();
-        itemWarpWardAmulet = new ItemWarpWardAmulet();
-
-        itemSomething = new ItemSomething();
-        itemPaper = new ItemPaper();
-        itemOblivionPotion = new ItemOblivionPotion();
         GameRegistry.registerItem(itemCleanserMinor, itemCleanserMinor.getUnlocalizedName());
         GameRegistry.registerItem(itemCleanser, itemCleanser.getUnlocalizedName());
         GameRegistry.registerItem(itemAmulet, itemAmulet.getUnlocalizedName());

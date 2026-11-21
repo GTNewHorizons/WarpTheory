@@ -1,6 +1,5 @@
 package shukaro.warptheory.handlers;
 
-import java.util.List;
 import java.util.function.Function;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,11 +35,10 @@ public abstract class IWorldTickWarpEvent extends IWarpEvent {
     }
 
     @SubscribeEvent
-    @SuppressWarnings("unchecked")
     public void onTick(TickEvent.WorldTickEvent e) {
         if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER) return;
 
-        for (EntityPlayer player : (List<EntityPlayer>) e.world.playerEntities) {
+        for (EntityPlayer player : e.world.playerEntities) {
             if (MiscHelper.getWarpTag(player).hasKey(name)) {
                 int eventAmount = MiscHelper.getWarpTag(player).getInteger(name);
                 int decrement = triggerEvent(eventAmount, e.world, player);
