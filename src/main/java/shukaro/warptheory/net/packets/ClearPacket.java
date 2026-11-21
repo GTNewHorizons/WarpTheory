@@ -1,24 +1,29 @@
 package shukaro.warptheory.net.packets;
 
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import shukaro.warptheory.handlers.warpevents.WarpBlood;
 
-public class ClearPacket implements IWarpPacket {
-
-    public int id;
+public class ClearPacket implements IMessage {
 
     public ClearPacket() {}
 
-    public ClearPacket(int id) {
-        this.id = id;
-    }
+    @Override
+    public void fromBytes(ByteBuf bytes) {}
 
     @Override
-    public void readBytes(ByteBuf bytes) {
-        this.id = bytes.readInt();
-    }
+    public void toBytes(ByteBuf bytes) {}
 
-    @Override
-    public void writeBytes(ByteBuf bytes) {
-        bytes.writeInt(this.id);
+    public static final class Handler implements IMessageHandler<ClearPacket, IMessage> {
+
+        @Override
+        public IMessage onMessage(ClearPacket message, MessageContext ctx) {
+            WarpBlood.bloody.clear();
+            WarpBlood.blackBloody.clear();
+
+            return null;
+        }
     }
 }

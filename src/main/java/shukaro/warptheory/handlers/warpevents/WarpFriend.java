@@ -1,7 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
@@ -20,7 +20,7 @@ public class WarpFriend extends IMultiWarpEvent {
     }
 
     @Override
-    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayerMP player) {
         int successful = 0;
 
         for (int i = 0; i < 6; i++) {

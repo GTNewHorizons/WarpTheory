@@ -1,6 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -20,7 +21,7 @@ public class WarpPumpkin extends IWarpEvent {
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
+    public boolean doEvent(World world, EntityPlayerMP player) {
         if (world.isRemote) return true;
 
         // This should be guaranteed to be true, since we check in canDo().

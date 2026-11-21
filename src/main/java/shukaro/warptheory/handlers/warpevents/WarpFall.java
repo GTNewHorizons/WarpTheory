@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -34,7 +35,7 @@ public class WarpFall extends IWarpEvent {
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
+    public boolean doEvent(World world, EntityPlayerMP player) {
         sendChatMessage(player);
         MiscHelper.modEventInt(player, name, 4);
         return true;
