@@ -3,6 +3,7 @@ package shukaro.warptheory.handlers.warpevents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -30,7 +31,7 @@ public class WarpFakeRain extends IMultiWarpEvent {
     }
 
     @Override
-    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayerMP player) {
         if (eventAmount > 1) {
             PacketDispatcher.sendFakeRainEvent(player, eventLevel);
         } else {

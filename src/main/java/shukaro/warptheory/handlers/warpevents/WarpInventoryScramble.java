@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -25,7 +26,7 @@ public class WarpInventoryScramble extends IWarpEvent {
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
+    public boolean doEvent(World world, EntityPlayerMP player) {
         if (world.isRemote) return true;
 
         List<ItemStack> inventoryContents = Lists.newArrayList(player.inventory.mainInventory);

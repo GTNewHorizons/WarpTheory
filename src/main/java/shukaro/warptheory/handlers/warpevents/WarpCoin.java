@@ -1,6 +1,6 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -14,7 +14,7 @@ public class WarpCoin extends IWarpEvent {
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
+    public boolean doEvent(World world, EntityPlayerMP player) {
         if (world.isRemote) return true;
 
         player.entityDropItem(new ItemStack(ConfigItems.itemResource, 1, 18), 0.0f);

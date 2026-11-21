@@ -6,7 +6,7 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntitySquid;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import shukaro.warptheory.entity.EntitySafeTaintSheep;
@@ -24,7 +24,7 @@ public class WarpLivestockRain extends IMultiWarpEvent {
     }
 
     @Override
-    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayerMP player) {
         int successful = 0;
         for (int i = 0; i < 6; i++) {
             BlockCoord target = RandomBlockHelper.randomBlock(world, player, 8, block -> isValid(world, block));

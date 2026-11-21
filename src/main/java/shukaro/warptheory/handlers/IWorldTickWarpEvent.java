@@ -3,6 +3,7 @@ package shukaro.warptheory.handlers;
 import java.util.function.Function;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -28,7 +29,7 @@ public abstract class IWorldTickWarpEvent extends IWarpEvent {
     public abstract int triggerEvent(int eventAmount, World world, EntityPlayer player);
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
+    public boolean doEvent(World world, EntityPlayerMP player) {
         sendChatMessage(player);
         MiscHelper.modEventInt(player, name, incrementFunction.apply(world));
         return true;

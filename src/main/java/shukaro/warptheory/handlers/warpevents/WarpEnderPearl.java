@@ -1,7 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.item.EntityEnderPearl;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import shukaro.warptheory.handlers.IWarpEvent;
@@ -13,7 +13,7 @@ public class WarpEnderPearl extends IWarpEvent {
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
+    public boolean doEvent(World world, EntityPlayerMP player) {
         if (world.isRemote) return true;
 
         if (world.spawnEntityInWorld(new EntityEnderPearl(world, player))) {

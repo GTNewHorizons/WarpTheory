@@ -1,6 +1,7 @@
 package shukaro.warptheory.handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import shukaro.warptheory.util.ChatHelper;
@@ -32,7 +33,7 @@ public abstract class IWarpEvent {
         return true;
     }
 
-    public abstract boolean doEvent(World world, EntityPlayer player);
+    public abstract boolean doEvent(World world, EntityPlayerMP player);
 
     public void sendChatMessage(EntityPlayer player) {
         sendChatMessage(player, name);
