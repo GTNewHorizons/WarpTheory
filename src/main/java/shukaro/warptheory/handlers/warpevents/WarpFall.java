@@ -1,6 +1,5 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,8 +19,8 @@ import shukaro.warptheory.util.MiscHelper;
 
 public class WarpFall extends IWarpEvent {
 
-    private static Map<String, BlockCoord> originalPositions = new HashMap<String, BlockCoord>();
-    private static Map<String, Long> returnTimes = new HashMap<String, Long>();
+    private static Map<String, BlockCoord> originalPositions = new HashMap<>();
+    private static Map<String, Long> returnTimes = new HashMap<>();
 
     public WarpFall(int minWarp) {
         super("fall", minWarp);
@@ -44,7 +43,7 @@ public class WarpFall extends IWarpEvent {
     @SubscribeEvent
     public void onTick(TickEvent.WorldTickEvent e) {
         if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER) return;
-        for (EntityPlayer player : (ArrayList<EntityPlayer>) e.world.playerEntities) {
+        for (EntityPlayer player : e.world.playerEntities) {
             if (MiscHelper.getWarpTag(player).hasKey(name)) {
                 if (!originalPositions.containsKey(player.getCommandSenderName())) {
                     int fall = MiscHelper.getWarpTag(player).getInteger(name);

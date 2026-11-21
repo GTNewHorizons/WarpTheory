@@ -26,10 +26,10 @@ import thaumcraft.common.lib.research.PlayerKnowledge;
 public class WarpHandler {
 
     public static final PlayerKnowledge Knowledge = Thaumcraft.proxy.getPlayerKnowledge();
-    private static HashMap<UUID, Integer> Unavoidable = new HashMap<UUID, Integer>();
-    public static ArrayList<IWarpEvent> warpEvents = new ArrayList<IWarpEvent>();
+    private static HashMap<UUID, Integer> Unavoidable = new HashMap<>();
+    public static ArrayList<IWarpEvent> warpEvents = new ArrayList<>();
 
-    public static Map<NameMetaPair, NameMetaPair> decayMappings = new THashMap<NameMetaPair, NameMetaPair>();
+    public static Map<NameMetaPair, NameMetaPair> decayMappings = new THashMap<>();
 
     public static void addDecayMapping(Block start, Block end) {
         addDecayMapping(start, 0, end, 0);
@@ -130,7 +130,7 @@ public class WarpHandler {
     public static int getTotalWarp(EntityPlayer player) {
         String name = player.getCommandSenderName();
         int innerWarp = Knowledge.getWarpTotal(name);
-        int extraPerm = Knowledge.getWarpPerm(name) * (int) Math.max(0, ConfigHandler.permWarpMult - 1);
+        int extraPerm = Knowledge.getWarpPerm(name) * Math.max(0, ConfigHandler.permWarpMult - 1);
         int outerWarp = getWarpFromGear(player);
         return innerWarp + extraPerm + outerWarp;
     }
@@ -203,7 +203,7 @@ public class WarpHandler {
         if (!MiscHelper.getWarpTag(player).hasKey("queuedEvents")) queue = "";
         else queue = MiscHelper.getWarpTag(player).getString("queuedEvents");
         if (queue.length() > 0) {
-            ArrayList<String> names = new ArrayList<String>();
+            ArrayList<String> names = new ArrayList<>();
             for (String n : queue.split(" ")) names.add(n);
             Collections.shuffle(names);
             String todo = names.remove(player.worldObj.rand.nextInt(names.size()));

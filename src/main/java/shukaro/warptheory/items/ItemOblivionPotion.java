@@ -1,7 +1,6 @@
 package shukaro.warptheory.items;
 
 import java.util.List;
-import java.util.Locale;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -26,10 +25,9 @@ import thaumcraft.common.Thaumcraft;
 public class ItemOblivionPotion extends Item {
 
     public ItemOblivionPotion() {
-        this.setHasSubtypes(false);
         this.setMaxStackSize(1);
         this.setUnlocalizedName(Constants.ITEM_POTION);
-        this.setTextureName(Constants.modID.toLowerCase(Locale.ENGLISH) + ":itemOblivionPotion");
+        this.setTextureName("warptheory:itemOblivionPotion");
     }
 
     @Override

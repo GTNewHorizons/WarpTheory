@@ -1,7 +1,5 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import java.util.Collection;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
@@ -22,7 +20,6 @@ public class WarpBuff extends IWarpEvent {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean doEvent(World world, EntityPlayer player) {
         if (world.isRemote) return true;
 
@@ -32,7 +29,7 @@ public class WarpBuff extends IWarpEvent {
             int level = effect.getAmplifier();
 
             if (player.isPotionActive(id)) {
-                for (PotionEffect e : (Collection<PotionEffect>) player.getActivePotionEffects()) {
+                for (PotionEffect e : player.getActivePotionEffects()) {
                     if (e.getPotionID() == id) {
                         effect = new PotionEffect(id, duration + e.getDuration(), level);
                         break;

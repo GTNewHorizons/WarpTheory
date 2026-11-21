@@ -58,21 +58,21 @@ public class BlockVanish extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubBlocks(Item i, CreativeTabs creativeTabs, List list) {
+    public void getSubBlocks(Item i, CreativeTabs creativeTabs, List<ItemStack> list) {
         list.add(new ItemStack(i));
     }
 
     @Override
-    public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB axisalignedbb, List arraylist,
-            Entity entity) {}
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB mask, List<AxisAlignedBB> list,
+            Entity collider) {}
 
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k) {
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
         setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
     @Override
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World w, int i, int j, int k) {
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
         return AxisAlignedBB.getBoundingBox(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
     }
 
