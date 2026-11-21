@@ -7,11 +7,11 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import shukaro.warptheory.net.packets.BloodPacket;
-import shukaro.warptheory.net.packets.ClearPacket;
-import shukaro.warptheory.net.packets.ClientEventPacket;
-import shukaro.warptheory.net.packets.DecrementPacket;
+import shukaro.warptheory.net.packets.ClearBlockBloodPacket;
 import shukaro.warptheory.net.packets.EnderParticlesPacket;
 import shukaro.warptheory.net.packets.FakeRainPacket;
+import shukaro.warptheory.net.packets.InflictEarsPacket;
+import shukaro.warptheory.net.packets.ReduceEarsPacket;
 import shukaro.warptheory.net.packets.VelocityPacket;
 
 public class PacketDispatcher {
@@ -32,15 +32,15 @@ public class PacketDispatcher {
     }
 
     public static void sendBloodClearEvent(EntityPlayerMP player) {
-        network.sendTo(new ClearPacket(), player);
+        network.sendTo(new ClearBlockBloodPacket(), player);
     }
 
     public static void sendEarDecrementEvent() {
-        network.sendToServer(new DecrementPacket());
+        network.sendToServer(new ReduceEarsPacket());
     }
 
     public static void sendEarStartEvent(EntityPlayerMP player, int amount) {
-        network.sendTo(new ClientEventPacket(amount), player);
+        network.sendTo(new InflictEarsPacket(amount), player);
     }
 
     public static void sendFakeRainEvent(EntityPlayerMP player, int eventLevel) {

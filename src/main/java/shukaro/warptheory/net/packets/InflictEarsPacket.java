@@ -9,13 +9,13 @@ import io.netty.buffer.ByteBuf;
 import shukaro.warptheory.WarpTheory;
 import shukaro.warptheory.util.MiscHelper;
 
-public class ClientEventPacket implements IMessage {
+public class InflictEarsPacket implements IMessage {
 
     public int amount;
 
-    public ClientEventPacket() {}
+    public InflictEarsPacket() {}
 
-    public ClientEventPacket(int amount) {
+    public InflictEarsPacket(int amount) {
         this.amount = amount;
     }
 
@@ -29,10 +29,10 @@ public class ClientEventPacket implements IMessage {
         bytes.writeInt(this.amount);
     }
 
-    public static final class Handler implements IMessageHandler<ClientEventPacket, IMessage> {
+    public static final class Handler implements IMessageHandler<InflictEarsPacket, IMessage> {
 
         @Override
-        public IMessage onMessage(ClientEventPacket message, MessageContext ctx) {
+        public IMessage onMessage(InflictEarsPacket message, MessageContext ctx) {
             EntityPlayer player = WarpTheory.proxy.getPlayer();
             if (player != null) MiscHelper.modEventInt(player, "ears", message.amount);
             return null;
