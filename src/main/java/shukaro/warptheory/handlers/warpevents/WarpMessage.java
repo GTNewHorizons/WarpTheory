@@ -15,8 +15,6 @@ public class WarpMessage extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayerMP player) {
-        if (world.isRemote) return true;
-
         int message = world.rand.nextInt(NUM_MESSAGES);
         sendChatMessage(player, String.format("%s.%d", name, message));
         return true;

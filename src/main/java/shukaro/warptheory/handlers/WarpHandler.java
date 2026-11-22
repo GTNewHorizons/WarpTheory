@@ -178,8 +178,7 @@ public class WarpHandler {
     }
 
     public static int getFinalWarp(ItemStack stack, EntityPlayer player) {
-        if (stack == null || !(stack.getItem() instanceof IWarpingGear)) return 0;
-        IWarpingGear armor = (IWarpingGear) stack.getItem();
+        if (stack == null || !(stack.getItem() instanceof IWarpingGear armor)) return 0;
         return armor.getWarp(stack, player);
     }
 

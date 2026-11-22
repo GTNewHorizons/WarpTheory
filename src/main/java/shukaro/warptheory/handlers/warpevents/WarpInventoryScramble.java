@@ -26,8 +26,6 @@ public class WarpInventoryScramble extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayerMP player) {
-        if (world.isRemote) return true;
-
         List<ItemStack> inventoryContents = Lists.newArrayList(player.inventory.mainInventory);
         // We won't move the player's currently selected item.
         inventoryContents.remove(player.inventory.currentItem);

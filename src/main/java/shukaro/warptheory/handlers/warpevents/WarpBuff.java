@@ -21,8 +21,6 @@ public class WarpBuff extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayerMP player) {
-        if (world.isRemote) return true;
-
         for (PotionEffect effect : potionEffects) {
             int id = effect.getPotionID();
             int duration = effect.getDuration();

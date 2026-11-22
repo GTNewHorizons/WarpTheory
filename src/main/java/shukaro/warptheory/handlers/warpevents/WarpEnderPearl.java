@@ -14,8 +14,6 @@ public class WarpEnderPearl extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayerMP player) {
-        if (world.isRemote) return true;
-
         if (world.spawnEntityInWorld(new EntityEnderPearl(world, player))) {
             world.playSoundAtEntity(player, "mob.endermen.scream", 1.0F, 1.0F);
             sendChatMessage(player);

@@ -21,8 +21,6 @@ public class WarpObsidian extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayerMP player) {
-        if (world.isRemote) return true;
-
         // This should be guaranteed to be true, since we check in canDo().
         // But check again just to be safe (in case the code changes).
         BlockCoord playerHead = new BlockCoord(player).offset(1);

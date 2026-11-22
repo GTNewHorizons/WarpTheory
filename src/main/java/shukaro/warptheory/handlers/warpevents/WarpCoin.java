@@ -15,8 +15,6 @@ public class WarpCoin extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayerMP player) {
-        if (world.isRemote) return true;
-
         player.entityDropItem(new ItemStack(ConfigItems.itemResource, 1, 18), 0.0f);
         world.playSoundAtEntity(player, "random.orb", 1.0F, 1.0F);
         sendChatMessage(player);

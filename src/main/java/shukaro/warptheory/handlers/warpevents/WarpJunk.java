@@ -40,8 +40,6 @@ public class WarpJunk extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayerMP player) {
-        if (world.isRemote) return true;
-
         boolean successful = false;
         ItemStack[] inventory = player.inventory.mainInventory;
         for (int i = 0; i < inventory.length; i++) {

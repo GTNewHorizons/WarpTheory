@@ -19,8 +19,6 @@ public class WarpInventorySwap extends IWarpEvent {
 
     @Override
     public boolean doEvent(World world, EntityPlayerMP player) {
-        if (world.isRemote) return true;
-
         ItemStack[] inventory = player.inventory.mainInventory;
         // Find empty and full slots in the player's main inventory (excluding hotbar).
         List<Integer> emptySlots = new ArrayList<>();

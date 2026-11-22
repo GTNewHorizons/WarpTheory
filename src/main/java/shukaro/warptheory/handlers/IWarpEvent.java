@@ -7,6 +7,9 @@ import net.minecraft.world.World;
 import shukaro.warptheory.util.ChatHelper;
 import shukaro.warptheory.util.MiscHelper;
 
+/**
+ * A custom warp event. Must be registered in {@link WarpEventRegistry} to function.
+ */
 public abstract class IWarpEvent {
 
     protected final String name;
@@ -29,10 +32,25 @@ public abstract class IWarpEvent {
         return (int) Math.ceil(getSeverity() / (double) 10);
     }
 
+    /**
+     * Check whether this event can apply to the player. Runs only on the server thread. (Skipped events still reduce
+     * the warp counter and delay the next warp event.)
+     *
+     * @param world  The world the player is currently occupying.
+     * @param player The player whose warp is being triggered.
+     * @return Whether the event can occur.
+     */
     public boolean canDo(World world, EntityPlayerMP player) {
         return true;
     }
 
+    /**
+     * Inflict the event on the player. Runs only on the server thread.
+     *
+     * @param world  The world the player is currently occupying.
+     * @param player The player whose warp is being triggered.
+     * @return Whether the event occurred? All usages of this seems to return true, and the return value is unused.
+     */
     public abstract boolean doEvent(World world, EntityPlayerMP player);
 
     public void sendChatMessage(EntityPlayer player) {
@@ -46,7 +64,7 @@ public abstract class IWarpEvent {
     /**
      * Returns the new value of the tag.
      */
-    public int decreaseTag(EntityPlayer player, String tag, int decrement) {
+    public static int decreaseTag(EntityPlayer player, String tag, int decrement) {
         int amount = MiscHelper.getWarpTag(player).getInteger(tag);
 
         if (decrement > 0) {
