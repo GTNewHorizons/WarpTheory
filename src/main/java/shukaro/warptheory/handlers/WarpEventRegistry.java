@@ -27,7 +27,6 @@ import shukaro.warptheory.handlers.warpevents.WarpFakeRain;
 import shukaro.warptheory.handlers.warpevents.WarpFakeSound;
 import shukaro.warptheory.handlers.warpevents.WarpFakeSoundBehind;
 import shukaro.warptheory.handlers.warpevents.WarpFakeSoundRateLimited;
-import shukaro.warptheory.handlers.warpevents.WarpFall;
 import shukaro.warptheory.handlers.warpevents.WarpFireBats;
 import shukaro.warptheory.handlers.warpevents.WarpFriend;
 import shukaro.warptheory.handlers.warpevents.WarpGregTechFakeSound;
@@ -76,7 +75,6 @@ public enum WarpEventRegistry {
     BLOOD(WarpBlood::new, "Blood", "blood", true, 35, false, false),
     ACCELERATION(WarpAcceleration::new, "Acceleration", "acceleration", true, 140, true, false),
     LIGHTNING(WarpLightning::new, "Lightning", "lightning", true, 120, false, false),
-    FALL(WarpFall::new, "WorldHole", "world hole", false, 150, true, true),
     RAIN(WarpRain::new, "Rain", "rain", true, 55, true, false),
     WITHER(WarpWither::new, "WitherSpawn", "spawn wither", true, 200, true, false),
     FAKE_EXPLOSION(warp -> new WarpFakeSound("fakeexplosion", warp, "random.explode", 8), "FakeBoom", "fake explosion",

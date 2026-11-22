@@ -14,11 +14,11 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import shukaro.warptheory.block.WarpBlocks;
 import shukaro.warptheory.entity.EntityDoppelganger;
 import shukaro.warptheory.entity.EntityFakeCreeper;
 import shukaro.warptheory.entity.EntityPassiveCreeper;
@@ -81,8 +81,6 @@ public class WarpTheory {
 
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
 
-        WarpBlocks.initBlocks();
-
         WarpItems.initItems();
 
         MinecraftForge.EVENT_BUS.register(new WarpEventHandler());
@@ -106,5 +104,14 @@ public class WarpTheory {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent evt) {
         WarpResearch.init();
+    }
+
+    @Mod.EventHandler
+    public void onMissingMappings(FMLMissingMappingsEvent event) {
+        for (final var mapping : event.get()) {
+            if (mapping.name.equals("WarpTheory:blockVanish")) {
+                mapping.ignore();
+            }
+        }
     }
 }
