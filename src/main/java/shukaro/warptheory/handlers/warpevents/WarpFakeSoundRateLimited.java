@@ -1,6 +1,6 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 public class WarpFakeSoundRateLimited extends WarpFakeSound {
@@ -17,7 +17,7 @@ public class WarpFakeSoundRateLimited extends WarpFakeSound {
     }
 
     @Override
-    public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventAmount, World world, EntityPlayerMP player) {
         final long now = System.currentTimeMillis() / 1000;
 
         final long lastTriggered;

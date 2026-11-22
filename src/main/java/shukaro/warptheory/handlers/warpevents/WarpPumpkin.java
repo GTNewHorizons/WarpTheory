@@ -1,6 +1,5 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -15,7 +14,7 @@ public class WarpPumpkin extends IWarpEvent {
     }
 
     @Override
-    public boolean canDo(World world, EntityPlayer player) {
+    public boolean canDo(World world, EntityPlayerMP player) {
         // Only trigger if the player isn't wearing a helmet.
         return player.inventory.armorInventory[3] == null;
     }

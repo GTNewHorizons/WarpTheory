@@ -29,7 +29,7 @@ public abstract class IWarpEvent {
         return (int) Math.ceil(getSeverity() / (double) 10);
     }
 
-    public boolean canDo(World world, EntityPlayer player) {
+    public boolean canDo(World world, EntityPlayerMP player) {
         return true;
     }
 

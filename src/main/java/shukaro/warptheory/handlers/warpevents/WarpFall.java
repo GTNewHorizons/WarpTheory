@@ -29,7 +29,7 @@ public class WarpFall extends IWarpEvent {
     }
 
     @Override
-    public boolean canDo(World world, EntityPlayer player) {
+    public boolean canDo(World world, EntityPlayerMP player) {
         if (originalPositions.get(player.getCommandSenderName()) != null) return false;
         return true;
     }

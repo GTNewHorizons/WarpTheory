@@ -1,6 +1,5 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -15,7 +14,7 @@ public class WarpObsidian extends IWarpEvent {
     }
 
     @Override
-    public boolean canDo(World world, EntityPlayer player) {
+    public boolean canDo(World world, EntityPlayerMP player) {
         BlockCoord playerHead = new BlockCoord(player).offset(1);
         return playerHead.isAir(world);
     }

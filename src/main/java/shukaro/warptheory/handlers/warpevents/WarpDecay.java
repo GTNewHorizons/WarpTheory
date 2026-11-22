@@ -2,7 +2,7 @@ package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -21,7 +21,7 @@ public class WarpDecay extends IWorldTickWarpEvent {
     }
 
     @Override
-    public boolean canDo(World world, EntityPlayer player) {
+    public boolean canDo(World world, EntityPlayerMP player) {
         for (String n : MiscHelper.getWarpTag(player).func_150296_c()) {
             if (n.startsWith("biome") && !n.equals(getName())) return false;
         }
@@ -29,7 +29,7 @@ public class WarpDecay extends IWorldTickWarpEvent {
     }
 
     @Override
-    public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventAmount, World world, EntityPlayerMP player) {
         BlockCoord target = RandomBlockHelper
                 .randomBlock(world, player, 8, block -> MiscHelper.hasNonSolidNeighbor(world, block));
         if (target == null) {

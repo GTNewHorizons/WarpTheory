@@ -1,7 +1,6 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -19,7 +18,7 @@ public class WarpEndermen extends IMultiWarpEvent {
     }
 
     @Override
-    public boolean canDo(World world, EntityPlayer player) {
+    public boolean canDo(World world, EntityPlayerMP player) {
         // Only queue up this event at night.
         return !world.isDaytime();
     }
