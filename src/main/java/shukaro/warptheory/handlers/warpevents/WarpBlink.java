@@ -1,6 +1,6 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -17,7 +17,7 @@ public class WarpBlink extends IWorldTickWarpEvent {
     }
 
     @Override
-    public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventAmount, World world, EntityPlayerMP player) {
         for (int i = 0; i < 8; i++) {
             BlockCoord target = RandomBlockHelper.randomBlock(world, player, 16, block -> isBlockValid(world, block));
             if (target == null) {

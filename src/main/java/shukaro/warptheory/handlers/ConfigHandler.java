@@ -22,7 +22,6 @@ public class ConfigHandler {
     public static boolean allowGlobalWarpEffects = false;
     public static boolean allowMultiWarpEffects = false;
     public static boolean allowWarpEffects = false;
-    public static boolean allowServerKickWarpEffects = false;
 
     public static void init(File configFile) {
         if (config == null) {
@@ -70,11 +69,6 @@ public class ConfigHandler {
                 "general",
                 true,
                 "whether to add general warp effects. If false extra effects will only be seen when using Pure Tear");
-        allowServerKickWarpEffects = config.getBoolean(
-                "allowServerErrorWarpEffects",
-                "general",
-                false,
-                "whether to allow warp effects known to cause errors on servers");
 
         Arrays.stream(WarpEventRegistry.values()).forEach(warpEvent -> warpEvent.loadConfig(config));
 

@@ -1,6 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import com.google.common.collect.ImmutableList;
@@ -27,7 +28,7 @@ public class WarpGregTechFakeSound extends IMultiWarpEvent {
     }
 
     @Override
-    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayerMP player) {
         world.playSoundEffect(player.posX, player.posY, player.posZ, SOUNDS.get(eventLevel), 1.0f, 1.0f);
 
         // A little hackery to allow us to play the alarm sound multiple times, but the others once.

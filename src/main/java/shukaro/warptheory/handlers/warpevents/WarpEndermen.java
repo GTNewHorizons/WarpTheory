@@ -1,7 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -18,13 +18,13 @@ public class WarpEndermen extends IMultiWarpEvent {
     }
 
     @Override
-    public boolean canDo(World world, EntityPlayer player) {
+    public boolean canDo(World world, EntityPlayerMP player) {
         // Only queue up this event at night.
         return !world.isDaytime();
     }
 
     @Override
-    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayerMP player) {
         int successful = 0;
         for (int i = 0; i < 6; i++) {
             BlockCoord target = RandomBlockHelper.randomTripleAirBlock(world, player, 24);

@@ -29,7 +29,6 @@ public class ChatHelper {
 
     /** Sends a lang key with the given style to the player so their own client translates it. */
     public static void sendTranslatedToPlayer(EntityPlayer player, String key, ChatStyle style) {
-        // Server-side StatCollector only knows en_US, so the key must reach the client untranslated
         player.addChatMessage(new ChatComponentTranslation(key).setChatStyle(style));
     }
 

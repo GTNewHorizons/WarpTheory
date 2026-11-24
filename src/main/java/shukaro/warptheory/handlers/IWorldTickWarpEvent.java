@@ -3,6 +3,7 @@ package shukaro.warptheory.handlers;
 import java.util.function.Function;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -25,10 +26,10 @@ public abstract class IWorldTickWarpEvent extends IWarpEvent {
     /**
      * Returns the number of successful triggers of the event.
      */
-    public abstract int triggerEvent(int eventAmount, World world, EntityPlayer player);
+    public abstract int triggerEvent(int eventAmount, World world, EntityPlayerMP player);
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
+    public boolean doEvent(World world, EntityPlayerMP player) {
         sendChatMessage(player);
         MiscHelper.modEventInt(player, name, incrementFunction.apply(world));
         return true;
@@ -39,9 +40,11 @@ public abstract class IWorldTickWarpEvent extends IWarpEvent {
         if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER) return;
 
         for (EntityPlayer player : e.world.playerEntities) {
+            if (!(player instanceof EntityPlayerMP playerMP)) return;
+
             if (MiscHelper.getWarpTag(player).hasKey(name)) {
                 int eventAmount = MiscHelper.getWarpTag(player).getInteger(name);
-                int decrement = triggerEvent(eventAmount, e.world, player);
+                int decrement = triggerEvent(eventAmount, e.world, playerMP);
                 decreaseTag(player, name, decrement);
             }
         }

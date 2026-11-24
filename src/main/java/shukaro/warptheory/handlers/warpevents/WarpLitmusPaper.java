@@ -1,6 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -20,7 +21,7 @@ public class WarpLitmusPaper extends ITimerWarpEvent {
     }
 
     @Override
-    public boolean canDo(World world, EntityPlayer player) {
+    public boolean canDo(World world, EntityPlayerMP player) {
         // Don't even queue up this event while it's on cooldown, so that it doesn't reduce the
         // chances of other warp events.
         return getTimer(player, COOLDOWN_TIMER) == 0;

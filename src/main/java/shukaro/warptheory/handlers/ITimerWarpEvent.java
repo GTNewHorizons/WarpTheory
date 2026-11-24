@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import com.google.common.collect.ImmutableMap;
@@ -69,7 +70,7 @@ public abstract class ITimerWarpEvent extends IWarpEvent {
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
+    public boolean doEvent(World world, EntityPlayerMP player) {
         sendChatMessage(player);
         MiscHelper.modEventInt(player, name, incrementFunction.apply(world));
         return true;

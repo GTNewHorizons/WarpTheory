@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -53,7 +54,7 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
     /**
      * Returns the number of successful triggers of the event. {@code eventLevel} is the {@code 0}-indexed event level.
      */
-    public abstract int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayer player);
+    public abstract int triggerEvent(int eventLevel, int eventAmount, World world, EntityPlayerMP player);
 
     public ImmutableBiMap<Integer, String> getEventLevels() {
         return eventLevels;
@@ -88,7 +89,7 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
+    public boolean doEvent(World world, EntityPlayerMP player) {
         int eventLevel = calculateEventLevel(world, player);
         return doEvent(eventLevels.get(eventLevel), world, player);
     }
@@ -107,12 +108,14 @@ public abstract class IMultiWarpEvent extends IWarpEvent {
         if (e.phase != TickEvent.Phase.END || e.side != Side.SERVER) return;
 
         for (EntityPlayer player : e.world.playerEntities) {
+            if (!(player instanceof EntityPlayerMP playerMP)) continue;
+
             for (Map.Entry<Integer, String> entry : reversedEventLevels) {
                 String tag = entry.getValue();
 
                 if (MiscHelper.getWarpTag(player).hasKey(tag)) {
                     int eventAmount = MiscHelper.getWarpTag(player).getInteger(tag);
-                    int decrement = triggerEvent(entry.getKey(), eventAmount, e.world, player);
+                    int decrement = triggerEvent(entry.getKey(), eventAmount, e.world, playerMP);
                     decreaseTag(player, tag, decrement);
                     break; // Just do one event at a time.
                 }

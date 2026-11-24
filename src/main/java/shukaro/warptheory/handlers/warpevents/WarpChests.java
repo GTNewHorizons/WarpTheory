@@ -3,7 +3,7 @@ package shukaro.warptheory.handlers.warpevents;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
@@ -21,7 +21,7 @@ public class WarpChests extends IWorldTickWarpEvent {
     }
 
     @Override
-    public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventAmount, World world, EntityPlayerMP player) {
         int successful = 0;
 
         ArrayList<IInventory> inventories = MiscHelper.getNearbyTileInventories(player, 8);
