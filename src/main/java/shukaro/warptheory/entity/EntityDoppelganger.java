@@ -116,11 +116,11 @@ public class EntityDoppelganger extends EntityCreature {
         if (gameProfile == null) {
             gameProfile = new GameProfile(uuid, null);
             gameProfileCache.put(uuid, gameProfile);
-            CompletableFuture
-                    .supplyAsync(
-                            () -> Minecraft.getMinecraft().func_152347_ac()
-                                    .fillProfileProperties(new GameProfile(uuid, null), true))
-                    .thenAccept(p -> Minecraft.getMinecraft().func_152344_a(() -> gameProfileCache.put(uuid, p)));
+            CompletableFuture.runAsync(() -> {
+                GameProfile profile = Minecraft.getMinecraft().func_152347_ac()
+                        .fillProfileProperties(new GameProfile(uuid, null), true);
+                Minecraft.getMinecraft().func_152344_a(() -> gameProfileCache.put(uuid, profile));
+            });
         }
 
         SkinManager skinManager = Minecraft.getMinecraft().func_152342_ad();
