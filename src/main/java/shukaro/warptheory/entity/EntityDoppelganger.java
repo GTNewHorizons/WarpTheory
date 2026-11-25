@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.resources.SkinManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -106,11 +108,19 @@ public class EntityDoppelganger extends EntityCreature {
         }
         UUID uuid = UUID.fromString(uuidString);
 
+        if (worldObj.func_152378_a(uuid) instanceof AbstractClientPlayer player) {
+            return player.getLocationSkin();
+        }
+
         GameProfile gameProfile = gameProfileCache.get(uuid);
         if (gameProfile == null) {
-            gameProfile = Minecraft.getMinecraft().func_152347_ac()
-                    .fillProfileProperties(new GameProfile(uuid, null), true);
+            gameProfile = new GameProfile(uuid, null);
             gameProfileCache.put(uuid, gameProfile);
+            CompletableFuture.runAsync(() -> {
+                GameProfile profile = Minecraft.getMinecraft().func_152347_ac()
+                        .fillProfileProperties(new GameProfile(uuid, null), true);
+                Minecraft.getMinecraft().func_152344_a(() -> gameProfileCache.put(uuid, profile));
+            });
         }
 
         SkinManager skinManager = Minecraft.getMinecraft().func_152342_ad();
