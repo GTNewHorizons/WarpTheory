@@ -1,7 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import shukaro.warptheory.handlers.IWorldTickWarpEvent;
@@ -13,7 +13,7 @@ public class WarpLightning extends IWorldTickWarpEvent {
     }
 
     @Override
-    public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventAmount, World world, EntityPlayerMP player) {
         int x = (int) player.posX + world.rand.nextInt(3) - world.rand.nextInt(3);
         int y = (int) player.posY;
         int z = (int) player.posZ + world.rand.nextInt(3) - world.rand.nextInt(3);

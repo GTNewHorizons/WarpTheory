@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -19,15 +19,13 @@ public class WarpInventoryScramble extends IWarpEvent {
     }
 
     @Override
-    public boolean canDo(World world, EntityPlayer player) {
+    public boolean canDo(World world, EntityPlayerMP player) {
         // Combat Hotbar slots are not in the main inventory.
         return player.inventory.currentItem < player.inventory.mainInventory.length;
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
-        if (world.isRemote) return true;
-
+    public boolean doEvent(World world, EntityPlayerMP player) {
         List<ItemStack> inventoryContents = Lists.newArrayList(player.inventory.mainInventory);
         // We won't move the player's currently selected item.
         inventoryContents.remove(player.inventory.currentItem);

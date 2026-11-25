@@ -1,6 +1,6 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
@@ -14,15 +14,13 @@ public class WarpObsidian extends IWarpEvent {
     }
 
     @Override
-    public boolean canDo(World world, EntityPlayer player) {
+    public boolean canDo(World world, EntityPlayerMP player) {
         BlockCoord playerHead = new BlockCoord(player).offset(1);
         return playerHead.isAir(world);
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
-        if (world.isRemote) return true;
-
+    public boolean doEvent(World world, EntityPlayerMP player) {
         // This should be guaranteed to be true, since we check in canDo().
         // But check again just to be safe (in case the code changes).
         BlockCoord playerHead = new BlockCoord(player).offset(1);

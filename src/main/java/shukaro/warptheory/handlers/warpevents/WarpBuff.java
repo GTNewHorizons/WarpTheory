@@ -1,6 +1,6 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
@@ -20,9 +20,7 @@ public class WarpBuff extends IWarpEvent {
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
-        if (world.isRemote) return true;
-
+    public boolean doEvent(World world, EntityPlayerMP player) {
         for (PotionEffect effect : potionEffects) {
             int id = effect.getPotionID();
             int duration = effect.getDuration();

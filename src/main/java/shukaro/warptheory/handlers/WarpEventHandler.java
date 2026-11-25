@@ -5,7 +5,7 @@ import static thaumcraft.common.config.Config.wuss;
 
 import java.util.Random;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
@@ -15,7 +15,7 @@ public class WarpEventHandler {
 
     @SubscribeEvent
     public void livingUpdate(LivingEvent.LivingUpdateEvent e) {
-        if (!(e.entity instanceof EntityPlayer player)) return;
+        if (!(e.entity instanceof EntityPlayerMP player)) return;
 
         World world = player.worldObj;
         if (world.isRemote || player.ticksExisted <= 0) return;

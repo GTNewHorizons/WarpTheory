@@ -1,6 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
@@ -23,7 +24,7 @@ public class WarpEars extends IWarpEvent {
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
+    public boolean doEvent(World world, EntityPlayerMP player) {
         sendChatMessage(player);
         int amount = 10 + world.rand.nextInt(30);
         if (!world.isRemote) {
@@ -37,7 +38,7 @@ public class WarpEars extends IWarpEvent {
     @SideOnly(Side.CLIENT)
     public void onMessageReceived(ClientChatReceivedEvent e) {
         EntityPlayer player = WarpTheory.proxy.getPlayer();
-        if (player == null || ChatHelper.getUsername(e.message).length() == 0
+        if (player == null || ChatHelper.getUsername(e.message).isEmpty()
                 || player.getCommandSenderName().equals(ChatHelper.getUsername(e.message)))
             return;
 
@@ -45,7 +46,7 @@ public class WarpEars extends IWarpEvent {
         if (MiscHelper.getWarpTag(player).hasKey(name)) {
             e.message = new ChatComponentText(
                     ChatHelper.getFormattedUsername(e.message) + " " + ChatHelper.garbleMessage(e.message));
-            PacketDispatcher.sendEarDecrementEvent(player);
+            PacketDispatcher.sendEarDecrementEvent();
             decreaseTag(player, name, 1);
         }
     }

@@ -1,6 +1,6 @@
 package shukaro.warptheory.handlers.warpevents;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 public class WarpFakeSoundBehind extends WarpFakeSound {
@@ -18,7 +18,7 @@ public class WarpFakeSoundBehind extends WarpFakeSound {
     }
 
     @Override
-    public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventAmount, World world, EntityPlayerMP player) {
         double yaw = player.getRotationYawHead();
         double targetX = player.posX
                 - (distance * Math.sin(Math.toRadians(90 - yaw))) * (Math.sin(Math.toRadians(yaw)));

@@ -1,6 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import shukaro.warptheory.entity.EntityPhantom;
@@ -20,7 +21,7 @@ public class WarpPhantoms extends IWorldTickWarpEvent {
     }
 
     @Override
-    public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventAmount, World world, EntityPlayerMP player) {
         int successful = 0;
 
         for (int i = 0; i < 6; i++) {

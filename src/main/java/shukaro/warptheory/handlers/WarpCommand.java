@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,11 +49,11 @@ public class WarpCommand implements ICommand {
             sender.addChatMessage(new ChatComponentTranslation("commands.warptheory.events", events));
             sender.addChatMessage(new ChatComponentTranslation("commands.warptheory.additional"));
         } else {
-            EntityPlayer player;
+            EntityPlayerMP player;
             if (args.length == 1) {
-                player = MiscHelper.getPlayerByName(sender.getCommandSenderName());
+                player = CommandBase.getCommandSenderAsPlayer(sender);
             } else {
-                player = MiscHelper.getPlayerByName(args[1]);
+                player = CommandBase.getPlayer(sender, args[1]);
             }
 
             if ("print".equals(args[0])) {

@@ -2,7 +2,7 @@ package shukaro.warptheory.handlers.warpevents;
 
 import java.util.function.Supplier;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -39,9 +39,7 @@ public class WarpJunk extends IWarpEvent {
     }
 
     @Override
-    public boolean doEvent(World world, EntityPlayer player) {
-        if (world.isRemote) return true;
-
+    public boolean doEvent(World world, EntityPlayerMP player) {
         boolean successful = false;
         ItemStack[] inventory = player.inventory.mainInventory;
         for (int i = 0; i < inventory.length; i++) {

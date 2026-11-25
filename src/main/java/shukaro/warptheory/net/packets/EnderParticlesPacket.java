@@ -1,8 +1,13 @@
 package shukaro.warptheory.net.packets;
 
+import net.minecraft.client.Minecraft;
+
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 
-public class EnderParticlesPacket implements IWarpPacket {
+public class EnderParticlesPacket implements IMessage {
 
     public double x, y, z;
 
@@ -15,16 +20,36 @@ public class EnderParticlesPacket implements IWarpPacket {
     }
 
     @Override
-    public void readBytes(ByteBuf bytes) {
+    public void fromBytes(ByteBuf bytes) {
         this.x = bytes.readDouble();
         this.y = bytes.readDouble();
         this.z = bytes.readDouble();
     }
 
     @Override
-    public void writeBytes(ByteBuf bytes) {
+    public void toBytes(ByteBuf bytes) {
         bytes.writeDouble(this.x);
         bytes.writeDouble(this.y);
         bytes.writeDouble(this.z);
+    }
+
+    public static final class Handler implements IMessageHandler<EnderParticlesPacket, IMessage> {
+
+        @Override
+        public IMessage onMessage(EnderParticlesPacket message, MessageContext ctx) {
+            var world = Minecraft.getMinecraft().theWorld;
+            for (int l = 0; l < 128; ++l) {
+                world.spawnParticle(
+                        "portal",
+                        message.x + world.rand.nextDouble() - world.rand.nextDouble(),
+                        message.y + world.rand.nextDouble() - world.rand.nextDouble(),
+                        message.z + world.rand.nextDouble() - world.rand.nextDouble(),
+                        (double) (world.rand.nextFloat() - 0.5F) * 0.2F,
+                        (double) (world.rand.nextFloat() - 0.5F) * 0.2F,
+                        (double) (world.rand.nextFloat() - 0.5F) * 0.2F);
+            }
+
+            return null;
+        }
     }
 }

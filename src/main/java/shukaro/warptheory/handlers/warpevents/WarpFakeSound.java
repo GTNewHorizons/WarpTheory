@@ -1,6 +1,7 @@
 package shukaro.warptheory.handlers.warpevents;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -37,7 +38,7 @@ public class WarpFakeSound extends IWorldTickWarpEvent {
     }
 
     @Override
-    public int triggerEvent(int eventAmount, World world, EntityPlayer player) {
+    public int triggerEvent(int eventAmount, World world, EntityPlayerMP player) {
         if (distance == 0) {
             world.playSoundEffect(player.posX, player.posY, player.posZ, sound, volume, pitch);
             return 1;
